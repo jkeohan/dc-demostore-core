@@ -1,0 +1,5 @@
+{
+  "body": "./schemas/html-schema.json",
+  "schemaId": "https://demostore.amplience.com/content/html",
+  "validationLevel": "CONTENT_TYPE"
+}

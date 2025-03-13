@@ -1,0 +1,5 @@
+{
+  "body": "./schemas/slider-schema.json",
+  "schemaId": "https://demostore.amplience.com/content/slider",
+  "validationLevel": "CONTENT_TYPE"
+}

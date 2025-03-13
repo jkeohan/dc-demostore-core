@@ -1,0 +1,5 @@
+{
+  "body": "./schemas/split-block-schema.json",
+  "schemaId": "https://demostore.amplience.com/content/split-block",
+  "validationLevel": "CONTENT_TYPE"
+}

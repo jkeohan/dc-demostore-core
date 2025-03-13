@@ -1,0 +1,5 @@
+{
+  "body": "./schemas/brand-schema.json",
+  "schemaId": "https://demostore.amplience.com/site/experiences/brand",
+  "validationLevel": "CONTENT_TYPE"
+}

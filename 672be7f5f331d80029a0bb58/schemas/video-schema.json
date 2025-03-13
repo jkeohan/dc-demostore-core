@@ -1,0 +1,36 @@
+{
+    "$schema": "http://bigcontent.io/cms/schema/v1/schema#",
+    "id": "https://demostore.amplience.com/content/video",
+    "title": "Video",
+    "description": "A reusable component to display a video",
+    "allOf": [
+        {
+            "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content"
+        }
+    ],
+    "type": "object",
+    "properties": {
+        "video": {
+            "type": "object",
+            "title": "Video",
+            "description": "The video to display",
+            "anyOf": [
+                {
+                    "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/video-link"
+                }
+            ]
+        },
+        "captions": {
+            "type": "boolean",
+            "title": "Display captions?",
+            "description": "When checked, if captions are available they will display",
+            "default": true,
+            "ui:component": {
+                "name": "switch",
+                "params": {
+                    "labelPosition": "left"
+                }
+            }
+        }
+    }
+}

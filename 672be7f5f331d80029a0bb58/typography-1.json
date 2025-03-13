@@ -1,0 +1,5 @@
+{
+  "body": "./schemas/typography-1-schema.json",
+  "schemaId": "https://demostore.amplience.com/site/typography",
+  "validationLevel": "CONTENT_TYPE"
+}

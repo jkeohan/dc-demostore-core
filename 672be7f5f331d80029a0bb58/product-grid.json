@@ -1,0 +1,5 @@
+{
+  "body": "./schemas/product-grid-schema.json",
+  "schemaId": "https://demostore.amplience.com/content/product-grid",
+  "validationLevel": "CONTENT_TYPE"
+}

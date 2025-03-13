@@ -1,0 +1,5 @@
+{
+  "body": "./schemas/experience-group-schema.json",
+  "schemaId": "https://demostore.amplience.com/site/experience-group",
+  "validationLevel": "CONTENT_TYPE"
+}

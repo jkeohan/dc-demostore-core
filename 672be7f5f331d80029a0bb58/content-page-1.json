@@ -1,0 +1,5 @@
+{
+  "body": "./schemas/content-page-1-schema.json",
+  "schemaId": "https://demostore.amplience.com/slots/content-page",
+  "validationLevel": "CONTENT_TYPE"
+}

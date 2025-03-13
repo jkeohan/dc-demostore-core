@@ -1,0 +1,301 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://demostore.amplience.com/site/typography",
+    "title": "Typography",
+    "description": "",
+    "allOf": [
+        {
+            "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content"
+        }
+    ],
+    "trait:hierarchy": {
+        "childContentTypes": []
+    },
+    "trait:sortable": {
+        "sortBy": [
+            {
+                "key": "default",
+                "paths": [
+                    "/type"
+                ]
+            }
+        ]
+    },
+    "type": "object",
+    "ui:component": {
+        "name": "tabs",
+        "params": {
+            "tabs": {
+                "defaultTab": "Default",
+                "orientation": "vertical",
+                "items": [
+                    {
+                        "label": "Default",
+                        "pointers": [
+                            "/htmlFontSize",
+                            "/fontFamily",
+                            "/fontWeightLight",
+                            "/fontWeightRegular",
+                            "/fontWeightMedium",
+                            "fontWeightBold"
+                        ]
+                    },
+                    {
+                        "label": "H1",
+                        "pointers": [
+                            "/h1"
+                        ]
+                    },
+                    {
+                        "label": "H2",
+                        "pointers": [
+                            "/h2"
+                        ]
+                    },
+                    {
+                        "label": "H3",
+                        "pointers": [
+                            "/h3"
+                        ]
+                    },
+                    {
+                        "label": "H4",
+                        "pointers": [
+                            "/h4"
+                        ]
+                    },
+                    {
+                        "label": "H5",
+                        "pointers": [
+                            "/h5"
+                        ]
+                    },
+                    {
+                        "label": "H6",
+                        "pointers": [
+                            "/h6"
+                        ]
+                    },
+                    {
+                        "label": "Sub1",
+                        "pointers": [
+                            "/subtitle1"
+                        ]
+                    },
+                    {
+                        "label": "Sub2",
+                        "pointers": [
+                            "/subtitle2"
+                        ]
+                    },
+                    {
+                        "label": "Body1",
+                        "pointers": [
+                            "/body1"
+                        ]
+                    },
+                    {
+                        "label": "Body2",
+                        "pointers": [
+                            "/body2"
+                        ]
+                    },
+                    {
+                        "label": "BTN",
+                        "pointers": [
+                            "/button"
+                        ]
+                    },
+                    {
+                        "label": "Caption",
+                        "pointers": [
+                            "/caption"
+                        ]
+                    },
+                    {
+                        "label": "Overline",
+                        "pointers": [
+                            "/overline"
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "properties": {
+        "type": {
+            "title": "Type",
+            "type": "string",
+            "const": "Typography",
+            "ui:component": "none"
+        },
+        "htmlFontSize": {
+            "type": "number",
+            "title": "HTML Font Size"
+        },
+        "fontFamily": {
+            "type": "string",
+            "title": "Font Family"
+        },
+        "fontSize": {
+            "type": "number",
+            "title": "Font Size"
+        },
+        "fontWeightLight": {
+            "type": "number",
+            "title": "Font Weight Light"
+        },
+        "fontWeightRegular": {
+            "type": "number",
+            "title": "Font Weight Regular"
+        },
+        "fontWeightMedium": {
+            "type": "number",
+            "title": "Font Weight Medium"
+        },
+        "fontWeightBold": {
+            "type": "number",
+            "title": "Font Weight Bold"
+        },
+        "h1": {
+            "title": "H1",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/TextStyleOptions"
+                }
+            ]
+        },
+        "h2": {
+            "title": "H2",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/TextStyleOptions"
+                }
+            ]
+        },
+        "h3": {
+            "title": "H3",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/TextStyleOptions"
+                }
+            ]
+        },
+        "h4": {
+            "title": "H4",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/TextStyleOptions"
+                }
+            ]
+        },
+        "h5": {
+            "title": "H5",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/TextStyleOptions"
+                }
+            ]
+        },
+        "h6": {
+            "title": "H6",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/TextStyleOptions"
+                }
+            ]
+        },
+        "subtitle1": {
+            "title": "Sub-Title 1",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/TextStyleOptions"
+                }
+            ]
+        },
+        "subtitle2": {
+            "title": "Sub-Title 2",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/TextStyleOptions"
+                }
+            ]
+        },
+        "body1": {
+            "title": "Body 1",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/TextStyleOptions"
+                }
+            ]
+        },
+        "body2": {
+            "title": "Body 2",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/TextStyleOptions"
+                }
+            ]
+        },
+        "button": {
+            "title": "Button",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/TextStyleOptions"
+                }
+            ]
+        },
+        "caption": {
+            "title": "Caption",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/TextStyleOptions"
+                }
+            ]
+        },
+        "overline": {
+            "title": "Overline",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/TextStyleOptions"
+                }
+            ]
+        }
+    },
+    "definitions": {
+        "TextStyleOptions": {
+            "type": "object",
+            "properties": {
+                "fontFamily": {
+                    "type": "string",
+                    "title": "Font Family"
+                },
+                "fontWeight": {
+                    "type": "number",
+                    "title": "Font Weight"
+                },
+                "fontSize": {
+                    "type": "string",
+                    "title": "Font Size"
+                },
+                "color": {
+                    "title": "Color",
+                    "format": "color",
+                    "type": "string"
+                },
+                "lineHeight": {
+                    "type": "number",
+                    "title": "Line Height"
+                },
+                "letterSpacing": {
+                    "type": "string",
+                    "title": "Letter Spacing"
+                },
+                "textTransform": {
+                    "type": "string",
+                    "title": "Text Transformation"
+                }
+            }
+        }
+    }
+}

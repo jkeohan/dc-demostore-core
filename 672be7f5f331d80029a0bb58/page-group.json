@@ -1,0 +1,5 @@
+{
+  "body": "./schemas/page-group-schema.json",
+  "schemaId": "https://demostore.amplience.com/site/page-group",
+  "validationLevel": "CONTENT_TYPE"
+}

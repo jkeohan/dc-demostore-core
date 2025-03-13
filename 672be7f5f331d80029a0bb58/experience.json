@@ -1,0 +1,5 @@
+{
+  "body": "./schemas/experience-schema.json",
+  "schemaId": "https://demostore.amplience.com/site/experience",
+  "validationLevel": "CONTENT_TYPE"
+}

@@ -1,0 +1,74 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://joe-demo.com/date-time-picker",
+  "title": "Title",
+  "description": "Description",
+  "allOf": [
+    {
+      "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content"
+    }
+  ],
+  "type": "object",
+  "properties": {
+    "date": {
+      "title": "Just date",
+      "type": "string",
+      "format": "date",
+      "ui:extension": {
+        "name": "date-time-picker"
+      }
+    },
+    "time": {
+      "title": "Just time",
+      "type": "string",
+      "format": "time",
+      "ui:extension": {
+        "name": "date-time-picker"
+      }
+    },
+    "both": {
+      "title": "Date and time",
+      "type": "string",
+      "format": "date-time",
+      "ui:extension": {
+        "name": "date-time-picker"
+      }
+    },
+    "date-timestamp": {
+      "title": "Just date (timestamp)",
+      "type": "number",
+      "format": "date",
+      "ui:extension": {
+        "name": "date-time-picker"
+      }
+    },
+    "time-timestamp": {
+      "title": "Just time (timestamp)",
+      "type": "number",
+      "format": "time",
+      "ui:extension": {
+        "name": "date-time-picker"
+      }
+    },
+    "both-timestamp": {
+      "title": "Date and time (timestamp)",
+      "type": "number",
+      "format": "date-time",
+      "ui:extension": {
+        "name": "date-time-picker"
+      }
+    },
+    "unix": {
+      "title": "Unix",
+      "type": "number",
+      "format": "date-time",
+      "ui:extension": {
+        "url": "https://date-time-picker.extensions.content.amplience.net",
+        "params": {
+          "unix": true
+        }
+      }
+    }
+  },
+  "propertyOrder": []
+}

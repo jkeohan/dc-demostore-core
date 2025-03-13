@@ -1,0 +1,5 @@
+{
+  "body": "./schemas/banner-schema.json",
+  "schemaId": "https://demostore.amplience.com/email/banner",
+  "validationLevel": "CONTENT_TYPE"
+}

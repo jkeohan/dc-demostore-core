@@ -1,0 +1,5 @@
+{
+  "body": "./schemas/date-time-picker-schema.json",
+  "schemaId": "https://joe-demo.com/date-time-picker",
+  "validationLevel": "CONTENT_TYPE"
+}

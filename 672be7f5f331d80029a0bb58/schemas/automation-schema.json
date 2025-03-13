@@ -1,0 +1,73 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://demostore.amplience.com/site/automation",
+    "title": "demostore automation",
+    "description": "Intended to automate mapping.json. This holds mappings from imported content item IDs to current content item IDs.",
+    "allOf": [
+        {
+            "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content"
+        }
+    ],
+    "definitions": {
+        "mapping": {
+            "type": "object",
+            "ui:component": {
+                "name": "grid",
+                "params": {
+                    "numColumns": 12,
+                    "columns": [
+                        {
+                            "span": 6,
+                            "pointers": [
+                                "/from"
+                            ]
+                        },
+                        {
+                            "span": 6,
+                            "pointers": [
+                                "/to"
+                            ]
+                        }
+                    ]
+                }
+            },
+            "properties": {
+                "from": {
+                    "title": "From",
+                    "description": "The original value",
+                    "type": "string",
+                    "minLength": 0,
+                    "maxLength": 100
+                },
+                "to": {
+                    "title": "To",
+                    "description": "The new value value",
+                    "type": "string",
+                    "minLength": 0,
+                    "maxLength": 100
+                }
+            }
+        }
+    },
+    "type": "object",
+    "properties": {
+        "contentItems": {
+            "title": "Content items",
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/mapping"
+            }
+        },
+        "workflowStates": {
+            "title": "Workflow states",
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/mapping"
+            }
+        }
+    },
+    "propertyOrder": [
+        "contentItems",
+        "workflowStates"
+    ]
+}

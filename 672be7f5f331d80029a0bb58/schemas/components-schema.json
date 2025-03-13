@@ -1,0 +1,53 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://demostore.amplience.com/lib/components",
+    "type": "object",
+    "title": "Components",
+    "definitions": {
+        "anyComponent": {
+            "enum": [
+                "https://demostore.amplience.com/content/simple-banner",
+                "https://demostore.amplience.com/content/simple-localized-banner",
+                "https://demostore.amplience.com/content/simple-banner-bynder",
+                "https://demostore.amplience.com/content/card",
+                "https://demostore.amplience.com/content/card-list",
+                "https://demostore.amplience.com/content/curated-product-grid",
+                "https://demostore.amplience.com/content/rich-text",
+                "https://demostore.amplience.com/content/product-grid",
+                "https://demostore.amplience.com/content/image",
+                "https://demostore.amplience.com/content/shoppable-image",
+                "https://demostore.amplience.com/content/slider",
+                "https://demostore.amplience.com/content/split-block",
+                "https://demostore.amplience.com/content/text",
+                "https://demostore.amplience.com/content/video",
+                "https://demostore.amplience.com/content/container",
+                "https://demostore.amplience.com/content/dynamic-blog-list",
+                "https://demostore.amplience.com/component/simple-banner-external",
+                "https://demostore.amplience.com/content/theme-wrapper",
+                "https://demostore.amplience.com/content/advanced-banner",
+                "https://demostore.amplience.com/content/stylitics/generic",
+                "https://demostore.amplience.com/content/stylitics/classic",
+                "https://demostore.amplience.com/content/stylitics/hotspots",
+                "https://demostore.amplience.com/content/stylitics/moodboard",
+                "https://demostore.amplience.com/content/stylitics/main-and-detail",
+                "https://demostore.amplience.com/content/stylitics/gallery"
+            ]
+        },
+        "anySlot": {
+            "enum": [
+                "https://demostore.amplience.com/slots/personalized-banner",
+                "https://demostore.amplience.com/slots/flexible",
+                "https://demostore.amplience.com/menu-slot",
+                "https://demostore.amplience.com/slots/content-page",
+                "https://demostore.amplience.com/slots/localized-banner",
+                "https://demostore.amplience.com/content/simple-banner",
+                "https://demostore.amplience.com/content/simple-banner-bynder",
+                "https://demostore.amplience.com/content/split-block",
+                "https://demostore.amplience.com/content/curated-product-grid",
+                "https://demostore.amplience.com/product/grid",
+                "https://demostore.amplience.com/content/dynamic-blog-list",
+                "https://demostore.amplience.com/slots/banner"
+            ]
+        }
+    }
+}

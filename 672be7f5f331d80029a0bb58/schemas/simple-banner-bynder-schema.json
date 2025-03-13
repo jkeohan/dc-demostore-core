@@ -1,0 +1,182 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://demostore.amplience.com/content/simple-banner-bynder",
+    "title": "Simple Banner Bynder",
+    "description": "Simple Banner",
+    "allOf": [
+        {
+            "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content"
+        }
+    ],
+    "type": "object",
+    "properties": {
+        "bynder": {
+            "title": "Bynder Object File Selection",
+            "description": "A single reference to an item in Bynder with file selection",
+            "type": "object",
+            "properties": {},
+            "ui:extension": {
+                "name": "bynder"
+            }
+        },
+        "opacity": {
+            "title": "Opacity",
+            "description": "The Opacity of the text overlay panel",
+            "type": "number",
+            "default": 0.9,
+            "ui:component": {
+                "name": "slider",
+                "params": {
+                    "defaultValue": 0.9,
+                    "min": 0,
+                    "max": 1,
+                    "inverted": false,
+                    "marks": [
+                        {
+                            "value": 0,
+                            "label": "Transparent"
+                        },
+                        {
+                            "value": 0.25,
+                            "label": "Low"
+                        },
+                        {
+                            "value": 0.5,
+                            "label": "Medium"
+                        },
+                        {
+                            "value": 0.75,
+                            "label": "High"
+                        },
+                        {
+                            "value": 1,
+                            "label": "Solid"
+                        }
+                    ],
+                    "step": 0.05
+                }
+            }
+        },
+        "textPositioning": {
+            "title": "Panel Positioning",
+            "type": "object",
+            "description": "How the Text Panel is positioned over the banner",
+            "ui:component": {
+                "name": "grid",
+                "params": {
+                    "numColumns": 12,
+                    "columns": [
+                        {
+                            "span": 6,
+                            "pointers": [
+                                "/textPositionHorizontal"
+                            ]
+                        },
+                        {
+                            "span": 6,
+                            "pointers": [
+                                "/textPositionVertical"
+                            ]
+                        }
+                    ]
+                }
+            },
+            "properties": {
+                "textPositionHorizontal": {
+                    "title": "Horizontal Text Position",
+                    "description": "Select: Left / Center / Right",
+                    "type": "string",
+                    "default": "left",
+                    "enum": [
+                        "left",
+                        "center",
+                        "right"
+                    ]
+                },
+                "textPositionVertical": {
+                    "title": "Vertical Text Position",
+                    "description": "Select: Top / Middle / Bottom",
+                    "type": "string",
+                    "default": "top",
+                    "enum": [
+                        "top",
+                        "middle",
+                        "bottom"
+                    ]
+                }
+            }
+        },
+        "bannerText": {
+            "title": "Banner Text Settings",
+            "type": "object",
+            "properties": {
+                "header": {
+                    "title": "Header",
+                    "description": "Add header text",
+                    "type": "string"
+                },
+                "subheader": {
+                    "title": "Subheader",
+                    "description": "Add Subheader text",
+                    "type": "string"
+                },
+                "description": {
+                    "title": "Description",
+                    "description": "Add description text",
+                    "type": "string"
+                }
+            }
+        },
+        "ctaSettings": {
+            "title": "CTA Settings",
+            "type": "object",
+            "properties": {
+                "buttonText": {
+                    "title": "CTA Text",
+                    "type": "string",
+                    "minimum": 4,
+                    "maximum": 12
+                },
+                "linkUrl": {
+                    "title": "CTA URL",
+                    "type": "string"
+                }
+            }
+        }
+    },
+    "ui:component": {
+        "name": "tabs",
+        "params": {
+            "tabs": {
+                "defaultTab": "Image",
+                "orientation": "horizontal",
+                "variant": "default",
+                "grow": false,
+                "items": [
+                    {
+                        "label": "Image",
+                        "pointers": [
+                            "/image"
+                        ]
+                    },
+                    {
+                        "label": "Overlay Panel",
+                        "pointers": [
+                            "/opacity",
+                            "/textPositioning",
+                            "/bannerText",
+                            "/ctaSettings"
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "propertyOrder": [
+        "bynder",
+        "opacity",
+        "textPositioning",
+        "bannerText",
+        "ctaSettings"
+    ]
+}

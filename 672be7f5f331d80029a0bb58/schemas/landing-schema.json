@@ -1,0 +1,108 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://demostore.amplience.com/site/pages/landing",
+    "title": "Landing Page",
+    "description": "Holds one or more Page Groups.",
+    "allOf": [
+        {
+            "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content"
+        }
+    ],
+    "trait:hierarchy": {
+        "childContentTypes": [
+            "https://demostore.amplience.com/site/page-group"
+        ]
+    },
+    "trait:sortable": {
+        "sortBy": [
+            {
+                "key": "default",
+                "paths": [
+                    "/menu/priority"
+                ]
+            }
+        ]
+    },
+    "type": "object",
+    "properties": {
+        "active": {
+            "type": "boolean",
+            "title": "Is Active?",
+            "description": "When unchecked, this page becomes inaccessible (you should get a 404 page not found error when inactive).",
+            "default": true,
+            "ui:component": {
+                "name": "switch",
+                "params": {
+                    "labelPosition": "left"
+                }
+            }
+        },
+        "_meta": {
+            "title": "Landing Page Slug",
+            "properties": {
+                "deliveryKey": {
+                    "title": "Slug",
+                    "type": "string",
+                    "pattern": "page/.*"
+                }
+            },
+            "required": [
+                "deliveryKey"
+            ]
+        },
+        "title": {
+            "title": "Title",
+            "description": "Title for the page",
+            "allOf": [
+                {
+                    "$ref": "http://bigcontent.io/cms/schema/v1/localization#/definitions/localized-string"
+                }
+            ]
+        },
+        "menu": {
+            "$ref": "https://demostore.amplience.com/lib/menu#/definitions/menuItemConfig"
+        },
+        "components": {
+            "title": "Components",
+            "type": "array",
+            "items": {
+                "title": "Component",
+                "allOf": [
+                    {
+                        "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content-link"
+                    },
+                    {
+                        "properties": {
+                            "contentType": {
+                                "$ref": "https://demostore.amplience.com/lib/components#/definitions/anyComponent"
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        "slots": {
+            "title": "Slots",
+            "type": "array",
+            "items": {
+                "title": "Slots",
+                "allOf": [
+                    {
+                        "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content-reference"
+                    },
+                    {
+                        "properties": {
+                            "contentType": {
+                                "$ref": "https://demostore.amplience.com/lib/components#/definitions/anySlot"
+                            }
+                        }
+                    }
+                ]
+            }
+        }
+    },
+    "required": [
+        "title"
+    ],
+    "definitions": {}
+}

@@ -1,0 +1,5 @@
+{
+  "body": "./schemas/menu-schema.json",
+  "schemaId": "https://demostore.amplience.com/lib/menu",
+  "validationLevel": "CONTENT_TYPE"
+}

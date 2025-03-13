@@ -1,0 +1,39 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"$id": "https://joe-demo.com/unsplash-demo",
+
+	"title": "Title",
+	"description": "Description",
+
+	"allOf": [
+		{
+			"$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content"
+		}
+	],
+	
+	"type": "object",
+	"properties": {
+		"propertyName1": {
+			"title": "Unsplash Image",
+			"type": "object",
+			"properties": {
+				"url": {
+					"title": "URL",
+					"description": "URL for the image",
+					"type": "string"
+				},
+				"alt_description": {
+					"title": "Description",
+					"description": "Id (the image name)",
+					"type": "string"
+				}
+			},
+			"ui:extension": {
+				"name": "unsplash-demo"
+			},
+			"propertyOrder": []
+		}
+		
+	},
+	"propertyOrder": []
+}

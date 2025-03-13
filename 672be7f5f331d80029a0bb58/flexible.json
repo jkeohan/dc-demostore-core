@@ -1,0 +1,5 @@
+{
+  "body": "./schemas/flexible-schema.json",
+  "schemaId": "https://demostore.amplience.com/slots/flexible",
+  "validationLevel": "CONTENT_TYPE"
+}

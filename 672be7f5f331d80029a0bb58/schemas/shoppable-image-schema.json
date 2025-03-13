@@ -1,0 +1,113 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://demostore.amplience.com/content/shoppable-image",
+    "title": "Shoppable Image",
+    "description": "A shoppable image with links",
+    "allOf": [
+        {
+            "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content"
+        }
+    ],
+    "type": "object",
+    "properties": {
+        "help": {
+            "type": "null",
+            "ui:extension": {
+                "name": "help",
+                "params": {
+                    "title": "Help with Shoppable Target & Selector",
+                    "message": "The Shoppable Image extension allows you to tie hotspots and regions on an image to links, tooltips and popups via the string fields 'target' and 'selector'. In this project, the selector defines what type of content is associated, and the target defines the specific content.\n- **.product:** Links to a product by ID. On hover, will show the product name, price and thumbnail if available. On click it will go to the product details page.\n    - *Example:* `BP416_BK0001`\n- **.category:** Links to a category by ID. On hover, will show the category name. On click it will go to the category page.\n    - *Example:* `women`\n- **.link:** A link to any URL in the same tab. Can be relative or absolute.\n    - *Examples:* `/cart`, `https://amplience.com`\n- **.linkNew:** A link to any external URL in a new tab. Should be absolute.\n    - *Examples:* `https://amplience.com`\n- **.tooltip:** A tooltip that does nothing on click.\n    - *Example:* `tooltip-key`\n- **.deliveryKey:** Opens a drawer displaying Amplience content with the specified key.\n    - *Example:* `hero`\n### Tooltips\nFor any selector, you can define a custom localized tooltip using the array below that overrides the default one. The `key` of the tooltip should match whatever the `target` is in the shoppable image, and the value is what you want to appear in the tooltip. The `tooltip` selector will _only_ display a tooltip if the text is defined here."
+                }
+            }
+        },
+        "shoppableImage": {
+            "title": "Shoppable Image",
+            "description": "An image enriched with a focal point and hotspots.",
+            "allOf": [
+                {
+                    "$ref": "https://demostore.amplience.com/lib/shoppable-image-partial#/definitions/shoppableImage"
+                }
+            ]
+        },
+        "imageAltText": {
+            "type": "string",
+            "title": "Image alt text",
+            "description": "Alternative text for image for SEO",
+            "minLength": 0,
+            "maxLength": 255,
+            "ui:extension": {
+                "name": "ai-image-caption",
+                "params": {
+                    "image": "1/shoppableImage/image"
+                }
+            }
+        },
+        "polygonHide": {
+            "title": "Hide Polygon Areas",
+            "description": "Hide Hotspots Areas (circles, rectangles)",
+            "type": "boolean",
+            "ui:component": {
+                "name": "switch",
+                "params": {
+                    "labelPosition": "left"
+                }
+            }
+        },
+        "di": {
+            "type": "string",
+            "title": "Additional Imaging Params",
+            "description": "Optional Dynamic Media paramaters to control the image (https://amplience.com/developers/docs/apis/media-delivery/media-delivery-reference)",
+            "examples": [
+                "bg=rgb(255,255,255)",
+                "https://amplience.com/developers/docs/apis/media-delivery/media-delivery-reference/"
+            ],
+            "ui:component": {
+                "name": "text-area",
+                "params": {
+                    "autosize": "true"
+                }
+            }
+        },
+        "tooltips": {
+            "title": "Tooltips",
+            "description": "Custom tooltips used in the Shoppable Image",
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "key": {
+                        "title": "Tooltip Key",
+                        "description": "The key used to identify this tooltip text, referenced by the Target.",
+                        "type": "string"
+                    },
+                    "value": {
+                        "allOf": [
+                            {
+                                "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/localized-value"
+                            }
+                        ],
+                        "properties": {
+                            "values": {
+                                "items": {
+                                    "properties": {
+                                        "value": {
+                                            "type": "string",
+                                            "title": "Tooltip Text",
+                                            "description": "Text that appears when the user hovers over the hotspot or polygon.",
+                                            "minLength": 0,
+                                            "maxLength": 100
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "required": [
+                    "key",
+                    "value"
+                ]
+            }
+        }
+    }
+}

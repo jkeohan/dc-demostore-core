@@ -1,0 +1,39 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://demostore.amplience.com/site/config",
+    "title": "Site Configuration",
+    "description": "Site configuration. Contains common UI elements and themes.",
+    "allOf": [
+        {
+            "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content"
+        }
+    ],
+    "trait:hierarchy": {
+        "childContentTypes": [
+            "https://demostore.amplience.com/site/ui",
+            "https://demostore.amplience.com/site/theme-group"
+        ]
+    },
+    "type": "object",
+    "properties": {
+        "_meta": {
+            "title": "Product Delivery Key",
+            "properties": {
+                "deliveryKey": {
+                    "title": "Delivery Key",
+                    "description": "Delivery key for the site configuration",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "deliveryKey"
+            ]
+        },
+        "type": {
+            "type": "string",
+            "const": "Site Configuration",
+            "ui:component": "none"
+        }
+    },
+    "definitions": {}
+}

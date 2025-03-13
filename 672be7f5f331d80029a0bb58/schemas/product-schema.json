@@ -1,0 +1,64 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://demostore.amplience.com/site/experiences/product",
+    "title": "Product Experience",
+    "description": "Configure experience for pages related to this product",
+    "allOf": [
+        {
+            "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content"
+        }
+    ],
+    "trait:hierarchy": {
+        "childContentTypes": []
+    },
+    "trait:sortable": {
+        "sortBy": [
+            {
+                "key": "default",
+                "paths": [
+                    "/priority"
+                ]
+            }
+        ]
+    },
+    "trait:filterable": {
+        "filterBy": [
+            {
+                "paths": [
+                    "/id"
+                ]
+            },
+            {
+                "paths": [
+                    "/id",
+                    "/_meta/hierarchy/parentId"
+                ]
+            }
+        ]
+    },
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "string",
+            "title": "Ecommerce Product",
+            "description": "The eCommerce product that this experience relates to",
+            "ui:extension": {
+                "name": "ecomm-toolkit",
+                "params": {
+                    "label": "Search By Category",
+                    "view": "product",
+                    "data": "product",
+                    "type": "string"
+                }
+            }
+        },
+        "priority": {
+            "type": "number",
+            "title": "Priority"
+        },
+        "experience": {
+            "$ref": "https://demostore.amplience.com/site/experience#/definitions/experience"
+        }
+    },
+    "propertyOrder": []
+}

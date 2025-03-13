@@ -1,0 +1,187 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://demostore.amplience.com/content/product-override",
+    "title": "Product Override",
+    "description": "A retail product.",
+    "allOf": [
+        {
+            "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content"
+        }
+    ],
+    "type": "object",
+    "ui:component": {
+        "name": "tabs",
+        "params": {
+            "tabs": {
+                "defaultTab": "Product",
+                "orientation": "vertical",
+                "items": [
+                    {
+                        "label": "Product",
+                        "pointers": [
+                            "/_meta",
+                            "/active"
+                        ]
+                    },
+                    {
+                        "label": "Text",
+                        "pointers": [
+                            "/textOverride"
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "properties": {
+        "active": {
+            "type": "boolean",
+            "title": "Is Active?",
+            "description": "When unchecked, this page becomes inaccessible.",
+            "default": true,
+            "ui:component": {
+                "name": "switch",
+                "params": {
+                    "labelPosition": "right"
+                }
+            }
+        },
+        "_meta": {
+            "title": "Product Delivery Key",
+            "properties": {
+                "deliveryKey": {
+                    "title": "Delivery Key",
+                    "description": "product-override/productId",
+                    "type": "string",
+                    "pattern": "product-override/.*",
+                    "ui:extension": {
+                        "name": "ecomm-toolkit",
+                        "params": {
+                            "label": "Search By Category",
+                            "view": "product",
+                            "data": "product",
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "required": [
+                "deliveryKey"
+            ]
+        },
+        "textOverride": {
+            "type": "array",
+            "ui:extension": {
+                "name": "custom-rich-text",
+                "params": {
+                    "language": "json",
+                    "styles": ".was-price { color: red; }",
+                    "tools": {
+                        "blacklist": [],
+                        "inline_styles": {
+                            "classNames": [
+                                {
+                                    "className": "was-price",
+                                    "label": "Was Price"
+                                }
+                            ]
+                        }
+                    },
+                    "toolbar": {
+                        "layout": [
+                            {
+                                "type": "group",
+                                "children": [
+                                    {
+                                        "type": "button",
+                                        "toolName": "undo"
+                                    },
+                                    {
+                                        "type": "button",
+                                        "toolName": "redo"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "dropdown",
+                                "label": "Styles",
+                                "toolNames": [
+                                    "inline_styles_className_was-price"
+                                ]
+                            },
+                            {
+                                "type": "group",
+                                "children": [
+                                    {
+                                        "type": "button",
+                                        "toolName": "strong"
+                                    },
+                                    {
+                                        "type": "button",
+                                        "toolName": "em"
+                                    },
+                                    {
+                                        "type": "button",
+                                        "toolName": "link"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "group",
+                                "children": [
+                                    {
+                                        "type": "button",
+                                        "toolName": "bullet_list"
+                                    },
+                                    {
+                                        "type": "button",
+                                        "toolName": "ordered_list"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "group",
+                                "children": [
+                                    {
+                                        "type": "button",
+                                        "toolName": "dc-image-link"
+                                    },
+                                    {
+                                        "type": "button",
+                                        "toolName": "image"
+                                    },
+                                    {
+                                        "type": "button",
+                                        "toolName": "blockquote"
+                                    },
+                                    {
+                                        "type": "button",
+                                        "toolName": "code_block"
+                                    },
+                                    {
+                                        "type": "button",
+                                        "toolName": "horizontal_rule"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "group",
+                                "children": [
+                                    {
+                                        "type": "button",
+                                        "toolName": "clear_formatting"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "button",
+                                "toolName": "ai"
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+    },
+    "propertyOrder": []
+}

@@ -1,0 +1,5 @@
+{
+  "body": "./schemas/tag-group-schema.json",
+  "schemaId": "https://demostore.amplience.com/site/tag-group",
+  "validationLevel": "CONTENT_TYPE"
+}

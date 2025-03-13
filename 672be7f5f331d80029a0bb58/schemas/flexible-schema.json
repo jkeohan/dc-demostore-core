@@ -1,0 +1,60 @@
+{
+    "$schema": "http://bigcontent.io/cms/schema/v1/schema#",
+    "id": "https://demostore.amplience.com/slots/flexible",
+    "title": "Flexible Slot",
+    "description": "Slot that allows a number of any content type",
+    "allOf": [
+        {
+            "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content"
+        }
+    ],
+    "type": "object",
+    "properties": {
+        "contentTypes": {
+            "type": "array",
+            "title": "Content Type",
+            "description": "Select and order content to display in the page",
+            "items": {
+                "allOf": [
+                    {
+                        "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content-link"
+                    },
+                    {
+                        "properties": {
+                            "contentType": {
+                                "title": "",
+                                "enum": [
+                                    "https://demostore.amplience.com/content/simple-banner",
+                                    "https://demostore.amplience.com/content/simple-localized-banner",
+                                    "https://demostore.amplience.com/content/simple-banner-bynder",
+                                    "https://demostore.amplience.com/content/blog",
+                                    "https://demostore.amplience.com/content/blog-list",
+                                    "https://demostore.amplience.com/content/card",
+                                    "https://demostore.amplience.com/content/card-list",
+                                    "https://demostore.amplience.com/content/curated-product-grid",
+                                    "https://demostore.amplience.com/content/rich-text",
+                                    "https://demostore.amplience.com/content/product-grid",
+                                    "https://demostore.amplience.com/content/html",
+                                    "https://demostore.amplience.com/content/image",
+                                    "https://demostore.amplience.com/content/shoppable-image",
+                                    "https://demostore.amplience.com/content/slider",
+                                    "https://demostore.amplience.com/content/split-block",
+                                    "https://demostore.amplience.com/content/text",
+                                    "https://demostore.amplience.com/content/video",
+                                    "https://demostore.amplience.com/content/container",
+                                    "https://demostore.amplience.com/content/dynamic-blog-list",
+                                    "https://demostore.amplience.com/content/stylitics/generic",
+                                    "https://demostore.amplience.com/content/stylitics/classic",
+                                    "https://demostore.amplience.com/content/stylitics/hotspots",
+                                    "https://demostore.amplience.com/content/stylitics/moodboard",
+                                    "https://demostore.amplience.com/content/stylitics/main-and-detail",
+                                    "https://demostore.amplience.com/content/stylitics/gallery"
+                                ]
+                            }
+                        }
+                    }
+                ]
+            }
+        }
+    }
+}

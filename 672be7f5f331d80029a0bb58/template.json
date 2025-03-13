@@ -1,0 +1,5 @@
+{
+  "body": "./schemas/template-schema.json",
+  "schemaId": "https://demostore.amplience.com/email/template",
+  "validationLevel": "CONTENT_TYPE"
+}

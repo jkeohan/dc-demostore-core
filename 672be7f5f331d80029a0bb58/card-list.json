@@ -1,0 +1,5 @@
+{
+  "body": "./schemas/card-list-schema.json",
+  "schemaId": "https://demostore.amplience.com/content/card-list",
+  "validationLevel": "CONTENT_TYPE"
+}

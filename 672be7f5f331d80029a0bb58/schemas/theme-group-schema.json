@@ -1,0 +1,67 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://demostore.amplience.com/site/theme-group",
+    "title": "Theme Group",
+    "description": "",
+    "allOf": [
+        {
+            "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content"
+        }
+    ],
+    "trait:hierarchy": {
+        "childContentTypes": [
+            "https://demostore.amplience.com/site/theme"
+        ]
+    },
+    "trait:sortable": {
+        "sortBy": [
+            {
+                "key": "default",
+                "paths": [
+                    "/type"
+                ]
+            }
+        ]
+    },
+    "type": "object",
+    "properties": {
+        "type": {
+            "type": "string",
+            "const": "Themes",
+            "ui:component": "none"
+        },
+        "defaultTheme": {
+            "title": "Default Theme",
+            "type": "object",
+            "properties": {
+                "values": {
+                    "type": "array",
+                    "ui:extension": {
+                        "name": "hierarchy-picker",
+                        "params": {
+                            "nodeId": "",
+                            "type": "chip"
+                        }
+                    },
+                    "items": {
+                        "allOf": [
+                            {
+                                "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content-reference"
+                            },
+                            {
+                                "properties": {
+                                    "contentType": {
+                                        "enum": [
+                                            "https://demostore.amplience.com/site/theme"
+                                        ]
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {}
+}

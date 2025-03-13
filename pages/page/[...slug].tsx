@@ -9,6 +9,7 @@ import { mapToID, notNull } from '@lib/util';
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
     const { slug } = context.params || {};
+    console.log('*** getServerSideProps - slug:j *** ' + slug);
     const deliveryKey = Array.isArray(slug) ? slug.join('/') : (slug as string);
 
     const data = await fetchStandardPageData(

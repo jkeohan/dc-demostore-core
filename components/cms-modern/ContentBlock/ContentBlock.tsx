@@ -100,6 +100,7 @@ const ContentBlock = ({
     const vse = (query?.vse as string) || '';
 
     // Get real-time content from original content
+    console.log('*** ContnetBlock > originalConent, vse ***', originalContent, vse);
     const [liveContent] = useContent(originalContent, vse);
     if (!liveContent) {
         return null;

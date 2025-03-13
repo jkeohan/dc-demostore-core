@@ -1,0 +1,5 @@
+{
+  "body": "./schemas/theme-wrapper-schema.json",
+  "schemaId": "https://demostore.amplience.com/content/theme-wrapper",
+  "validationLevel": "CONTENT_TYPE"
+}

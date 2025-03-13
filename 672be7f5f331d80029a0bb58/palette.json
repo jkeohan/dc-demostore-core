@@ -1,0 +1,5 @@
+{
+  "body": "./schemas/palette-schema.json",
+  "schemaId": "https://demostore.amplience.com/site/palette",
+  "validationLevel": "CONTENT_TYPE"
+}

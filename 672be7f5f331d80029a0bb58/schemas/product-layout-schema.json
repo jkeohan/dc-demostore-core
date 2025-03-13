@@ -1,0 +1,434 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://demostore.amplience.com/content/product-layout",
+    "title": "Product Layout",
+    "description": "",
+    "allOf": [
+        {
+            "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content"
+        }
+    ],
+    "type": "object",
+    "properties": {
+        "slots": {
+            "type": "object",
+            "ui:extension": {
+                "name": "dom-extension",
+                "params": {
+                    "height": 600,
+                    "slots": {
+                        "main": {
+                            "allow": "*"
+                        }
+                    },
+                    "components": [
+                        {
+                            "name": "section",
+                            "title": "Section",
+                            "icon": "input",
+                            "group": "Layout",
+                            "slots": {
+                                "title": {
+                                    "allow": "*",
+                                    "title": "Header"
+                                },
+                                "children": {
+                                    "allow": "*",
+                                    "title": "Body"
+                                }
+                            },
+                            "properties": {
+                                "variant": {
+                                    "type": "string",
+                                    "title": "Variant",
+                                    "enum": [
+                                        "default",
+                                        "contained"
+                                    ]
+                                },
+                                "title": {
+                                    "type": "string",
+                                    "title": "Title"
+                                }
+                            }
+                        },
+                        {
+                            "name": "grid",
+                            "title": "Responsive Grid",
+                            "icon": "table_chart",
+                            "group": "Layout",
+                            "slots": {
+                                "children": {
+                                    "allow": "*"
+                                }
+                            },
+                            "properties": {
+                                "type": {
+                                    "type": "string",
+                                    "title": "Type",
+                                    "enum": [
+                                        "container",
+                                        "item"
+                                    ]
+                                },
+                                "direction": {
+                                    "type": "string",
+                                    "title": "Direction",
+                                    "enum": [
+                                        "row",
+                                        "column"
+                                    ]
+                                },
+                                "justify": {
+                                    "type": "string",
+                                    "title": "Justify",
+                                    "enum": [
+                                        "flex-start",
+                                        "center",
+                                        "flex-end",
+                                        "space-between",
+                                        "space-around",
+                                        "space-evenly"
+                                    ]
+                                },
+                                "alignItems": {
+                                    "type": "string",
+                                    "title": "Align Items",
+                                    "enum": [
+                                        "flex-start",
+                                        "center",
+                                        "flex-end",
+                                        "stretch",
+                                        "baseline"
+                                    ]
+                                },
+                                "spacing": {
+                                    "type": "string",
+                                    "title": "Spacing"
+                                },
+                                "breakpoints": {
+                                    "type": "object",
+                                    "properties": {
+                                        "xs": {
+                                            "type": "string",
+                                            "title": "Extra Small"
+                                        },
+                                        "sm": {
+                                            "type": "string",
+                                            "title": "Small"
+                                        },
+                                        "md": {
+                                            "type": "string",
+                                            "title": "Medium"
+                                        },
+                                        "lg": {
+                                            "type": "string",
+                                            "title": "Large"
+                                        },
+                                        "xl": {
+                                            "type": "string",
+                                            "title": "Extra Large"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "name": "text",
+                            "title": "Simple Text",
+                            "icon": "notes",
+                            "group": "Text",
+                            "preview": {
+                                "text": "/text"
+                            },
+                            "slots": {},
+                            "properties": {
+                                "text": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        {
+                            "name": "typography",
+                            "title": "Styled Text",
+                            "icon": "text_format",
+                            "group": "Text",
+                            "preview": {
+                                "text": "/text"
+                            },
+                            "slots": {
+                                "children": {
+                                    "allow": "*"
+                                }
+                            },
+                            "properties": {
+                                "variant": {
+                                    "type": "string",
+                                    "title": "Variant",
+                                    "enum": [
+                                        "h1",
+                                        "h2",
+                                        "h3",
+                                        "h4",
+                                        "h5",
+                                        "h6",
+                                        "body1",
+                                        "body2"
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "name": "accordion",
+                            "title": "Accordion",
+                            "icon": "expand",
+                            "group": "Interface",
+                            "preview": {
+                                "text": "/title"
+                            },
+                            "slots": {
+                                "children": {
+                                    "allow": "*"
+                                }
+                            },
+                            "properties": {
+                                "title": {
+                                    "type": "string",
+                                    "title": "Title"
+                                }
+                            }
+                        },
+                        {
+                            "name": "product_hero",
+                            "title": "Product Hero",
+                            "icon": "sell",
+                            "group": "Commerce",
+                            "slots": {},
+                            "properties": {}
+                        },
+                        {
+                            "name": "product_attribute",
+                            "title": "Product Attribute",
+                            "icon": "sell",
+                            "group": "Commerce",
+                            "slots": {},
+                            "properties": {
+                                "variant": {
+                                    "type": "string",
+                                    "title": "Variant",
+                                    "enum": [
+                                        "id",
+                                        "name",
+                                        "longDescription",
+                                        "articleNumberMax",
+                                        "color",
+                                        "designer",
+                                        "size",
+                                        "sku",
+                                        "header",
+                                        "text"
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "name": "product_attribute_override",
+                            "title": "Product Attribute Override",
+                            "icon": "sell",
+                            "group": "Commerce",
+                            "slots": {},
+                            "properties": {
+                                "variant": {
+                                    "type": "string",
+                                    "title": "Variant",
+                                    "enum": [
+                                        "id",
+                                        "name",
+                                        "longDescription",
+                                        "articleNumberMax",
+                                        "color",
+                                        "designer",
+                                        "size",
+                                        "sku",
+                                        "header",
+                                        "text"
+                                    ]
+                                },
+                                "richTextVariant": {
+                                    "type": "string",
+                                    "title": "Rich Text Variant",
+                                    "enum": [
+                                        "textOverride"
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "name": "product_attribute_override",
+                            "title": "Product Attribute Override",
+                            "icon": "sell",
+                            "group": "Commerce",
+                            "slots": {},
+                            "properties": {
+                                "variant": {
+                                    "type": "string",
+                                    "title": "Variant",
+                                    "enum": [
+                                        "id",
+                                        "name",
+                                        "longDescription",
+                                        "articleNumberMax",
+                                        "color",
+                                        "designer",
+                                        "size",
+                                        "sku",
+                                        "header",
+                                        "text"
+                                    ]
+                                },
+                                "richTextVariant": {
+                                    "type": "string",
+                                    "title": "Rich Text Variant",
+                                    "enum": [
+                                        "textOverride"
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "name": "product_image_viewer",
+                            "title": "Product Media Viewer",
+                            "icon": "sell",
+                            "group": "Commerce",
+                            "slots": {},
+                            "properties": {
+                                "variant": {
+                                    "type": "string",
+                                    "title": "Variant",
+                                    "enum": [
+                                        "portrait",
+                                        "landscape"
+                                    ]
+                                },
+                                "numItems": {
+                                    "type": "string",
+                                    "title": "Number of items visible"
+                                }
+                            }
+                        },
+                        {
+                            "name": "product_size",
+                            "title": "Product Size",
+                            "icon": "sell",
+                            "group": "Commerce",
+                            "slots": {},
+                            "properties": {}
+                        },
+                        {
+                            "name": "product_color",
+                            "title": "Product Color",
+                            "icon": "sell",
+                            "group": "Commerce",
+                            "slots": {},
+                            "properties": {}
+                        },
+                        {
+                            "name": "product_atb",
+                            "title": "Add To Basket Button",
+                            "icon": "sell",
+                            "group": "Commerce",
+                            "slots": {},
+                            "properties": {}
+                        },
+                        {
+                            "name": "product_rich_text",
+                            "title": "Product Rich Text",
+                            "icon": "sell",
+                            "group": "Commerce",
+                            "slots": {},
+                            "properties": {
+                                "variant": {
+                                    "type": "string",
+                                    "title": "Variant",
+                                    "enum": [
+                                        "text"
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "name": "stylitics",
+                            "title": "Stylitics",
+                            "icon": "sell",
+                            "group": "Commerce",
+                            "slots": {},
+                            "properties": {
+                                "view": {
+                                    "type": "string",
+                                    "title": "View",
+                                    "enum": [
+                                        "classic",
+                                        "hotspots",
+                                        "moodboard",
+                                        "gallery",
+                                        "mainAndDetail"
+                                    ],
+                                    "default": "classic"
+                                }
+                            }
+                        },
+                        {
+                            "name": "content_block",
+                            "title": "Content Block",
+                            "icon": "view_in_ar",
+                            "group": "Content",
+                            "slots": {},
+                            "properties": {
+                                "content": {
+                                    "title": "Content Block",
+                                    "allOf": [
+                                        {
+                                            "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content-link"
+                                        },
+                                        {
+                                            "properties": {
+                                                "contentType": {
+                                                    "enum": [
+                                                        "https://demostore.amplience.com/content/simple-banner",
+                                                        "https://demostore.amplience.com/content/simple-localized-banner",
+                                                        "https://demostore.amplience.com/content/simple-banner-bynder",
+                                                        "https://demostore.amplience.com/content/card",
+                                                        "https://demostore.amplience.com/content/card-list",
+                                                        "https://demostore.amplience.com/content/curated-product-grid",
+                                                        "https://demostore.amplience.com/content/rich-text",
+                                                        "https://demostore.amplience.com/content/image",
+                                                        "https://demostore.amplience.com/content/shoppable-image",
+                                                        "https://demostore.amplience.com/content/slider",
+                                                        "https://demostore.amplience.com/content/split-block",
+                                                        "https://demostore.amplience.com/content/text",
+                                                        "https://demostore.amplience.com/content/video",
+                                                        "https://demostore.amplience.com/content/container",
+                                                        "https://demostore.amplience.com/content/dynamic-blog-list",
+                                                        "https://demostore.amplience.com/content/theme-wrapper",
+                                                        "https://demostore.amplience.com/content/advanced-banner",
+                                                        "https://demostore.amplience.com/content/stylitics/generic",
+                                                        "https://demostore.amplience.com/content/stylitics/classic",
+                                                        "https://demostore.amplience.com/content/stylitics/hotspots",
+                                                        "https://demostore.amplience.com/content/stylitics/moodboard",
+                                                        "https://demostore.amplience.com/content/stylitics/main-and-detail",
+                                                        "https://demostore.amplience.com/content/stylitics/gallery"
+                                                    ]
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "propertyOrder": []
+}

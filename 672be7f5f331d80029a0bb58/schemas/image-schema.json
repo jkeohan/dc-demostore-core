@@ -1,0 +1,80 @@
+{
+    "$schema": "http://bigcontent.io/cms/schema/v1/schema#",
+    "id": "https://demostore.amplience.com/content/image",
+    "title": "Image",
+    "description": "Basic image with SEO information and allow roundels",
+    "allOf": [
+        {
+            "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content"
+        }
+    ],
+    "type": "object",
+    "properties": {
+        "image": {
+            "type": "object",
+            "title": "Image",
+            "description": "Image",
+            "anyOf": [
+                {
+                    "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/image-link"
+                }
+            ]
+        },
+        "imageAltText": {
+            "type": "string",
+            "title": "Image alt text",
+            "description": "Alternative text for image for SEO *",
+            "format": "text",
+            "minLength": 1,
+            "maxLength": 255,
+            "ui:extension": {
+                "name": "ai-image-caption",
+                "params": {
+                    "image": "1/image"
+                }
+            }
+        },
+        "seoText": {
+            "type": "string",
+            "title": "SEO Text",
+            "description": "e.g. ladies-sunglasses",
+            "minLength": 0,
+            "maxLength": 100
+        },
+        "display": {
+            "type": "string",
+            "title": "Display type",
+            "description": "How the image should display (Point of Interest, Hotspots, served staticaly (ie, animated GIF)",
+            "enum": [
+                "Point of Interest",
+                "Hotspots",
+                "Static"
+            ]
+        },
+        "di": {
+            "type": "string",
+            "title": "Additional Imaging Params",
+            "description": "Optional Dynamic Media paramaters to control the image (https://amplience.com/developers/docs/apis/media-delivery/media-delivery-reference)",
+            "examples": [
+                "bg=rgb(255,255,255)",
+                "https://amplience.com/developers/docs/apis/media-delivery/media-delivery-reference/"
+            ],
+            "ui:component": {
+                "name": "text-area",
+                "params": {
+                    "autosize": "true"
+                }
+            }
+        }
+    },
+    "required": [
+        "imageAltText"
+    ],
+    "propertyOrder": [
+        "image",
+        "imageAltText",
+        "seoText",
+        "roundel",
+        "display"
+    ]
+}

@@ -1,0 +1,80 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://demostore.amplience.com/site/experiences/brand",
+    "title": "Brand Experience",
+    "description": "Configure experience for pages related to this brand",
+    "allOf": [
+        {
+            "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content"
+        }
+    ],
+    "trait:hierarchy": {
+        "childContentTypes": []
+    },
+    "trait:sortable": {
+        "sortBy": [
+            {
+                "key": "default",
+                "paths": [
+                    "/priority"
+                ]
+            }
+        ]
+    },
+    "trait:filterable": {
+        "filterBy": [
+            {
+                "paths": [
+                    "/brand"
+                ]
+            },
+            {
+                "paths": [
+                    "/brand",
+                    "/_meta/hierarchy/parentId"
+                ]
+            }
+        ]
+    },
+    "type": "object",
+    "ui:component": {
+        "name": "grid",
+        "params": {
+            "numColumns": 12,
+            "columns": [
+                {
+                    "span": 8,
+                    "pointers": [
+                        "/brand"
+                    ]
+                },
+                {
+                    "span": 4,
+                    "pointers": [
+                        "/priority"
+                    ]
+                },
+                {
+                    "span": 6,
+                    "pointers": [
+                        "/experience"
+                    ]
+                }
+            ]
+        }
+    },
+    "properties": {
+        "brand": {
+            "type": "string",
+            "title": "Brand"
+        },
+        "priority": {
+            "type": "number",
+            "title": "Priority"
+        },
+        "experience": {
+            "$ref": "https://demostore.amplience.com/site/experience#/definitions/experience"
+        }
+    },
+    "propertyOrder": []
+}

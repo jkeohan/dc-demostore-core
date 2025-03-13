@@ -1,0 +1,5 @@
+{
+  "body": "./schemas/container-schema.json",
+  "schemaId": "https://demostore.amplience.com/slots/container",
+  "validationLevel": "CONTENT_TYPE"
+}

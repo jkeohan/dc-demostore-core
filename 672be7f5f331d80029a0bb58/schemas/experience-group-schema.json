@@ -1,0 +1,52 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://demostore.amplience.com/site/experience-group",
+    "title": "Site Experience Group",
+    "description": "Contains Site Experiences and Site Experience Groups.",
+    "allOf": [
+        {
+            "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content"
+        }
+    ],
+    "trait:hierarchy": {
+        "childContentTypes": [
+            "https://demostore.amplience.com/site/experience-group",
+            "https://demostore.amplience.com/site/experiences/category",
+            "https://demostore.amplience.com/site/experiences/product",
+            "https://demostore.amplience.com/site/experiences/designer"
+        ]
+    },
+    "trait:sortable": {
+        "sortBy": [
+            {
+                "key": "default",
+                "paths": [
+                    "/priority"
+                ]
+            }
+        ]
+    },
+    "trait:filterable": {
+        "filterBy": [
+            {
+                "paths": [
+                    "/id"
+                ]
+            },
+            {
+                "paths": [
+                    "/id",
+                    "/_meta/hierarchy/parentId"
+                ]
+            }
+        ]
+    },
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "string",
+            "title": "Experience Root"
+        }
+    },
+    "propertyOrder": []
+}

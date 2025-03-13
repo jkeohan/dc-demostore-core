@@ -1,0 +1,69 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://demostore.amplience.com/site/pages",
+    "title": "Site Pages",
+    "description": "",
+    "allOf": [
+        {
+            "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content"
+        }
+    ],
+    "trait:hierarchy": {
+        "childContentTypes": [
+            "https://demostore.amplience.com/site/pages/category",
+            "https://demostore.amplience.com/site/pages/landing",
+            "https://demostore.amplience.com/site/pages/external"
+        ]
+    },
+    "type": "object",
+    "properties": {
+        "title": {
+            "title": "Title",
+            "type": "string"
+        },
+        "_meta": {
+            "title": "Homepage slug",
+            "properties": {
+                "deliveryKey": {
+                    "title": "Slug",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "deliveryKey"
+            ]
+        },
+        "ecommCategories": {
+            "title": "Populate categories from eCommerce",
+            "description": "If true, visible eCommerce categories that don't have a matching content item will be automatically created.",
+            "type": "boolean",
+            "default": false,
+            "ui:component": {
+                "name": "switch",
+                "params": {
+                    "labelPosition": "left"
+                }
+            }
+        },
+        "slots": {
+            "title": "Slots",
+            "type": "array",
+            "items": {
+                "title": "Slots",
+                "allOf": [
+                    {
+                        "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content-reference"
+                    },
+                    {
+                        "properties": {
+                            "contentType": {
+                                "$ref": "https://demostore.amplience.com/lib/components#/definitions/anySlot"
+                            }
+                        }
+                    }
+                ]
+            }
+        }
+    },
+    "definitions": {}
+}

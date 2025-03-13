@@ -1,0 +1,66 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://demostore.amplience.com/content/theme-wrapper",
+    "title": "Theme Wrapper",
+    "description": "Wraps a collection of anyComponent with a theme.",
+    "allOf": [
+        {
+            "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content"
+        }
+    ],
+    "type": "object",
+    "properties": {
+        "theme": {
+            "title": "Theme",
+            "type": "object",
+            "properties": {
+                "values": {
+                    "type": "array",
+                    "ui:extension": {
+                        "name": "hierarchy-picker",
+                        "params": {
+                            "nodeId": "",
+                            "type": "chip"
+                        }
+                    },
+                    "items": {
+                        "allOf": [
+                            {
+                                "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content-reference"
+                            },
+                            {
+                                "properties": {
+                                    "contentType": {
+                                        "enum": [
+                                            "https://demostore.amplience.com/site/theme"
+                                        ]
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        "components": {
+            "title": "Components",
+            "type": "array",
+            "items": {
+                "title": "Component",
+                "allOf": [
+                    {
+                        "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content-link"
+                    },
+                    {
+                        "properties": {
+                            "contentType": {
+                                "$ref": "https://demostore.amplience.com/lib/components#/definitions/anyComponent"
+                            }
+                        }
+                    }
+                ]
+            }
+        }
+    },
+    "propertyOrder": []
+}

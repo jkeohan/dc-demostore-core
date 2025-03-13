@@ -24,6 +24,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 }
 
 export default function Home({ content }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+    console.log('*** Home - content ***', content)
     return (
         <PageContent>
             <ContentBlock content={content.content} />

@@ -1,0 +1,5 @@
+{
+  "body": "./schemas/generic-schema.json",
+  "schemaId": "https://demostore.amplience.com/content/stylitics/generic",
+  "validationLevel": "CONTENT_TYPE"
+}

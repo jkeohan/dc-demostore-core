@@ -1,0 +1,85 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://demostore.amplience.com/content/slider",
+    "title": "Slider",
+    "description": "A carousel of slides",
+    "allOf": [
+        {
+            "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content"
+        }
+    ],
+    "type": "object",
+    "ui:component": {
+        "name": "grid",
+        "params": {
+            "numColumns": 12,
+            "columns": [
+                {
+                    "span": 12,
+                    "pointers": [
+                        "/slides"
+                    ]
+                },
+                {
+                    "span": 6,
+                    "pointers": [
+                        "/loop"
+                    ]
+                },
+                {
+                    "span": 6,
+                    "pointers": [
+                        "/navigationDots"
+                    ]
+                }
+            ]
+        }
+    },
+    "properties": {
+        "slides": {
+            "type": "array",
+            "title": "Slides",
+            "description": "Select from banners, images and videos to use in this slider",
+            "items": {
+                "title": "Slides",
+                "allOf": [
+                    {
+                        "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content-link"
+                    },
+                    {
+                        "properties": {
+                            "contentType": {
+                                "$ref": "https://demostore.amplience.com/lib/components#/definitions/anyComponent"
+                            }
+                        }
+                    }
+                ]
+            },
+            "minItems": 1,
+            "maxItems": 8
+        },
+        "loop": {
+            "type": "boolean",
+            "title": "Loop slider",
+            "description": "Infinite slide looping",
+            "ui:component": {
+                "name": "switch",
+                "params": {
+                    "labelPosition": "right"
+                }
+            }
+        },
+        "navigationDots": {
+            "type": "boolean",
+            "title": "Navigation Dots",
+            "description": "Display Navigation dots?",
+            "ui:component": {
+                "name": "switch",
+                "params": {
+                    "labelPosition": "right"
+                }
+            }
+        }
+    },
+    "propertyOrder": []
+}

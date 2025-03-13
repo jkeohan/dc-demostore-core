@@ -1,0 +1,5 @@
+{
+  "body": "./schemas/blog-list-schema.json",
+  "schemaId": "https://demostore.amplience.com/content/blog-list",
+  "validationLevel": "CONTENT_TYPE"
+}

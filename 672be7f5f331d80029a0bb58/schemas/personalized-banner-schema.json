@@ -1,0 +1,76 @@
+{
+    "$schema": "http://bigcontent.io/cms/schema/v1/schema#",
+    "id": "https://demostore.amplience.com/slots/personalized-banner",
+    "title": "Personalized Banner Slot",
+    "description": "A Slot that can accept multiple banner for different segments (also known as a Targeted Hero)",
+    "allOf": [
+        {
+            "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content"
+        }
+    ],
+    "type": "object",
+    "properties": {
+        "segments": {
+            "type": "array",
+            "title": "Content",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "segment": {
+                        "title": "User Groups",
+                        "description": "Select user segments for the content to display. Default content is without any segments associated. Will only display a matching segment or default if available when not signed in",
+                        "type": "array",
+                        "minItems": 0,
+                        "maxItems": 5,
+                        "items": {
+                            "type": "string"
+                        },
+                        "ui:extension": {
+                            "name": "ecomm-toolkit",
+                            "params": {
+                                "label": "User Segments",
+                                "view": "multi",
+                                "data": "segment",
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "content": {
+                        "title": "Content",
+                        "allOf": [
+                            {
+                                "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content-link"
+                            },
+                            {
+                                "properties": {
+                                    "contentType": {
+                                        "title": "contentType",
+                                        "enum": [
+                                            "https://demostore.amplience.com/content/simple-banner",
+                                            "https://demostore.amplience.com/content/shoppable-image",
+                                            "https://demostore.amplience.com/content/simple-banner-bynder",
+                                            "https://demostore.amplience.com/content/advanced-banner",
+                                            "https://demostore.amplience.com/content/simple-localized-banner",
+                                            "https://demostore.amplience.com/content/slider",
+                                            "https://demostore.amplience.com/content/video",
+                                            "https://demostore.amplience.com/content/stylitics/generic",
+                                            "https://demostore.amplience.com/content/stylitics/classic",
+                                            "https://demostore.amplience.com/content/stylitics/hotspots",
+                                            "https://demostore.amplience.com/content/stylitics/moodboard",
+                                            "https://demostore.amplience.com/content/stylitics/main-and-detail",
+                                            "https://demostore.amplience.com/content/stylitics/gallery"
+                                        ]
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                },
+                "propertyOrder": [
+                    "segment",
+                    "content"
+                ]
+            }
+        }
+    }
+}

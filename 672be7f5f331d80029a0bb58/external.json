@@ -1,0 +1,5 @@
+{
+  "body": "./schemas/external-schema.json",
+  "schemaId": "https://demostore.amplience.com/site/pages/external",
+  "validationLevel": "CONTENT_TYPE"
+}

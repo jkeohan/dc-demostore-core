@@ -1,0 +1,40 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://demostore.amplience.com/email/template",
+    "title": "Email Template",
+    "description": "Email Template",
+    "allOf": [
+        {
+            "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content"
+        }
+    ],
+    "type": "object",
+    "properties": {
+        "content": {
+            "title": "Email Content",
+            "type": "array",
+            "minItems": 0,
+            "maxItems": 10,
+            "items": {
+                "allOf": [
+                    {
+                        "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content-link"
+                    },
+                    {
+                        "properties": {
+                            "contentType": {
+                                "enum": [
+                                    "https://demostore.amplience.com/email/header",
+                                    "https://demostore.amplience.com/email/banner",
+                                    "https://demostore.amplience.com/email/footer",
+                                    "https://demostore.amplience.com/content/simple-banner"
+                                ]
+                            }
+                        }
+                    }
+                ]
+            }
+        }
+    },
+    "propertyOrder": []
+}

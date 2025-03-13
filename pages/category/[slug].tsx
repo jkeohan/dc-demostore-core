@@ -105,6 +105,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
 function CategoryPage(props: InferGetServerSidePropsType<typeof getServerSideProps> & CategoryPageConfig) {
     const { vse, content, category, slots } = props;
+    console.log('*** Category page > vse ***', vse)
     const [config] = useContent(content.configComponents, vse);
 
     let components: CmsContent[] = props.content?.page?.components || [];

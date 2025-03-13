@@ -1,0 +1,55 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://demostore.amplience.com/site/experiences/designer",
+    "title": "Designer Experience",
+    "description": "Configure experience for pages related to this designer",
+    "allOf": [
+        {
+            "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content"
+        }
+    ],
+    "trait:hierarchy": {
+        "childContentTypes": []
+    },
+    "trait:sortable": {
+        "sortBy": [
+            {
+                "key": "default",
+                "paths": [
+                    "/priority"
+                ]
+            }
+        ]
+    },
+    "trait:filterable": {
+        "filterBy": [
+            {
+                "paths": [
+                    "/designer"
+                ]
+            },
+            {
+                "paths": [
+                    "/designer",
+                    "/_meta/hierarchy/parentId"
+                ]
+            }
+        ]
+    },
+    "type": "object",
+    "properties": {
+        "designer": {
+            "type": "string",
+            "title": "Designer"
+        },
+        "priority": {
+            "type": "integer",
+            "description": "Integers only, lower numbers show first",
+            "title": "Priority"
+        },
+        "experience": {
+            "$ref": "https://demostore.amplience.com/site/experience#/definitions/experience"
+        }
+    },
+    "propertyOrder": []
+}

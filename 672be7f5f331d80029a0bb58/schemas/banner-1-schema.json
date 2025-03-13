@@ -1,0 +1,44 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://demostore.amplience.com/slots/banner",
+    "title": "Banner Slot",
+    "description": "A slot to contain a Banner.",
+    "allOf": [
+        {
+            "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content"
+        }
+    ],
+    "type": "object",
+    "properties": {
+        "content": {
+            "title": "Content",
+            "allOf": [
+                {
+                    "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content-link"
+                },
+                {
+                    "properties": {
+                        "contentType": {
+                            "title": "contentType",
+                            "enum": [
+                                "https://demostore.amplience.com/content/simple-banner",
+                                "https://demostore.amplience.com/content/simple-localized-banner",
+                                "https://demostore.amplience.com/content/simple-banner-bynder",
+                                "https://demostore.amplience.com/content/container",
+                                "https://demostore.amplience.com/content/slider",
+                                "https://demostore.amplience.com/content/video",
+                                "https://demostore.amplience.com/content/stylitics/generic",
+                                "https://demostore.amplience.com/content/stylitics/classic",
+                                "https://demostore.amplience.com/content/stylitics/hotspots",
+                                "https://demostore.amplience.com/content/stylitics/moodboard",
+                                "https://demostore.amplience.com/content/stylitics/main-and-detail",
+                                "https://demostore.amplience.com/content/stylitics/gallery"
+                            ]
+                        }
+                    }
+                }
+            ]
+        }
+    },
+    "propertyOrder": []
+}

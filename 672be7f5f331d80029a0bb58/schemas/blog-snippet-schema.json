@@ -1,0 +1,164 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://demostore.amplience.com/content/blog-snippet",
+    "title": "Blog Snippet",
+    "description": "Key information for indexing and displaying a blog post",
+    "allOf": [
+        {
+            "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content"
+        }
+    ],
+    "type": "object",
+    "properties": {
+        "image": {
+            "type": "object",
+            "title": "Image",
+            "description": "Image to show in the snippet",
+            "allOf": [
+                {
+                    "$ref": "https://demostore.amplience.com/content/image"
+                }
+            ]
+        },
+        "title": {
+            "type": "string",
+            "title": "Title",
+            "description": "Blog post title",
+            "validation": "Please enter less than 255 characters",
+            "minLength": 1,
+            "maxLength": 255,
+            "ui:extension": {
+                "name": "seo-assistant",
+                "params": {
+                    "type": "title",
+                    "sources": [
+                        "/content/text"
+                    ]
+                }
+            }
+        },
+        "description": {
+            "type": "string",
+            "title": "Snippet Description",
+            "description": "Blog post description",
+            "validation": "Please enter less than 500 characters",
+            "minLength": 1,
+            "maxLength": 500,
+            "ui:extension": {
+                "name": "seo-assistant",
+                "params": {
+                    "type": "description",
+                    "sources": [
+                        "/content/text"
+                    ]
+                }
+            }
+        },
+        "keywords": {
+            "title": "SEO Keywords",
+            "type": "string",
+            "ui:extension": {
+                "name": "seo-assistant",
+                "params": {
+                    "type": "keywords",
+                    "sources": [
+                        "/content/text"
+                    ]
+                }
+            }
+        },
+        "cta": {
+            "type": "object",
+            "title": "Call to action",
+            "description": "The location of the blog post",
+            "allOf": [
+                {
+                    "$ref": "https://demostore.amplience.com/lib/link"
+                }
+            ]
+        },
+        "category": {
+            "type": "array",
+            "title": "Category",
+            "description": "The name of the category this relates to",
+            "items": {
+                "type": "string",
+                "enum": [
+                    "women",
+                    "men",
+                    "beauty",
+                    "lighting",
+                    "furniture",
+                    "electricals",
+                    "inspiration"
+                ]
+            }
+        },
+        "author": {
+            "type": "string",
+            "title": "Author",
+            "description": "The author of the post",
+            "enum": [
+                "Hazel Nutkins",
+                "Macadamia Smith",
+                "Sally Almond",
+                "Desmond Cobnut",
+                "Jose Pistachio"
+            ]
+        },
+        "blogdate": {
+            "type": "string",
+            "title": "Creation Date",
+            "description": "Enter date (yyyy-mm-dd) that blog is created",
+            "format": "date",
+            "ui:component": {
+                "params": {
+                    "placeholder": "Choose a date"
+                }
+            }
+        },
+        "tags": {
+            "title": "Tags",
+            "type": "array",
+            "ui:extension": {
+                "name": "hierarchy-picker",
+                "params": {
+                    "nodeId": "",
+                    "type": "chip"
+                }
+            },
+            "items": {
+                "allOf": [
+                    {
+                        "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content-reference"
+                    },
+                    {
+                        "properties": {
+                            "contentType": {
+                                "enum": [
+                                    "https://demostore.amplience.com/site/tag"
+                                ]
+                            }
+                        }
+                    }
+                ]
+            }
+        }
+    },
+    "required": [
+        "title",
+        "author",
+        "description",
+        "blogdate"
+    ],
+    "propertyOrder": [
+        "image",
+        "title",
+        "description",
+        "keywords",
+        "blogdate",
+        "category",
+        "cta",
+        "author"
+    ]
+}

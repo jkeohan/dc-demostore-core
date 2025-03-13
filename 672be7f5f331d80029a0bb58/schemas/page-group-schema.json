@@ -1,0 +1,61 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://demostore.amplience.com/site/page-group",
+    "title": "Page Group",
+    "description": "",
+    "allOf": [
+        {
+            "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content"
+        }
+    ],
+    "trait:hierarchy": {
+        "childContentTypes": [
+            "https://demostore.amplience.com/site/pages/category",
+            "https://demostore.amplience.com/site/pages/landing",
+            "https://demostore.amplience.com/site/pages/external"
+        ]
+    },
+    "trait:sortable": {
+        "sortBy": [
+            {
+                "key": "default",
+                "paths": [
+                    "/priority"
+                ]
+            }
+        ]
+    },
+    "type": "object",
+    "properties": {
+        "active": {
+            "type": "boolean",
+            "title": "Is Active?",
+            "description": "When unchecked, this page becomes inaccessible.",
+            "default": true,
+            "ui:component": {
+                "name": "switch",
+                "params": {
+                    "labelPosition": "left"
+                }
+            }
+        },
+        "title": {
+            "title": "Title",
+            "description": "The title of the page group",
+            "allOf": [
+                {
+                    "$ref": "http://bigcontent.io/cms/schema/v1/localization#/definitions/localized-string"
+                }
+            ]
+        },
+        "priority": {
+            "type": "integer",
+            "description": "Integers only, lower numbers show first",
+            "title": "Priority"
+        }
+    },
+    "required": [
+        "title"
+    ],
+    "definitions": {}
+}

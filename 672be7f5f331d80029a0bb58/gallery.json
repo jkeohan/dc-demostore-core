@@ -1,0 +1,5 @@
+{
+  "body": "./schemas/gallery-schema.json",
+  "schemaId": "https://demostore.amplience.com/content/stylitics/gallery",
+  "validationLevel": "CONTENT_TYPE"
+}

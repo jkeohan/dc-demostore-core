@@ -1,0 +1,67 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://demostore.amplience.com/content/product-grid",
+    "title": "Dynamic Product Grid",
+    "description": "Dynamic Product Grid based off of a product category and/or text query.",
+    "allOf": [
+        {
+            "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content"
+        }
+    ],
+    "type": "object",
+    "properties": {
+        "category": {
+            "title": "Product Category",
+            "description": "The product category used to to render",
+            "type": "string",
+            "ui:extension": {
+                "name": "ecomm-toolkit",
+                "params": {
+                    "label": "Linked Category",
+                    "view": "single",
+                    "data": "category",
+                    "type": "string"
+                }
+            }
+        },
+        "limit": {
+            "title": "Limit",
+            "description": "Maximum number of results to display",
+            "type": "number",
+            "default": 4,
+            "minimum": 1,
+            "maximum": 100,
+            "ui:component": {
+                "name": "slider",
+                "params": {
+                    "defaultValue": 4,
+                    "inverted": false,
+                    "marks": [
+                        {
+                            "value": 1,
+                            "label": "1"
+                        },
+                        {
+                            "value": 25,
+                            "label": "25"
+                        },
+                        {
+                            "value": 50,
+                            "label": "50"
+                        },
+                        {
+                            "value": 75,
+                            "label": "75"
+                        },
+                        {
+                            "value": 100,
+                            "label": "100"
+                        }
+                    ],
+                    "step": 1
+                }
+            }
+        }
+    },
+    "propertyOrder": []
+}

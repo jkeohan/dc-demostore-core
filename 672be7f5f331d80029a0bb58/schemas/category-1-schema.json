@@ -1,0 +1,123 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://demostore.amplience.com/site/pages/category",
+    "title": "Category Page",
+    "description": "",
+    "allOf": [
+        {
+            "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content"
+        }
+    ],
+    "trait:hierarchy": {
+        "childContentTypes": [
+            "https://demostore.amplience.com/site/page-group",
+            "https://demostore.amplience.com/site/pages/category"
+        ]
+    },
+    "trait:sortable": {
+        "sortBy": [
+            {
+                "key": "default",
+                "paths": [
+                    "/menu/priority"
+                ]
+            }
+        ]
+    },
+    "type": "object",
+    "properties": {
+        "active": {
+            "type": "boolean",
+            "title": "Is Active?",
+            "description": "When unchecked, this page becomes inaccessible (you should get a 404 page not found error when inactive and if the slug doesn't exist in the target eComm).",
+            "default": true,
+            "ui:component": {
+                "name": "switch",
+                "params": {
+                    "labelPosition": "left"
+                }
+            }
+        },
+        "_meta": {
+            "title": "Page URL",
+            "properties": {
+                "deliveryKey": {
+                    "title": "URL",
+                    "type": "string",
+                    "description": "URL of the page in the application",
+                    "pattern": "category/.*"
+                }
+            },
+            "required": [
+                "deliveryKey"
+            ]
+        },
+        "name": {
+            "type": "string",
+            "title": "Ecommerce Category",
+            "description": "The eCommerce category that will be displayed on this page",
+            "ui:extension": {
+                "name": "ecomm-toolkit",
+                "params": {
+                    "label": "Linked Category",
+                    "view": "tree",
+                    "data": "category",
+                    "type": "string"
+                }
+            }
+        },
+        "ecommCategories": {
+            "title": "Populate sub-categories from eCommerce",
+            "description": "If true, visible eCommerce sub-categories that don't have a matching content item will be automatically created.",
+            "type": "boolean",
+            "default": false
+        },
+        "hideProductList": {
+            "title": "Hide Product List",
+            "description": "Hide Product List for a Category Landing Page for instance.",
+            "type": "boolean"
+        },
+        "menu": {
+            "$ref": "https://demostore.amplience.com/lib/menu#/definitions/menuItemConfig"
+        },
+        "components": {
+            "title": "Components",
+            "type": "array",
+            "items": {
+                "title": "Component",
+                "allOf": [
+                    {
+                        "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content-link"
+                    },
+                    {
+                        "properties": {
+                            "contentType": {
+                                "$ref": "https://demostore.amplience.com/lib/components#/definitions/anyComponent"
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        "slots": {
+            "title": "Slots",
+            "type": "array",
+            "items": {
+                "title": "Slots",
+                "allOf": [
+                    {
+                        "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content-reference"
+                    },
+                    {
+                        "properties": {
+                            "contentType": {
+                                "$ref": "https://demostore.amplience.com/lib/components#/definitions/anySlot"
+                            }
+                        }
+                    }
+                ]
+            }
+        }
+    },
+    "definitions": {}
+}

@@ -1,0 +1,5 @@
+{
+  "body": "./schemas/designer-schema.json",
+  "schemaId": "https://demostore.amplience.com/site/experiences/designer",
+  "validationLevel": "CONTENT_TYPE"
+}

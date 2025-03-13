@@ -1,0 +1,36 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://demostore.amplience.com/site/experience",
+    "title": "Site Experience",
+    "description": "Contains a product page layout.",
+    "allOf": [
+        {
+            "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content"
+        }
+    ],
+    "definitions": {
+        "experience": {
+            "type": "object",
+            "title": "Experience",
+            "properties": {
+                "pdpLayout": {
+                    "title": "Product Page Layout",
+                    "allOf": [
+                        {
+                            "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content-link"
+                        },
+                        {
+                            "properties": {
+                                "contentType": {
+                                    "enum": [
+                                        "https://demostore.amplience.com/content/product-layout"
+                                    ]
+                                }
+                            }
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,181 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://demostore.amplience.com/content/blog",
+    "title": "Blog",
+    "description": "A Blog Post",
+    "allOf": [
+        {
+            "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content"
+        }
+    ],
+    "trait:sortable": {
+        "sortBy": [
+            {
+                "key": "default",
+                "paths": [
+                    "/snippet/blogdate",
+                    "/snippet/title",
+                    "/snippet/author"
+                ]
+            },
+            {
+                "key": "title",
+                "paths": [
+                    "/snippet/title",
+                    "/snippet/blogdate",
+                    "/snippet/author"
+                ]
+            },
+            {
+                "key": "author",
+                "paths": [
+                    "/snippet/author",
+                    "/snippet/title",
+                    "/snippet/blogdate"
+                ]
+            }
+        ]
+    },
+    "trait:filterable": {
+        "filterBy": [
+            {
+                "paths": [
+                    "/active"
+                ]
+            }
+        ]
+    },
+    "type": "object",
+    "properties": {
+        "help": {
+            "type": "null",
+            "ui:extension": {
+                "name": "help",
+                "params": {
+                    "title": "Blog",
+                    "message": "### SEO Assistant features\n#### Title, Description and Keywords\nTitle, description and keywords properties can be automatically generated thanks to our SEO Assistant extension.\nYou first need content in the Rich Text before generating these properties.\n#### Rich Text\nRich Text content can be automatically generated from keywords.\nYou first need to add keywords before generating content."
+                }
+            }
+        },
+        "_meta": {
+            "title": "",
+            "properties": {
+                "deliveryKey": {
+                    "title": "Slug",
+                    "type": "string",
+                    "description": "Enter slug using the format post/your-blog-post-slug",
+                    "pattern": "post/.*"
+                }
+            },
+            "required": [
+                "deliveryKey"
+            ]
+        },
+        "active": {
+            "title": "Is active?",
+            "description": "If not active, will not display in blog filters",
+            "type": "boolean",
+            "default": true,
+            "ui:component": {
+                "name": "switch",
+                "params": {
+                    "labelPosition": "left"
+                }
+            }
+        },
+        "snippet": {
+            "type": "object",
+            "title": "Blog Snippet",
+            "description": "Blog Snippet",
+            "allOf": [
+                {
+                    "$ref": "https://demostore.amplience.com/content/blog-snippet"
+                }
+            ]
+        },
+        "content": {
+            "type": "object",
+            "title": "Blog Content",
+            "description": "The main content for the blog",
+            "allOf": [
+                {
+                    "$ref": "https://demostore.amplience.com/content/rich-text"
+                }
+            ]
+        },
+        "contentTypes": {
+            "type": "array",
+            "title": "Content Type",
+            "description": "Select and order content to display in the page",
+            "items": {
+                "allOf": [
+                    {
+                        "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content-link"
+                    },
+                    {
+                        "properties": {
+                            "contentType": {
+                                "title": "",
+                                "enum": [
+                                    "https://demostore.amplience.com/content/simple-banner",
+                                    "https://demostore.amplience.com/content/simple-banner-bynder",
+                                    "https://demostore.amplience.com/content/card",
+                                    "https://demostore.amplience.com/content/card-list",
+                                    "https://demostore.amplience.com/content/curated-product-grid",
+                                    "https://demostore.amplience.com/content/rich-text",
+                                    "https://demostore.amplience.com/content/product-grid",
+                                    "https://demostore.amplience.com/content/html",
+                                    "https://demostore.amplience.com/content/image",
+                                    "https://demostore.amplience.com/content/slider",
+                                    "https://demostore.amplience.com/content/split-block",
+                                    "https://demostore.amplience.com/content/text",
+                                    "https://demostore.amplience.com/content/video",
+                                    "https://demostore.amplience.com/content/dynamic-blog-list",
+                                    "https://demostore.amplience.com/content/stylitics/generic",
+                                    "https://demostore.amplience.com/content/stylitics/classic",
+                                    "https://demostore.amplience.com/content/stylitics/hotspots",
+                                    "https://demostore.amplience.com/content/stylitics/moodboard",
+                                    "https://demostore.amplience.com/content/stylitics/main-and-detail",
+                                    "https://demostore.amplience.com/content/stylitics/gallery"
+                                ]
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        "theme": {
+            "title": "Theme",
+            "type": "object",
+            "properties": {
+                "values": {
+                    "type": "array",
+                    "maxItems": 1,
+                    "ui:extension": {
+                        "name": "hierarchy-picker",
+                        "params": {
+                            "nodeId": "",
+                            "type": "chip"
+                        }
+                    },
+                    "items": {
+                        "allOf": [
+                            {
+                                "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content-reference"
+                            },
+                            {
+                                "properties": {
+                                    "contentType": {
+                                        "enum": [
+                                            "https://demostore.amplience.com/site/theme"
+                                        ]
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+    }
+}

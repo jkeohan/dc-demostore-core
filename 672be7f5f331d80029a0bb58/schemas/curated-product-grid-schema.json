@@ -1,0 +1,45 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://demostore.amplience.com/content/curated-product-grid",
+    "title": "Curated Product Grid",
+    "description": "Curated Product Grid",
+    "allOf": [
+        {
+            "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content"
+        }
+    ],
+    "type": "object",
+    "properties": {
+        "products": {
+            "title": "Product Selector",
+            "description": "Products to display",
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 50,
+            "items": {
+                "type": "string"
+            },
+            "ui:extension": {
+                "name": "ecomm-toolkit",
+                "params": {
+                    "label": "Search By Category",
+                    "view": "product",
+                    "data": "product",
+                    "type": "strings"
+                }
+            }
+        },
+        "header": {
+            "title": "Header",
+            "allOf": [
+                {
+                    "$ref": "http://bigcontent.io/cms/schema/v1/localization#/definitions/localized-string"
+                }
+            ]
+        }
+    },
+    "propertyOrder": [
+        "header",
+        "products"
+    ]
+}

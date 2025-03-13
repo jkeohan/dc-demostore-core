@@ -1,0 +1,5 @@
+{
+  "body": "./schemas/di-image-schema.json",
+  "schemaId": "https://demostore.amplience.com/lib/di-image",
+  "validationLevel": "CONTENT_TYPE"
+}

@@ -1,0 +1,58 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://demostore.amplience.com/site/pages/external",
+    "title": "Page Group",
+    "description": "",
+    "allOf": [
+        {
+            "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content"
+        }
+    ],
+    "trait:hierarchy": {
+        "childContentTypes": []
+    },
+    "trait:sortable": {
+        "sortBy": [
+            {
+                "key": "default",
+                "paths": [
+                    "/menu/priority"
+                ]
+            }
+        ]
+    },
+    "type": "object",
+    "properties": {
+        "active": {
+            "type": "boolean",
+            "title": "Is Active?",
+            "description": "When unchecked, this page becomes inaccessible.",
+            "default": true,
+            "ui:component": {
+                "name": "switch",
+                "params": {
+                    "labelPosition": "left"
+                }
+            }
+        },
+        "title": {
+            "title": "Title",
+            "allOf": [
+                {
+                    "$ref": "http://bigcontent.io/cms/schema/v1/localization#/definitions/localized-string"
+                }
+            ]
+        },
+        "href": {
+            "type": "string",
+            "title": "Link"
+        },
+        "menu": {
+            "$ref": "https://demostore.amplience.com/lib/menu#/definitions/menuItemConfig"
+        }
+    },
+    "required": [
+        "title"
+    ],
+    "definitions": {}
+}

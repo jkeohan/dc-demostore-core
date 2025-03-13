@@ -1,0 +1,5 @@
+{
+  "body": "./schemas/shoppable-image-schema.json",
+  "schemaId": "https://demostore.amplience.com/content/shoppable-image",
+  "validationLevel": "CONTENT_TYPE"
+}

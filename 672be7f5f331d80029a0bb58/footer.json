@@ -1,0 +1,5 @@
+{
+  "body": "./schemas/footer-schema.json",
+  "schemaId": "https://demostore.amplience.com/email/footer",
+  "validationLevel": "CONTENT_TYPE"
+}

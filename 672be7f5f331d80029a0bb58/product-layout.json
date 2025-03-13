@@ -1,0 +1,5 @@
+{
+  "body": "./schemas/product-layout-schema.json",
+  "schemaId": "https://demostore.amplience.com/content/product-layout",
+  "validationLevel": "CONTENT_TYPE"
+}

@@ -1,0 +1,166 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://demostore.amplience.com/content/store",
+    "title": "Store Location",
+    "description": "Store location details",
+    "allOf": [
+        {
+            "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content"
+        }
+    ],
+    "trait:sortable": {
+        "sortBy": [
+            {
+                "key": "default",
+                "paths": [
+                    "/locationName"
+                ]
+            }
+        ]
+    },
+    "trait:filterable": {
+        "filterBy": [
+            {
+                "paths": [
+                    "/filterActive"
+                ]
+            },
+            {
+                "paths": [
+                    "/filterActive",
+                    "/keyElements/parking"
+                ]
+            }
+        ]
+    },
+    "type": "object",
+    "properties": {
+        "filterActive": {
+            "title": "Active for Filter API",
+            "type": "boolean",
+            "default": true,
+            "ui:component": {
+                "name": "switch",
+                "params": {
+                    "labelPosition": "left"
+                }
+            }
+        },
+        "locationName": {
+            "title": "Store Name",
+            "type": "string",
+            "minLength": 0,
+            "maxLength": 64
+        },
+        "_meta": {
+            "type": "object",
+            "title": "Slug",
+            "properties": {
+                "deliveryKey": {
+                    "type": "string",
+                    "title": "URL slug",
+                    "description": "Enter the URL slug for this store (store/*)",
+                    "pattern": "store/.*"
+                }
+            },
+            "required": [
+                "deliveryKey"
+            ]
+        },
+        "locationAddress": {
+            "title": "Store Address",
+            "description": "Full address of the store",
+            "type": "string",
+            "format": "markdown",
+            "maxLength": 150
+        },
+        "keyElements": {
+            "title": "Key Store Elements",
+            "type": "object",
+            "properties": {
+                "parking": {
+                    "title": "Parking",
+                    "description": "Parking space avaiable",
+                    "type": "boolean"
+                },
+                "clickAndCollect": {
+                    "title": "Click & Collect",
+                    "description": "Click & Collect available",
+                    "type": "boolean"
+                },
+                "lateOpening": {
+                    "title": "Late Opening",
+                    "description": "Late Opening times",
+                    "type": "boolean"
+                }
+            },
+            "propertyOrder": [
+                "parking",
+                "clickAndCollect",
+                "lateOpening"
+            ],
+            "ui:component": {
+                "name": "grid",
+                "params": {
+                    "numColumns": 3,
+                    "columns": [
+                        {
+                            "span": 1,
+                            "pointers": [
+                                "/parking"
+                            ]
+                        },
+                        {
+                            "span": 1,
+                            "pointers": [
+                                "/clickAndCollect"
+                            ]
+                        },
+                        {
+                            "span": 1,
+                            "pointers": [
+                                "/lateOpening"
+                            ]
+                        }
+                    ]
+                }
+            }
+        },
+        "details": {
+            "title": "Store Details",
+            "type": "string",
+            "format": "markdown"
+        },
+        "image": {
+            "title": "Image",
+            "allOf": [
+                {
+                    "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/image-link"
+                }
+            ]
+        },
+        "imageAltText": {
+            "type": "string",
+            "title": "Image alt text",
+            "description": "Alternative text for image for SEO",
+            "minLength": 0,
+            "maxLength": 255,
+            "ui:extension": {
+                "name": "ai-image-caption",
+                "params": {
+                    "image": "1/image"
+                }
+            }
+        }
+    },
+    "propertyOrder": [
+        "filterActive",
+        "locationName",
+        "_meta",
+        "locationAddress",
+        "image",
+        "imageAltText",
+        "keyElements",
+        "details"
+    ]
+}

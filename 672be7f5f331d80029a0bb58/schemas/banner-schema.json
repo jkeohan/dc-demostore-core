@@ -1,0 +1,176 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://demostore.amplience.com/email/banner",
+    "title": "Email Banner",
+    "description": "One Column Article",
+    "allOf": [
+        {
+            "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content"
+        }
+    ],
+    "type": "object",
+    "properties": {
+        "wrapper": {
+            "title": "Wrapper Settings",
+            "type": "object",
+            "properties": {
+                "bgColor": {
+                    "title": "Background Color",
+                    "type": "string",
+                    "format": "color"
+                }
+            }
+        },
+        "imageSettings": {
+            "title": "Image Settings",
+            "type": "object",
+            "properties": {
+                "image": {
+                    "title": "Image",
+                    "description": "",
+                    "type": "object",
+                    "anyOf": [
+                        {
+                            "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/image-link"
+                        }
+                    ]
+                },
+                "imageWidth": {
+                    "title": "Image pixel width",
+                    "type": "number",
+                    "minLength": 0,
+                    "maxLenght": 540
+                },
+                "isAnimatedGif": {
+                    "title": "Is Image Animated GIF?",
+                    "type": "boolean",
+                    "ui:component": {
+                        "name": "switch",
+                        "params": {
+                            "labelPosition": "left"
+                        }
+                    }
+                },
+                "imageWrapperPadding": {
+                    "title": "Image Wrapper Padding",
+                    "description": "Padding is set with shorthand in this order: top, right, bottom, left (example: 20px 10px 20px 10px)",
+                    "type": "string"
+                },
+                "imageAltText": {
+                    "title": "Image alt text",
+                    "type": "string",
+                    "minLength": 0,
+                    "maxLength": 255,
+                    "ui:extension": {
+                        "name": "ai-image-caption",
+                        "params": {
+                            "image": "1/image"
+                        }
+                    }
+                },
+                "linkUrl": {
+                    "type": "string",
+                    "title": "Image Link"
+                },
+                "linkAlias": {
+                    "type": "string",
+                    "title": "Image Link Alias"
+                }
+            }
+        },
+        "headingSettings": {
+            "allOf": [
+                {
+                    "$ref": "https://demostore.amplience.com/email/typography#/definitions/headingSettings"
+                }
+            ]
+        },
+        "paragraphSettings": {
+            "allOf": [
+                {
+                    "$ref": "https://demostore.amplience.com/email/typography#/definitions/paragraphSettings"
+                }
+            ]
+        },
+        "ctaSettings": {
+            "title": "CTA Settings",
+            "type": "object",
+            "properties": {
+                "buttonStyle": {
+                    "title": "Button Style",
+                    "description": "Choose which style of button you prefer",
+                    "type": "string",
+                    "enum": [
+                        "Hide",
+                        "Solid",
+                        "Outlined"
+                    ]
+                },
+                "buttonColor": {
+                    "title": "Button/Border Color",
+                    "type": "string",
+                    "format": "color"
+                },
+                "linkUrl": {
+                    "title": "Link URL",
+                    "type": "string"
+                },
+                "linkAlias": {
+                    "title": "Link Alias",
+                    "type": "string"
+                },
+                "buttonText": {
+                    "title": "Button Text",
+                    "type": "string",
+                    "minimum": 4,
+                    "maximum": 12
+                },
+                "textColor": {
+                    "title": "Button Text Color",
+                    "type": "string",
+                    "format": "color"
+                }
+            }
+        }
+    },
+    "ui:component": {
+        "name": "tabs",
+        "params": {
+            "tabs": {
+                "defaultTab": "Image",
+                "items": [
+                    {
+                        "label": "Wrapper",
+                        "pointers": [
+                            "/wrapper"
+                        ]
+                    },
+                    {
+                        "label": "Image",
+                        "pointers": [
+                            "/imageSettings"
+                        ]
+                    },
+                    {
+                        "label": "Heading",
+                        "pointers": [
+                            "/headingSettings"
+                        ]
+                    },
+                    {
+                        "label": "Paragraph",
+                        "pointers": [
+                            "/paragraphSettings"
+                        ]
+                    },
+                    {
+                        "label": "CTA",
+                        "pointers": [
+                            "/ctaSettings"
+                        ]
+                    }
+                ]
+            }
+        }
+    }
+}

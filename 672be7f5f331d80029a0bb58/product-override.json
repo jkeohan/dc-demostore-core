@@ -1,0 +1,5 @@
+{
+  "body": "./schemas/product-override-schema.json",
+  "schemaId": "https://demostore.amplience.com/content/product-override",
+  "validationLevel": "CONTENT_TYPE"
+}

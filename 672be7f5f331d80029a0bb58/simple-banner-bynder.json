@@ -1,0 +1,5 @@
+{
+  "body": "./schemas/simple-banner-bynder-schema.json",
+  "schemaId": "https://demostore.amplience.com/content/simple-banner-bynder",
+  "validationLevel": "CONTENT_TYPE"
+}

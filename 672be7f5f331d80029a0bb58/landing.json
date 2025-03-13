@@ -1,0 +1,5 @@
+{
+  "body": "./schemas/landing-schema.json",
+  "schemaId": "https://demostore.amplience.com/site/pages/landing",
+  "validationLevel": "CONTENT_TYPE"
+}

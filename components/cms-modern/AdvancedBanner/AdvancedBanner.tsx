@@ -145,18 +145,20 @@ const AdvancedBanner = ({
                                     </Typography>
                                 );
                             })}
-                            {ctas?.map((cta: any) => {
-                                return (
-                                    <CallToAction
-                                        key={cta?.buttonText}
-                                        href={cta?.linkUrl}
-                                        style={{ marginTop: '15px !important', marginRight: '15px !important' }}
-                                        variant={cta?.variant}
-                                    >
-                                        {cta?.buttonText}
-                                    </CallToAction>
-                                );
-                            })}
+                            <div style={{ display: 'flex', justifyContent: 'center' }}>
+                                {ctas?.map((cta: any) => {
+                                    return (
+                                        <CallToAction
+                                            key={cta?.buttonText}
+                                            href={cta?.linkUrl}
+                                            style={{ marginTop: '15px !important', marginRight: '15px !important' }}
+                                            variant={cta?.variant}
+                                        >
+                                            {cta?.buttonText}
+                                        </CallToAction>
+                                    );
+                                })}
+                            </div>
                         </InfoPanel>
                     ) : null
                 }

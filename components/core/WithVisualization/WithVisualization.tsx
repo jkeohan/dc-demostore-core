@@ -48,6 +48,7 @@ const WithVisualization = (props: WithVisualizationProps) => {
                 });
 
                 setSDK(sdk);
+                console.log("WithVisualization - value.content", value.content)
                 setFormModel(value.content);
                 setStatus('connected');
             })

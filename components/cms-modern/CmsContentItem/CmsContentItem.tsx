@@ -20,6 +20,7 @@ export function useCmsContentItem(): CmsContentItemState | null {
 }
 
 const CmsContentItem = ({ content, children }: CmsContentItemProps) => {
+    console.log("CmsContentItem", content, children)
     const { showContent } = useDebug();
 
     if (!content || !content._meta || !content._meta.deliveryId) {

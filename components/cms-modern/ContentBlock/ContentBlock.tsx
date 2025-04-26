@@ -3,6 +3,7 @@ import { CmsContent } from '@lib/cms/CmsContent';
 import { useContent } from '@components/core/WithVisualization/WithVisualization';
 
 import AdvancedBanner from '@components/cms-modern/AdvancedBanner';
+import BannerPOC from '@components/cms-modern/BannerPOC';
 import BannerSlot from '@components/cms-modern/BannerSlot';
 import Blog from '@components/cms-modern/Blog';
 import BlogList from '@components/cms/BlogList';
@@ -39,6 +40,7 @@ import Video from '@components/cms-modern/Video';
 import { useRouter } from 'next/router';
 import Generic from '@components/stylitics/Generic/Generic';
 
+
 export type ContentBlockType = 'SLOT' | 'CONTENT';
 
 interface ContentBlockProps {
@@ -50,6 +52,7 @@ interface ContentBlockProps {
 
 const ComponentMapping: any = {
     'https://demostore.amplience.com/content/advanced-banner': AdvancedBanner,
+    'https://cms.gap.com/schema/v1/poc-banner': BannerPOC,
     'https://demostore.amplience.com/content/blog-list': BlogList,
     'https://demostore.amplience.com/content/blog-snippet': BlogSnippet,
     'https://demostore.amplience.com/content/blog': Blog,
@@ -100,7 +103,7 @@ const ContentBlock = ({
     const vse = (query?.vse as string) || '';
 
     // Get real-time content from original content
-    console.log('*** ContnetBlock > originalConent, vse ***', originalContent, vse);
+    console.log('*** ContentBlock > originalContent, vse ***', originalContent, vse);
     const [liveContent] = useContent(originalContent, vse);
     if (!liveContent) {
         return null;

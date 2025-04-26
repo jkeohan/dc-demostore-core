@@ -21,6 +21,9 @@ import 'nprogress/nprogress.css';
 import ErrorPage from 'next/error';
 import { ConfigContext } from '../components/core/Config';
 
+// local css imports not allowed in next so styles.css moved here
+import '../components/cms-modern/BannerPOC/styles.css';
+
 Router.events.on('routeChangeStart', () => NProgress.start());
 Router.events.on('routeChangeComplete', () => NProgress.done());
 Router.events.on('routeChangeError', () => NProgress.done());

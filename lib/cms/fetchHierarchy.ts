@@ -44,7 +44,8 @@ async function fetchHierarchy(items: CmsHierarchyRequest[], context: CmsContext)
                 depth: 'root',
                 format: 'linked',
             });
-            const children: CmsHierarchyNode[] = await getChildren((rootNode as any)._meta.deliveryId, context);
+            console.log("fetchHierarch", rootNode)
+            const children: CmsHierarchyNode[] = await getChildren((rootNode as any)?._meta.deliveryId, context);
             const response: any = {
                 content: rootNode,
                 children: children,

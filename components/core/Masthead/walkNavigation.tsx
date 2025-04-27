@@ -41,7 +41,7 @@ export function enrichCmsEntries(cmsEntry: CmsHierarchyNode, categoriesById: any
 
     const myType = getTypeFromSchema(cmsEntry.content?._meta?.schema);
 
-    if (!cmsEntry.content.ecommCategories) {
+    if (!cmsEntry.content?.ecommCategories) {
         categories = null;
     } else if (categories == null && myType === 'category') {
         // Locate the category by ID.

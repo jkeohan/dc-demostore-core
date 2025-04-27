@@ -57,6 +57,7 @@ const ComponentMapping: any = {
     'https://demostore.amplience.com/content/blog-snippet': BlogSnippet,
     'https://demostore.amplience.com/content/blog': Blog,
     'https://demostore.amplience.com/content/card-list': CardList,
+    'https://schema-examples-accelerators.com/card.json': Card,
     'https://demostore.amplience.com/content/card': Card,
     'https://demostore.amplience.com/content/container': Container,
     'https://demostore.amplience.com/content/curated-product-grid': CuratedProductGrid,

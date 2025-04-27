@@ -1,6 +1,6 @@
 // import './styles.css';
 import Button from '@mui/material/Button';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 interface ImageData {
     image: any;
@@ -57,6 +57,7 @@ interface ContentBlocks {
 }
 
 interface TextBlocks {
+    contentBlocksMobile: any;
     contentBlocksDesktop?: ContentBlocks[];
 }
 
@@ -79,7 +80,7 @@ function alignment(textBlocks: TextBlocks) {
     const halign = textBlocks.contentBlocksDesktop?.[0]?.halign || 'center';
     const valign = textBlocks.contentBlocksDesktop?.[0]?.valign || 'middle';
 
-    const ctaAlignClass = {
+    const ctaAlignVerticalClass = {
         left: 'justify-start',
         center: 'justify-center',
         right: 'justify-end',
@@ -103,31 +104,62 @@ function alignment(textBlocks: TextBlocks) {
         right: 'text-align-right',
     }[textAlign];
 
+    const ctaAlignHorizontalClass = {
+        left: 'left',
+        center: 'center',
+        right: 'right',
+    }[textAlign]
+
     return {
-        ctaAlignClass,
+        ctaAlignVerticalClass,
         halignClass,
         valignClass,
         textAlignClass,
+        ctaAlignHorizontalClass,
     };
 }
 
 const BannerPOC = ({ background, textBlocks, layout, contentPlacement, ...other }: BannerPOCProps) => {
-    console.log("background", background)
+     const [isMobile, setIsMobile] = useState(false);
+
+        useEffect(() => {
+            const checkIfMobile = () => {
+                setIsMobile(window.innerWidth <= 768); // Run this on the client-side only
+            };
+
+            // Check on component mount
+            checkIfMobile();
+
+            // Add event listener to handle window resize
+            window.addEventListener('resize', checkIfMobile);
+            return () => window.removeEventListener('resize', checkIfMobile); // Cleanup on unmount
+        }, []);
+
+    const desktopContent = textBlocks?.contentBlocksDesktop?.[0];
+    const mobileContent = textBlocks?.contentBlocksMobile?.[0];
+
+    const activeContent =
+        isMobile && mobileContent
+            ? { ...desktopContent, ...mobileContent } // mobile overrides desktop
+            : desktopContent;
+
+    console.log('activeContent', activeContent)
+
+    const blocks = activeContent?.block || [];
+
+    
     const desktopImage = background[0]?.image?.desktop?.image[0].image;
     const mobileImage = background[0]?.image?.mobile?.image[0].image;
-    console.log({ desktopImage });
-    const blocks = textBlocks?.contentBlocksDesktop?.[0]?.block || [];
+    // const blocks = textBlocks?.contentBlocksDesktop?.[0]?.block || [];
 
-    const { ctaAlignClass, halignClass, valignClass, textAlignClass } = alignment(textBlocks);
+    const { ctaAlignVerticalClass, halignClass, valignClass, textAlignClass, ctaAlignHorizontalClass } =
+        alignment(textBlocks);
 
     const getImageUrl = (imageObj: ImageData) =>
         `https://${imageObj?.defaultHost}/i/${imageObj?.endpoint}/${imageObj?.name}`;
-    console.log('mobileImage', mobileImage, getImageUrl(mobileImage));
 
     const renderBlock = (block: Block, index: number) => {
         if (!block) return null;
-
-        console.log("renderBlock", block.type)
 
         switch (block.type) {
             case 'header':
@@ -155,11 +187,18 @@ const BannerPOC = ({ background, textBlocks, layout, contentPlacement, ...other 
             case 'cta':
                 console.log('block.text.ctas?.ctas', block.text.ctas);
                 const ctas = block.text.ctas || [];
-                const buttonColor = block.text.buttonStyle?.buttonColor || '';
-                const buttonStyle = block.text.buttonStyle?.buttonStyle || '';
-                      console.log('buttonColor', buttonColor);
+                const buttonStyles = block.text.buttonStyle || {};
+                const buttonColor = buttonStyles?.buttonColor || '';
+                const buttonStyle = buttonStyles?.buttonStyle || '';
+                const buttonLayout = buttonStyles?.layoutType || '';
+
+                console.log('buttonStyle', block.text.buttonStyle);
+                console.log('buttonStyle', buttonStyle, buttonLayout);
                 return (
-                    <div key={index} className={`cta-buttons ${ctaAlignClass}`}>
+                    <div
+                        key={index}
+                        className={`cta-buttons ${ctaAlignVerticalClass} ${buttonLayout} ${ctaAlignHorizontalClass}`}
+                    >
                         {ctas.map((cta, i) => (
                             <a
                                 key={i}

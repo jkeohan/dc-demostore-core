@@ -186,7 +186,7 @@ const BannerPOC = ({ background, textBlocks, layout, contentPlacement, ...other 
 
             case 'cta':
                 console.log('block.text.ctas?.ctas', block.text.ctas);
-                const ctas = block.text.ctas || [];
+                const ctas = Array.isArray(block.text.ctas) ? block.text.ctas : [];
                 const buttonStyles = block.text.buttonStyle || {};
                 const buttonColor = buttonStyles?.buttonColor || '';
                 const buttonStyle = buttonStyles?.buttonStyle || '';
@@ -199,17 +199,21 @@ const BannerPOC = ({ background, textBlocks, layout, contentPlacement, ...other 
                         key={index}
                         className={`cta-buttons ${ctaAlignVerticalClass} ${buttonLayout} ${ctaAlignHorizontalClass}`}
                     >
-                        {ctas.map((cta, i) => (
-                            <a
-                                key={i}
-                                href={cta.cta.buttonValue}
-                                className={`button ${buttonStyle} ${buttonColor}`}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
-                                {cta.cta.buttonLabel}
-                            </a>
-                        ))}
+                        {ctas.length > 0 ? (
+                            ctas.map((cta, i) => (
+                                <a
+                                    key={i}
+                                    href={cta.cta.buttonValue}
+                                    className={`button ${buttonStyle} ${buttonColor}`}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    {cta.cta.buttonLabel}
+                                </a>
+                            ))
+                        ) : (
+                            <p>No CTAs available</p> // If no CTAs, show a fallback message
+                        )}
                     </div>
                 );
 
@@ -231,7 +235,7 @@ const BannerPOC = ({ background, textBlocks, layout, contentPlacement, ...other 
 
             <div className={`banner-text ${halignClass} ${valignClass} ${textAlignClass}`}>
                 {blocks.length > 0 ? (
-                    blocks.map((block, index) => renderBlock(block, index))
+                    blocks.map((block: Block, index: number) => renderBlock(block, index))
                 ) : (
                     <p>No content available</p>
                 )}

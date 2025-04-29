@@ -76,9 +76,9 @@ interface BannerPOCProps {
 }
 
 function alignment(textBlocks: TextBlocks) {
-    const textAlign = textBlocks.contentBlocksDesktop?.[0]?.textAlign || 'center';
-    const halign = textBlocks.contentBlocksDesktop?.[0]?.halign || 'center';
-    const valign = textBlocks.contentBlocksDesktop?.[0]?.valign || 'middle';
+    const textAlign = textBlocks?.contentBlocksDesktop?.[0]?.textAlign || 'center';
+    const halign = textBlocks?.contentBlocksDesktop?.[0]?.halign || 'center';
+    const valign = textBlocks?.contentBlocksDesktop?.[0]?.valign || 'middle';
 
     const ctaAlignVerticalClass = {
         left: 'justify-start',
@@ -108,7 +108,7 @@ function alignment(textBlocks: TextBlocks) {
         left: 'left',
         center: 'center',
         right: 'right',
-    }[textAlign]
+    }[textAlign];
 
     return {
         ctaAlignVerticalClass,
@@ -119,35 +119,41 @@ function alignment(textBlocks: TextBlocks) {
     };
 }
 
-const BannerPOC = ({ background, textBlocks, layout, contentPlacement, ...other }: BannerPOCProps) => {
-     const [isMobile, setIsMobile] = useState(false);
+const BannerPOC = ({ background = [], textBlocks, layout, contentPlacement, ...other }: BannerPOCProps) => {
+    const [isMobile, setIsMobile] = useState(false);
 
-        useEffect(() => {
-            const checkIfMobile = () => {
-                setIsMobile(window.innerWidth <= 768); // Run this on the client-side only
-            };
+    useEffect(() => {
+        const checkIfMobile = () => {
+            setIsMobile(window.innerWidth <= 768); // Run this on the client-side only
+        };
 
-            // Check on component mount
-            checkIfMobile();
+        // Check on component mount
+        checkIfMobile();
 
-            // Add event listener to handle window resize
-            window.addEventListener('resize', checkIfMobile);
-            return () => window.removeEventListener('resize', checkIfMobile); // Cleanup on unmount
-        }, []);
+        // Add event listener to handle window resize
+        window.addEventListener('resize', checkIfMobile);
+        return () => window.removeEventListener('resize', checkIfMobile); // Cleanup on unmount
+    }, []);
 
-    const desktopContent = textBlocks?.contentBlocksDesktop?.[0];
-    const mobileContent = textBlocks?.contentBlocksMobile?.[0];
-
+    const desktopContent = textBlocks?.contentBlocksDesktop?.[0] || { block: [] };
+    const mobileContent = textBlocks?.contentBlocksMobile?.[0] || { block: [] };
     const activeContent =
         isMobile && mobileContent
-            ? { ...desktopContent, ...mobileContent } // mobile overrides desktop
+            ? {
+                  ...desktopContent,
+                  ...Object.fromEntries(
+                      Object.entries(desktopContent || {}).map(([key, value]) => [
+                          key,
+                          mobileContent?.[key as keyof typeof mobileContent] ?? value,
+                      ]),
+                  ),
+              }
             : desktopContent;
 
-    console.log('activeContent', activeContent)
+    console.log('activeContent', activeContent);
 
     const blocks = activeContent?.block || [];
 
-    
     const desktopImage = background[0]?.image?.desktop?.image[0].image;
     const mobileImage = background[0]?.image?.mobile?.image[0].image;
     // const blocks = textBlocks?.contentBlocksDesktop?.[0]?.block || [];
@@ -211,9 +217,7 @@ const BannerPOC = ({ background, textBlocks, layout, contentPlacement, ...other 
                                     {cta.cta.buttonLabel}
                                 </a>
                             ))
-                        ) : (
-                            <p>No CTAs available</p> // If no CTAs, show a fallback message
-                        )}
+                        ) : null}
                     </div>
                 );
 
@@ -229,16 +233,14 @@ const BannerPOC = ({ background, textBlocks, layout, contentPlacement, ...other 
                 <img
                     className="banner-image"
                     src={desktopImage ? getImageUrl(desktopImage) : ''}
-                    alt={background[0]?.image?.desktop?.image[0]?.image.altText || 'BannerPOC'}
+                    alt={background[0]?.image?.desktop?.image[0]?.image?.altText || 'BannerPOC'}
                 />
             </picture>
 
             <div className={`banner-text ${halignClass} ${valignClass} ${textAlignClass}`}>
                 {blocks.length > 0 ? (
                     blocks.map((block: Block, index: number) => renderBlock(block, index))
-                ) : (
-                    <p>No content available</p>
-                )}
+                ) : null}
             </div>
         </section>
     );

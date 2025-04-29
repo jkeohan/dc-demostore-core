@@ -281,3 +281,8 @@
     width: 100px;
     text-align: center;
 }
+
+/* VIDEO */
+video.banner-video {
+    width: 100%;
+}

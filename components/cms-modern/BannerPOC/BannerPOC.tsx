@@ -15,6 +15,10 @@ interface DeviceImage {
 }
 
 interface BackgroundImage {
+    mobileVideo: any;
+    desktopVideo: any;
+    video: any;
+    type: string;
     image: {
         desktop: DeviceImage;
         mobile: DeviceImage;
@@ -124,19 +128,17 @@ const BannerPOC = ({ background = [], textBlocks, layout, contentPlacement, ...o
 
     useEffect(() => {
         const checkIfMobile = () => {
-            setIsMobile(window.innerWidth <= 768); // Run this on the client-side only
+            setIsMobile(window.innerWidth <= 768);
         };
 
-        // Check on component mount
         checkIfMobile();
-
-        // Add event listener to handle window resize
         window.addEventListener('resize', checkIfMobile);
-        return () => window.removeEventListener('resize', checkIfMobile); // Cleanup on unmount
+        return () => window.removeEventListener('resize', checkIfMobile);
     }, []);
 
     const desktopContent = textBlocks?.contentBlocksDesktop?.[0] || { block: [] };
     const mobileContent = textBlocks?.contentBlocksMobile?.[0] || { block: [] };
+
     const activeContent =
         isMobile && mobileContent
             ? {
@@ -150,19 +152,61 @@ const BannerPOC = ({ background = [], textBlocks, layout, contentPlacement, ...o
               }
             : desktopContent;
 
-    console.log('activeContent', activeContent);
-
     const blocks = activeContent?.block || [];
-
-    const desktopImage = background[0]?.image?.desktop?.image[0].image;
-    const mobileImage = background[0]?.image?.mobile?.image[0].image;
-    // const blocks = textBlocks?.contentBlocksDesktop?.[0]?.block || [];
 
     const { ctaAlignVerticalClass, halignClass, valignClass, textAlignClass, ctaAlignHorizontalClass } =
         alignment(textBlocks);
 
-    const getImageUrl = (imageObj: ImageData) =>
-        `https://${imageObj?.defaultHost}/i/${imageObj?.endpoint}/${imageObj?.name}`;
+    const getMediaUrl = (mediaObj: ImageData) =>
+        `https://${mediaObj?.defaultHost}/i/${mediaObj?.endpoint}/${mediaObj?.name}`;
+
+    const backgroundItem = background[0];
+
+
+    const renderBackgroundMedia = () => {
+        if (!backgroundItem) return null;
+            console.log('backgroundItem', backgroundItem.type);
+        
+
+        if (backgroundItem?.type === 'image') {
+            const desktopImg = backgroundItem.image?.desktop?.image?.[0]?.image;
+            const mobileImg = backgroundItem.image?.mobile?.image?.[0]?.image;
+        if (!desktopImg && !mobileImg) return null;
+
+            return (
+                <picture>
+                    <source media="(max-width: 768px)" srcSet={mobileImg ? getMediaUrl(mobileImg) : ''} />
+                    <img
+                        className="banner-image"
+                        src={desktopImg ? getMediaUrl(desktopImg) : ''}
+                        alt={desktopImg?.altText || 'Banner'}
+                    />
+                </picture>
+            );
+        }
+
+        if (backgroundItem.type === 'video') {
+            const desktopVid = backgroundItem.video.desktopVideo?.url;
+            const mobileVid = backgroundItem.video.mobileVideo?.url
+            const videoSource = isMobile ? mobileVid : desktopVid;
+            console.log('desktopVid', desktopVid, videoSource);
+            if (!desktopVid && !mobileVid) return null;
+
+            return videoSource ? (
+                <video
+                    className="banner-video"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    controls
+                    src={videoSource}
+                ></video>
+            ) : null;
+        }
+
+        return null;
+    };
 
     const renderBlock = (block: Block, index: number) => {
         if (!block) return null;
@@ -191,33 +235,28 @@ const BannerPOC = ({ background = [], textBlocks, layout, contentPlacement, ...o
                 );
 
             case 'cta':
-                console.log('block.text.ctas?.ctas', block.text.ctas);
                 const ctas = Array.isArray(block.text.ctas) ? block.text.ctas : [];
                 const buttonStyles = block.text.buttonStyle || {};
                 const buttonColor = buttonStyles?.buttonColor || '';
                 const buttonStyle = buttonStyles?.buttonStyle || '';
                 const buttonLayout = buttonStyles?.layoutType || '';
 
-                console.log('buttonStyle', block.text.buttonStyle);
-                console.log('buttonStyle', buttonStyle, buttonLayout);
                 return (
                     <div
                         key={index}
                         className={`cta-buttons ${ctaAlignVerticalClass} ${buttonLayout} ${ctaAlignHorizontalClass}`}
                     >
-                        {ctas.length > 0 ? (
-                            ctas.map((cta, i) => (
-                                <a
-                                    key={i}
-                                    href={cta.cta.buttonValue}
-                                    className={`button ${buttonStyle} ${buttonColor}`}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                >
-                                    {cta.cta.buttonLabel}
-                                </a>
-                            ))
-                        ) : null}
+                        {ctas.map((cta, i) => (
+                            <a
+                                key={i}
+                                href={cta.cta.buttonValue || '#'}
+                                className={`button ${buttonStyle} ${buttonColor}`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                {cta.cta.buttonLabel}
+                            </a>
+                        ))}
                     </div>
                 );
 
@@ -226,21 +265,14 @@ const BannerPOC = ({ background = [], textBlocks, layout, contentPlacement, ...o
         }
     };
 
+    console.log("renderBackgroundMedia", renderBackgroundMedia())
+
     return (
         <section className="banner">
-            <picture>
-                <source media="(max-width: 768px)" srcSet={mobileImage ? getImageUrl(mobileImage) : ''} />
-                <img
-                    className="banner-image"
-                    src={desktopImage ? getImageUrl(desktopImage) : ''}
-                    alt={background[0]?.image?.desktop?.image[0]?.image?.altText || 'BannerPOC'}
-                />
-            </picture>
-
+            {renderBackgroundMedia()}
+     
             <div className={`banner-text ${halignClass} ${valignClass} ${textAlignClass}`}>
-                {blocks.length > 0 ? (
-                    blocks.map((block: Block, index: number) => renderBlock(block, index))
-                ) : null}
+                {blocks.map((block, index) => renderBlock(block, index))}
             </div>
         </section>
     );

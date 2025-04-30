@@ -9,6 +9,7 @@ import Blog from '@components/cms-modern/Blog';
 import BlogList from '@components/cms/BlogList';
 import BlogSnippet from '@components/cms/BlogSnippet';
 import Card from '@components/cms-modern/Card';
+import Carousel from '@components/cms-modern/Carousel'
 import CardList from '@components/cms-modern/CardList';
 import CmsContentItem from '@components/cms-modern/CmsContentItem';
 import CmsEdition from '@components/cms-modern/CmsEdition';
@@ -41,6 +42,7 @@ import { useRouter } from 'next/router';
 import Generic from '@components/stylitics/Generic/Generic';
 
 
+
 export type ContentBlockType = 'SLOT' | 'CONTENT';
 
 interface ContentBlockProps {
@@ -59,6 +61,7 @@ const ComponentMapping: any = {
     'https://demostore.amplience.com/content/card-list': CardList,
     'https://schema-examples-accelerators.com/card.json': Card,
     'https://demostore.amplience.com/content/card': Card,
+    'https://cms.gap.com/schema/v1/poc-carousel.json': Carousel,
     'https://demostore.amplience.com/content/container': Container,
     'https://demostore.amplience.com/content/curated-product-grid': CuratedProductGrid,
     'https://demostore.amplience.com/content/dynamic-blog-list': DynamicBlogList,
@@ -104,7 +107,7 @@ const ContentBlock = ({
     const vse = (query?.vse as string) || '';
 
     // Get real-time content from original content
-    console.log('*** ContentBlock > originalContent, vse ***', originalContent, vse);
+    // console.log('*** ContentBlock > originalContent, vse ***', originalContent, vse);
     const [liveContent] = useContent(originalContent, vse);
     if (!liveContent) {
         return null;

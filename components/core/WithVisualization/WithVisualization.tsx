@@ -76,8 +76,6 @@ const WithVisualization = (props: WithVisualizationProps) => {
 export function useContent(content: any, vse: string): [any, any | undefined] {
 
     const { formModel } = useVisualization() || {};
-    console.log('I Am HERE ==>', { content });
-    console.log('formModel: ', {formModel, vse});
 
     if (vse === '') {
         return [content, undefined];

@@ -165,7 +165,7 @@ const BannerPOC = ({ background = [], textBlocks, layout, contentPlacement, ...o
 
     const renderBackgroundMedia = () => {
         if (!backgroundItem) return null;
-            console.log('backgroundItem', backgroundItem.type);
+            // console.log('backgroundItem', backgroundItem.type);
         
 
         if (backgroundItem?.type === 'image') {
@@ -189,7 +189,7 @@ const BannerPOC = ({ background = [], textBlocks, layout, contentPlacement, ...o
             const desktopVid = backgroundItem.video.desktopVideo?.url;
             const mobileVid = backgroundItem.video.mobileVideo?.url
             const videoSource = isMobile ? mobileVid : desktopVid;
-            console.log('desktopVid', desktopVid, videoSource);
+           // console.log('desktopVid', desktopVid, videoSource);
             if (!desktopVid && !mobileVid) return null;
 
             return videoSource ? (
@@ -265,7 +265,7 @@ const BannerPOC = ({ background = [], textBlocks, layout, contentPlacement, ...o
         }
     };
 
-    console.log("renderBackgroundMedia", renderBackgroundMedia())
+    // console.log("renderBackgroundMedia", renderBackgroundMedia())
 
     return (
         <section className="banner">

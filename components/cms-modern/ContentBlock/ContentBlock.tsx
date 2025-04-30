@@ -3,7 +3,10 @@ import { CmsContent } from '@lib/cms/CmsContent';
 import { useContent } from '@components/core/WithVisualization/WithVisualization';
 
 import AdvancedBanner from '@components/cms-modern/AdvancedBanner';
+// POCs
 import BannerPOC from '@components/cms-modern/BannerPOC';
+import ProductCardPOC from '@components/cms-modern/ProductCardPOC';
+// 
 import BannerSlot from '@components/cms-modern/BannerSlot';
 import Blog from '@components/cms-modern/Blog';
 import BlogList from '@components/cms/BlogList';
@@ -54,7 +57,10 @@ interface ContentBlockProps {
 
 const ComponentMapping: any = {
     'https://demostore.amplience.com/content/advanced-banner': AdvancedBanner,
+    // POCs
     'https://cms.gap.com/schema/v1/poc-banner': BannerPOC,
+    'https://cms.gap.com/schema/v1/poc-image-card.json': ProductCardPOC,
+    // 
     'https://demostore.amplience.com/content/blog-list': BlogList,
     'https://demostore.amplience.com/content/blog-snippet': BlogSnippet,
     'https://demostore.amplience.com/content/blog': Blog,

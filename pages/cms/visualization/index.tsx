@@ -1,5 +1,6 @@
 import { InferGetServerSidePropsType, GetServerSidePropsContext } from 'next';
 import { Layout } from '@components/core';
+import { StandaloneLayout } from '@components/core';
 import { ContentBlock } from '@components/cms-modern';
 import fetchStandardPageData from '@lib/page/fetchStandardPageData';
 import { PageContent } from '@components/ui';
@@ -26,10 +27,11 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 export default function Home({ content }: InferGetServerSidePropsType<typeof getServerSideProps>) {
     console.log('*** Home - content ***', content)
     return (
+        
         <PageContent>
             <ContentBlock content={content.content} />
         </PageContent>
     );
 }
 
-Home.Layout = Layout;
+Home.Layout = StandaloneLayout;

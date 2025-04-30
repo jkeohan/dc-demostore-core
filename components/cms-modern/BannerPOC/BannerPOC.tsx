@@ -1,130 +1,10 @@
-// import './styles.css';
 import Button from '@mui/material/Button';
 import React, { useEffect, useState } from 'react';
+import {BannerPOCProps, TextBlocks, ImageData, Block } from './types'
 
-interface ImageData {
-    image: any;
-    defaultHost: string;
-    endpoint: string;
-    name: string;
-}
-
-interface DeviceImage {
-    image: ImageData[];
-    altText?: string;
-}
-
-interface BackgroundImage {
-    mobileVideo: any;
-    desktopVideo: any;
-    video: any;
-    type: string;
-    image: {
-        desktop: DeviceImage;
-        mobile: DeviceImage;
-    };
-}
-
-interface CTA {
-    cta: {
-        buttonLabel: string;
-        buttonValue: string;
-    };
-}
-
-interface ButtonStyle {
-    buttonColor: string;
-    buttonStyle: string;
-}
-
-interface TextBlockText {
-    buttonStyle: any;
-    text: string;
-    color?: string;
-    class?: string;
-    ctas?: {
-        ctas: CTA[];
-        buttonStyle: ButtonStyle;
-    };
-}
-
-interface Block {
-    type: 'header' | 'subheader' | 'eyebrow' | 'cta';
-    text: TextBlockText;
-}
-
-interface ContentBlocks {
-    block: Block[];
-    halign?: 'left' | 'center' | 'right';
-    valign?: 'top' | 'middle' | 'bottom';
-    textAlign?: 'left' | 'center' | 'right';
-}
-
-interface TextBlocks {
-    contentBlocksMobile: any;
-    contentBlocksDesktop?: ContentBlocks[];
-}
-
-interface BannerProps {
-    background: BackgroundImage[];
-    contentPlacement?: string;
-    layout?: string;
-    textBlocks: TextBlocks;
-}
-
-interface BannerPOCProps {
-    background: BackgroundImage[];
-    textBlocks: TextBlocks;
-    layout?: string;
-    contentPlacement?: string;
-}
-
-function alignment(textBlocks: TextBlocks) {
-    const textAlign = textBlocks?.contentBlocksDesktop?.[0]?.textAlign || 'center';
-    const halign = textBlocks?.contentBlocksDesktop?.[0]?.halign || 'center';
-    const valign = textBlocks?.contentBlocksDesktop?.[0]?.valign || 'middle';
-
-    const ctaAlignVerticalClass = {
-        left: 'justify-start',
-        center: 'justify-center',
-        right: 'justify-end',
-    }[textAlign];
-
-    const halignClass = {
-        left: 'halign-left',
-        center: 'halign-center',
-        right: 'halign-right',
-    }[halign];
-
-    const valignClass = {
-        top: 'valign-top',
-        middle: 'valign-middle',
-        bottom: 'valign-bottom',
-    }[valign];
-
-    const textAlignClass = {
-        left: 'text-align-left',
-        center: 'text-align-center',
-        right: 'text-align-right',
-    }[textAlign];
-
-    const ctaAlignHorizontalClass = {
-        left: 'left',
-        center: 'center',
-        right: 'right',
-    }[textAlign];
-
-    return {
-        ctaAlignVerticalClass,
-        halignClass,
-        valignClass,
-        textAlignClass,
-        ctaAlignHorizontalClass,
-    };
-}
-
-const BannerPOC = ({ background = [], textBlocks, layout, contentPlacement, ...other }: BannerPOCProps) => {
+const BannerPOC = ({ background = [], textBlocks, layout, ...other }: BannerPOCProps) => {
     const [isMobile, setIsMobile] = useState(false);
+      const { desktopBannerSize } = layout;
 
     useEffect(() => {
         const checkIfMobile = () => {
@@ -139,20 +19,21 @@ const BannerPOC = ({ background = [], textBlocks, layout, contentPlacement, ...o
     const desktopContent = textBlocks?.contentBlocksDesktop?.[0] || { block: [] };
     const mobileContent = textBlocks?.contentBlocksMobile?.[0] || { block: [] };
 
-    const activeContent =
-        isMobile && mobileContent
-            ? {
-                  ...desktopContent,
-                  ...Object.fromEntries(
-                      Object.entries(desktopContent || {}).map(([key, value]) => [
-                          key,
-                          mobileContent?.[key as keyof typeof mobileContent] ?? value,
-                      ]),
-                  ),
-              }
-            : desktopContent;
+    // THIS WAS AN ATTEMPT AT FILTERING OVERRIDING DESKTOP WITH MOBILE IF THEY BOTH EXISTED
+    // const activeContent =
+    //     isMobile && mobileContent
+    //         ? {
+    //               ...desktopContent,
+    //               ...Object.fromEntries(
+    //                   Object.entries(desktopContent || {}).map(([key, value]) => [
+    //                       key,
+    //                       mobileContent?.[key as keyof typeof mobileContent] ?? value,
+    //                   ]),
+    //               ),
+    //           }
+    //         : desktopContent;
 
-    const blocks = activeContent?.block || [];
+    // const blocks = activeContent?.block || [];
 
     const { ctaAlignVerticalClass, halignClass, valignClass, textAlignClass, ctaAlignHorizontalClass } =
         alignment(textBlocks);
@@ -189,7 +70,6 @@ const BannerPOC = ({ background = [], textBlocks, layout, contentPlacement, ...o
             const desktopVid = backgroundItem.video.desktopVideo?.url;
             const mobileVid = backgroundItem.video.mobileVideo?.url
             const videoSource = isMobile ? mobileVid : desktopVid;
-           // console.log('desktopVid', desktopVid, videoSource);
             if (!desktopVid && !mobileVid) return null;
 
             return videoSource ? (
@@ -265,17 +145,66 @@ const BannerPOC = ({ background = [], textBlocks, layout, contentPlacement, ...o
         }
     };
 
-    // console.log("renderBackgroundMedia", renderBackgroundMedia())
 
     return (
-        <section className="banner">
+        <section className={`banner banner--${desktopBannerSize}`}>
             {renderBackgroundMedia()}
-     
-            <div className={`banner-text ${halignClass} ${valignClass} ${textAlignClass}`}>
-                {blocks.map((block, index) => renderBlock(block, index))}
-            </div>
+
+            {textBlocks?.contentBlocksDesktop?.map((group, index) => (
+                <div
+                    key={index}
+                    className={`banner-text halign-${group.halign} valign-${group.valign} text-align-${group.textAlign}`}
+                >
+                    {group.block.map((block, i) => renderBlock(block, i))}
+                </div>
+            ))}
         </section>
     );
 };
 
 export default BannerPOC;
+
+
+function alignment(textBlocks: TextBlocks) {
+    const textAlign = textBlocks?.contentBlocksDesktop?.[0]?.textAlign || 'center';
+    const halign = textBlocks?.contentBlocksDesktop?.[0]?.halign || 'center';
+    const valign = textBlocks?.contentBlocksDesktop?.[0]?.valign || 'middle';
+
+    const ctaAlignVerticalClass = {
+        left: 'justify-start',
+        center: 'justify-center',
+        right: 'justify-end',
+    }[textAlign];
+
+    const halignClass = {
+        left: 'halign-left',
+        center: 'halign-center',
+        right: 'halign-right',
+    }[halign];
+
+    const valignClass = {
+        top: 'valign-top',
+        middle: 'valign-middle',
+        bottom: 'valign-bottom',
+    }[valign];
+
+    const textAlignClass = {
+        left: 'text-align-left',
+        center: 'text-align-center',
+        right: 'text-align-right',
+    }[textAlign];
+
+    const ctaAlignHorizontalClass = {
+        left: 'left',
+        center: 'center',
+        right: 'right',
+    }[textAlign];
+
+    return {
+        ctaAlignVerticalClass,
+        halignClass,
+        valignClass,
+        textAlignClass,
+        ctaAlignHorizontalClass,
+    };
+}

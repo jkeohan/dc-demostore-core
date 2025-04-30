@@ -25,10 +25,7 @@ export interface POCProductCardProps {
                     color?: string;
                     text?: string;
                     ctas?: {
-                        cta: {
-                            buttonLabel: string;
-                            buttonValue: string;
-                        };
+                        cta: CTA
                     }[];
                     buttonStyle?: {
                         buttonColor?: string;
@@ -39,4 +36,9 @@ export interface POCProductCardProps {
             }[];
         };
 
+}
+
+export interface CTA {
+    buttonLabel: string | undefined;
+    buttonValue: string | undefined;
 }

@@ -1,10 +1,9 @@
-import Button from '@mui/material/Button';
 import React, { useEffect, useState } from 'react';
-import {BannerPOCProps, TextBlocks, ImageData, Block } from './types'
+import { BannerPOCProps, TextBlocks, ImageData, Block } from './types';
 
 const BannerPOC = ({ background = [], textBlocks, layout, ...other }: BannerPOCProps) => {
     const [isMobile, setIsMobile] = useState(false);
-      const { desktopBannerSize } = layout;
+    const { desktopBannerSize } = layout;
 
     useEffect(() => {
         const checkIfMobile = () => {
@@ -19,22 +18,6 @@ const BannerPOC = ({ background = [], textBlocks, layout, ...other }: BannerPOCP
     const desktopContent = textBlocks?.contentBlocksDesktop?.[0] || { block: [] };
     const mobileContent = textBlocks?.contentBlocksMobile?.[0] || { block: [] };
 
-    // THIS WAS AN ATTEMPT AT FILTERING OVERRIDING DESKTOP WITH MOBILE IF THEY BOTH EXISTED
-    // const activeContent =
-    //     isMobile && mobileContent
-    //         ? {
-    //               ...desktopContent,
-    //               ...Object.fromEntries(
-    //                   Object.entries(desktopContent || {}).map(([key, value]) => [
-    //                       key,
-    //                       mobileContent?.[key as keyof typeof mobileContent] ?? value,
-    //                   ]),
-    //               ),
-    //           }
-    //         : desktopContent;
-
-    // const blocks = activeContent?.block || [];
-
     const { ctaAlignVerticalClass, halignClass, valignClass, textAlignClass, ctaAlignHorizontalClass } =
         alignment(textBlocks);
 
@@ -43,16 +26,30 @@ const BannerPOC = ({ background = [], textBlocks, layout, ...other }: BannerPOCP
 
     const backgroundItem = background[0];
 
-
     const renderBackgroundMedia = () => {
         if (!backgroundItem) return null;
-            // console.log('backgroundItem', backgroundItem.type);
-        
 
-        if (backgroundItem?.type === 'image') {
+        if (backgroundItem.type === 'backgroundColor') {
+            const desktopColor = backgroundItem.bgColor?.desktop?.color1;
+            return (
+                <div
+                    style={{
+                        backgroundColor: desktopColor,
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        right: 0,
+                        bottom: 0,
+                        zIndex: -1,
+                    }}
+                />
+            );
+        }
+
+        if (backgroundItem.type === 'image') {
             const desktopImg = backgroundItem.image?.desktop?.image?.[0]?.image;
             const mobileImg = backgroundItem.image?.mobile?.image?.[0]?.image;
-        if (!desktopImg && !mobileImg) return null;
+            if (!desktopImg && !mobileImg) return null;
 
             return (
                 <picture>
@@ -67,8 +64,8 @@ const BannerPOC = ({ background = [], textBlocks, layout, ...other }: BannerPOCP
         }
 
         if (backgroundItem.type === 'video') {
-            const desktopVid = backgroundItem.video.desktopVideo?.url;
-            const mobileVid = backgroundItem.video.mobileVideo?.url
+            const desktopVid = backgroundItem.video?.desktopVideo?.url;
+            const mobileVid = backgroundItem.video?.mobileVideo?.url;
             const videoSource = isMobile ? mobileVid : desktopVid;
             if (!desktopVid && !mobileVid) return null;
 
@@ -81,6 +78,15 @@ const BannerPOC = ({ background = [], textBlocks, layout, ...other }: BannerPOCP
                     playsInline
                     controls
                     src={videoSource}
+                    style={{
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        width: '100%',
+                        height: '100%',
+                        objectFit: 'cover',
+                        zIndex: -1,
+                    }}
                 ></video>
             ) : null;
         }
@@ -145,17 +151,15 @@ const BannerPOC = ({ background = [], textBlocks, layout, ...other }: BannerPOCP
         }
     };
 
-
     return (
-        <section className={`banner banner--${desktopBannerSize}`}>
+        <section className={`banner banner--${desktopBannerSize}`} style={{ position: 'relative' }}>
             {renderBackgroundMedia()}
-
             {textBlocks?.contentBlocksDesktop?.map((group, index) => (
                 <div
                     key={index}
                     className={`banner-text halign-${group.halign} valign-${group.valign} text-align-${group.textAlign}`}
                 >
-                    {group.block.map((block, i) => renderBlock(block, i))}
+                    {Array.isArray(group.block) && group.block.map((block, i) => renderBlock(block, i))}
                 </div>
             ))}
         </section>
@@ -163,7 +167,6 @@ const BannerPOC = ({ background = [], textBlocks, layout, ...other }: BannerPOCP
 };
 
 export default BannerPOC;
-
 
 function alignment(textBlocks: TextBlocks) {
     const textAlign = textBlocks?.contentBlocksDesktop?.[0]?.textAlign || 'center';

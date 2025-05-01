@@ -11,6 +11,7 @@ interface DeviceImage {
 }
 
 interface BackgroundImage {
+    bgColor: any;
     mobileVideo: any;
     desktopVideo: any;
     video: any;

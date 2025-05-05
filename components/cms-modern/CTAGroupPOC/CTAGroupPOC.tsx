@@ -1,9 +1,8 @@
 import React from 'react';
-import { Stack, Button, Link } from '@mui/material';
-import {CTAGroupProps} from './types'
+import { Stack, Button, Link, Box } from '@mui/material';
+import { CTAGroupProps } from './types';
 
-
-const CTAGroup = ({ ctas = [], buttonStyle = {} }: CTAGroupProps) => {
+const CTAGroup = ({ ctas = [], buttonStyle = {}, halign }: CTAGroupProps) => {
     const direction = buttonStyle.layoutType === 'linear' ? 'row' : 'column';
     const isSolid = buttonStyle.buttonStyle === 'solid';
     const isDark = buttonStyle.buttonColor === 'dark';
@@ -17,7 +16,14 @@ const CTAGroup = ({ ctas = [], buttonStyle = {} }: CTAGroupProps) => {
             : {};
 
     return (
-        <Stack direction={direction} spacing={2} justifyContent="center" mt={2} {...stackedProps}>
+        <Stack
+            direction={direction}
+            spacing={2}
+            justifyContent={halign === 'left' ? 'flex-start' : halign === 'right' ? 'flex-end' : 'center'}
+            mt={2}
+            sx={{width: '100%'}}
+            {...stackedProps}
+        >
             {ctas.map((item, i) => {
                 const { buttonLabel, buttonValue } = item.cta;
 

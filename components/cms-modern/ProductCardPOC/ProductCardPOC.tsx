@@ -25,6 +25,7 @@ const ProductCardPOC = ({ image, cardType, text, width }: POCProductCardProps) =
                         variant="h2"
                         component="h1"
                         gutterBottom
+                        textAlign={text?.halign}
                     >
                         {block.text?.text}
                     </Typography>
@@ -36,7 +37,14 @@ const ProductCardPOC = ({ image, cardType, text, width }: POCProductCardProps) =
                     </Typography>
                 );
             case 'cta':
-                return <CTAGroup key={index} ctas={block.text?.ctas || []} buttonStyle={block.text?.buttonStyle} />;
+                return (
+                    <CTAGroup
+                        key={index}
+                        ctas={block.text?.ctas || []}
+                        buttonStyle={block.text?.buttonStyle}
+                        halign={text?.halign}
+                    />
+                );
 
             default:
                 return null;
@@ -73,7 +81,9 @@ const ProductCardPOC = ({ image, cardType, text, width }: POCProductCardProps) =
             </Box>
 
             {cardType === 'under' && (
-                <Box sx={{ mt: 2, px: 2 }}>{blocks.map((block, index) => renderBlock(block, index))}</Box>
+                <Box sx={{ mt: 2, textAlign: text?.halign }}>
+                    {blocks.map((block, index) => renderBlock(block, index))}
+                </Box>
             )}
         </Box>
     );

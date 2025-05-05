@@ -14,4 +14,5 @@ export interface CTAGroupProps {
     ctas: { cta: CTA }[];
     buttonStyle?: CTAStyle;
     halign?: 'left' | 'center' | 'right';
+    color?: string;
 }

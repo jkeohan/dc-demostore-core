@@ -1,5 +1,13 @@
 import React from 'react';
-import { Box, Grid, Typography, useMediaQuery, useTheme } from '@mui/material';
+import {
+    Box,
+    Grid,
+    Typography,
+    useMediaQuery,
+    useTheme,
+    createTheme,
+    ThemeProvider as MuiThemeProvider,
+} from '@mui/material';
 import ProductCardPOC from '../ProductCardPOC';
 import { WayfindingCardsProps } from './types';
 import { POCProductCardProps } from '../ProductCardPOC/types';
@@ -7,11 +15,23 @@ import TextRenderer from './components/TextRenderer';
 import MarkdownTypography from './components/MarkdownTypography';
 const WayfindingCardsPOC = ({ cardsDisplay, gridType, gridItems, text }: WayfindingCardsProps) => {
     const theme = useTheme();
+    const color = text?.color;
+
 
     const isXs = useMediaQuery(theme.breakpoints.down('sm'));
     const isSm = useMediaQuery(theme.breakpoints.between('sm', 'md'));
     const isMd = useMediaQuery(theme.breakpoints.between('md', 'lg'));
-    console.log('theme', theme, isXs, isSm, isMd);
+
+    const dynamicTheme = createTheme({
+        palette: {
+            primary: {
+                main: color === 'primary' ? '#1976d2' : '#dc004e',
+            },
+            secondary: {
+                main: color === 'primary' ? '#dc004e' : '#1976d2',
+            },
+        },
+    });
 
     const columns = cardsDisplay >= 2 && cardsDisplay <= 4 ? cardsDisplay : 4;
     const widthMap = {
@@ -29,6 +49,7 @@ const WayfindingCardsPOC = ({ cardsDisplay, gridType, gridItems, text }: Wayfind
             sx={{
                 textAlign: 'center',
                 padding: theme.spacing(4, 2),
+                backgroundColor: 'grey'
             }}
         >
             <Box
@@ -37,7 +58,7 @@ const WayfindingCardsPOC = ({ cardsDisplay, gridType, gridItems, text }: Wayfind
                     justifyContent: halign,
                 }}
             >
-                <Box sx={{ width: 800 }}>{text?.block && <TextRenderer text={text} />}</Box>
+                <Box sx={{ width: 800 }}>{text?.block && <TextRenderer text={text} color={color} />}</Box>
             </Box>
             <Grid
                 container
@@ -60,7 +81,7 @@ const WayfindingCardsPOC = ({ cardsDisplay, gridType, gridItems, text }: Wayfind
                                 height: '100%', // stretch to container height
                             }}
                         >
-                            <ProductCardPOC {...card} width="100%" />
+                            <ProductCardPOC {...card} width="100%" color={color}/>
                         </Grid>
                     );
                 })}

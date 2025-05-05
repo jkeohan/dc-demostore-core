@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { BannerPOCProps, TextBlocks, ImageData, Block } from './types';
 
-const BannerPOC = ({ background = [], textBlocks, layout, ...other }: BannerPOCProps) => {
+const BannerPOC = ({ background = [], textBlocks, layout}: BannerPOCProps) => {
     const [isMobile, setIsMobile] = useState(false);
     const { desktopBannerSize } = layout;
 
@@ -140,6 +140,7 @@ const BannerPOC = ({ background = [], textBlocks, layout, ...other }: BannerPOCP
                                 className={`button ${buttonStyle} ${buttonColor}`}
                                 target="_blank"
                                 rel="noopener noreferrer"
+                                style={{textAlign: 'center'}}
                             >
                                 {cta.cta.buttonLabel}
                             </a>

@@ -13,44 +13,44 @@ interface TextBlock {
 
 interface TextProps {
   block: TextBlock[];
+  color: string;
 }
 
-const TextRenderer = ({ text }: { text: TextProps }) => {
-  return (
-    <>
-      {text.block.map((block, index) => {
-        console.log("block.type", block.type)
-        switch (block.type) {
-          case 'header':
-            return (
-                <Typography
-                    key={index}
-                    variant={block.text.class as any} // Ideally narrow the class type
-                    color={block.text.color}
-                    gutterBottom
-                >
-
-                        {block.text.text}
-      
-                </Typography>
-            );
-          case 'subheader':
-            return (
-              <Typography
-                key={index}
-                variant="body1" // Map to an appropriate variant or make this dynamic
-                color={block.text.color}
-                paragraph
-              >
-                {block.text.text}
-              </Typography>
-            );
-          default:
-            return null;
-        }
-      })}
-    </>
-  );
+const TextRenderer = ({ text, color = 'inherit' }: { text: TextProps; color?: string }) => {
+      console.log('color', color)
+    return (
+        <>
+            {text.block.map((block, index) => {
+                console.log('block.type', block.type);
+                switch (block.type) {
+                    case 'header':
+                        return (
+                            <Typography
+                                key={index}
+                                variant={block.text.class as any} // Ideally narrow the class type
+                                color={color}
+                                gutterBottom
+                            >
+                                {block.text.text}
+                            </Typography>
+                        );
+                    case 'subheader':
+                        return (
+                            <Typography
+                                key={index}
+                                variant="body1" // Map to an appropriate variant or make this dynamic
+                                color={color}
+                                paragraph
+                            >
+                                {block.text.text}
+                            </Typography>
+                        );
+                    default:
+                        return null;
+                }
+            })}
+        </>
+    );
 };
 
 export default TextRenderer;

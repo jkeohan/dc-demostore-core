@@ -5,41 +5,42 @@ import remarkGfm from 'remark-gfm';
 
 interface MarkdownTypographyProps {
     markdown: string;
+    color?: string;
 }
 
-const MarkdownTypography = ({ markdown }: MarkdownTypographyProps) => {
+const MarkdownTypography = ({ markdown, color }: MarkdownTypographyProps) => {
     return (
         <ReactMarkdown
             remarkPlugins={[remarkGfm]}
             components={{
-                p: ({ children }) => <Typography paragraph>{children}</Typography>,
+                p: ({ children }) => <Typography sx={{ color }}>{children}</Typography>,
                 strong: ({ children }) => (
-                    <Typography component="span" sx={{ fontWeight: 700 }}>
+                    <Typography component="span" sx={{ fontWeight: 700, color }}>
                         {children}
                     </Typography>
                 ),
                 em: ({ children }) => (
-                    <Typography component="span" sx={{ fontStyle: 'italic' }}>
+                    <Typography component="span" sx={{ fontStyle: 'italic', color }}>
                         {children}
                     </Typography>
                 ),
                 del: ({ children }) => (
-                    <Typography component="span" sx={{ textDecoration: 'line-through' }}>
+                    <Typography component="span" sx={{ textDecoration: 'line-through', color }}>
                         {children}
                     </Typography>
                 ),
                 a: ({ href, children }) => (
-                    <Link href={href} target="_blank" rel="noopener noreferrer">
+                    <Link href={href} target="_blank" rel="noopener noreferrer" sx={{ color }}>
                         {children}
                     </Link>
                 ),
                 h1: ({ children }) => (
-                    <Typography variant="h1" gutterBottom>
+                    <Typography variant="h1" gutterBottom sx={{ color }}>
                         {children}
                     </Typography>
                 ),
                 h2: ({ children }) => (
-                    <Typography variant="h2" gutterBottom>
+                    <Typography variant="h2" gutterBottom sx={{ color }}>
                         {children}
                     </Typography>
                 ),
@@ -50,4 +51,4 @@ const MarkdownTypography = ({ markdown }: MarkdownTypographyProps) => {
     );
 };
 
-export default MarkdownTypography;
+export default MarkdownTypography

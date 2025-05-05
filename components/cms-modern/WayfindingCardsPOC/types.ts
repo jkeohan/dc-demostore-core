@@ -5,6 +5,7 @@ export interface WayfindingCardsProps {
     text?: {
         block: TextBlock[];
         halign: 'left' | 'center' | 'right'
+        color: string
     };
 }
 

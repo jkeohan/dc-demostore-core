@@ -5,6 +5,7 @@ import { useContent } from '@components/core/WithVisualization/WithVisualization
 import AdvancedBanner from '@components/cms-modern/AdvancedBanner';
 // POCs
 import BannerPOC from '@components/cms-modern/BannerPOC';
+import GlobalBannerPOC from '@components/cms-modern/GlobalBannerPOC';
 import ProductCardPOC from '@components/cms-modern/ProductCardPOC';
 import WayfindingCardsPOC from '@components/cms-modern//WayfindingCardsPOC';
 // 
@@ -60,6 +61,7 @@ const ComponentMapping: any = {
     'https://demostore.amplience.com/content/advanced-banner': AdvancedBanner,
     // POCs
     'https://cms.gap.com/schema/v1/poc-banner': BannerPOC,
+    "https://cms.gap.com/schema/v1/sitewide-banner.json": GlobalBannerPOC,
     'https://cms.gap.com/schema/v1/poc-image-card.json': ProductCardPOC,
     'https://cms.gap.com/schema/v1/poc-grid-of-image-cards.json': WayfindingCardsPOC,
     // 

@@ -33,9 +33,10 @@ export interface POCProductCardProps {
                 };
             };
         }[];
-        halign: 'left' | 'center' | 'right';
+        halign?: 'left' | 'center' | 'right';
     };
     width?: number | string;
+    color?: string;
 }
 
 export interface CTA {

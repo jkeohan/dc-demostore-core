@@ -8,10 +8,11 @@ const getMediaUrl = (image?: POCProductCardProps['image'][0]['image']): string =
     return `https://${image.defaultHost}/i/${image.endpoint}/${image.name}?w=800`;
 };
 
-const ProductCardPOC = ({ image, cardType, text, width }: POCProductCardProps) => {
+const ProductCardPOC = ({ image, cardType, text, width, color }: POCProductCardProps) => {
     const backgroundImage = image?.[0]?.image;
     const altText = image?.[0]?.altText || 'Card image';
     const blocks = text?.block || [];
+    console.log('ProductCard - color', color)
 
     const imageUrl = backgroundImage ? getMediaUrl(backgroundImage) : '';
 
@@ -21,7 +22,7 @@ const ProductCardPOC = ({ image, cardType, text, width }: POCProductCardProps) =
                 return (
                     <Typography
                         key={index}
-                        sx={{ fontWeight: 'bold', color: block.text?.color || '#000' }}
+                        sx={{ fontWeight: 'bold', color: color }}
                         variant="h2"
                         component="h1"
                         gutterBottom
@@ -43,6 +44,7 @@ const ProductCardPOC = ({ image, cardType, text, width }: POCProductCardProps) =
                         ctas={block.text?.ctas || []}
                         buttonStyle={block.text?.buttonStyle}
                         halign={text?.halign}
+                        color={color}
                     />
                 );
 

@@ -2,10 +2,12 @@ import React from 'react';
 import { Stack, Button, Link, Box } from '@mui/material';
 import { CTAGroupProps } from './types';
 
-const CTAGroup = ({ ctas = [], buttonStyle = {}, halign }: CTAGroupProps) => {
+const CTAGroup = ({ ctas = [], buttonStyle = {}, halign, color }: CTAGroupProps) => {
+    console.log('buttonStyle', buttonStyle)
     const direction = buttonStyle.layoutType === 'linear' ? 'row' : 'column';
     const isSolid = buttonStyle.buttonStyle === 'solid';
     const isDark = buttonStyle.buttonColor === 'dark';
+    console.log("CTAGroup - color", color)
 
     const stackedProps =
         direction === 'column'
@@ -66,13 +68,10 @@ const CTAGroup = ({ ctas = [], buttonStyle = {}, halign }: CTAGroupProps) => {
                         sx={{
                             display: 'inline-block',
                             fontWeight: 'bold',
-                            color: 'black',
+                            color: color,
                             textDecoration: 'none',
-                            borderBottom: '2px solid black',
+                            borderBottom: `2px solid ${color}`,
                             paddingBottom: '2px',
-                            '&:hover': {
-                                borderBottom: '2px solid black',
-                            },
                         }}
                     >
                         {buttonLabel}

@@ -13,12 +13,16 @@ const WayfindingCardsPOC = ({ cardsDisplay, gridType, gridItems, text }: Wayfind
     const isMd = useMediaQuery(theme.breakpoints.between('md', 'lg'));
     console.log('theme', theme, isXs, isSm, isMd);
 
-    let columns = 4; // default for large screens
-    if (isXs) columns = 2;
-    else if (isSm) columns = 3;
-    else if (isMd) columns = 4;
+    const columns = cardsDisplay >= 2 && cardsDisplay <= 4 ? cardsDisplay : 4;
+    const widthMap = {
+        2: 960,
+        3: 640,
+        4: 480,
+    };
 
-    const halign = text?.halign === 'left' ? 'flex-start' : text?.halign === 'right' ? 'flex-end' : 'center'
+    const containerWidth = widthMap[cardsDisplay] || 480;
+
+    const halign = text?.halign === 'left' ? 'flex-start' : text?.halign === 'right' ? 'flex-end' : 'center';
 
     return (
         <Box
@@ -30,22 +34,34 @@ const WayfindingCardsPOC = ({ cardsDisplay, gridType, gridItems, text }: Wayfind
             <Box
                 sx={{
                     display: 'flex',
-                    justifyContent: halign    
+                    justifyContent: halign,
                 }}
             >
                 <Box sx={{ width: 800 }}>{text?.block && <TextRenderer text={text} />}</Box>
             </Box>
-            <Grid container spacing={2} mt={2}>
-                {gridItems.map(
-                    (
-                        card: React.JSX.IntrinsicAttributes & POCProductCardProps,
-                        index: React.Key | null | undefined,
-                    ) => (
-                        <Grid item xs={12 / columns} key={index}>
-                            <ProductCardPOC {...card} />
-                        </Grid>
-                    ),
-                )}
+            <Grid
+                container
+                spacing={0}
+                mt={2}
+                sx={{
+                    width: "100%", // 960 / 640 / 480 based on cardsDisplay
+                    height: 810,
+                    margin: '0 auto',
+                    overflow: 'hidden',
+                }}
+            >
+                {gridItems.map((card: POCProductCardProps, index) => (
+                    <Grid
+                        item
+                        key={index}
+                        xs={12 / columns} // evenly distributes across row (e.g., 6, 4, or 3 columns)
+                        sx={{
+                            height: '100%', // stretch to container height
+                        }}
+                    >
+                        <ProductCardPOC {...card} />
+                    </Grid>
+                ))}
             </Grid>
         </Box>
     );

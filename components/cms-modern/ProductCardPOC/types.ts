@@ -34,7 +34,7 @@ export interface POCProductCardProps {
                 };
             }[];
         };
-        width?: number;
+        width?: number | string
 
 }
 

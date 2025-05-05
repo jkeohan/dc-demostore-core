@@ -44,24 +44,26 @@ const WayfindingCardsPOC = ({ cardsDisplay, gridType, gridItems, text }: Wayfind
                 spacing={0}
                 mt={2}
                 sx={{
-                    width: "100%", // 960 / 640 / 480 based on cardsDisplay
+                    width: '100%', // 960 / 640 / 480 based on cardsDisplay
                     height: 810,
                     margin: '0 auto',
                     overflow: 'hidden',
                 }}
             >
-                {gridItems.map((card: POCProductCardProps, index) => (
-                    <Grid
-                        item
-                        key={index}
-                        xs={12 / columns} // evenly distributes across row (e.g., 6, 4, or 3 columns)
-                        sx={{
-                            height: '100%' // stretch to container height
-                        }}
-                    >
-                        <ProductCardPOC {...card} />
-                    </Grid>
-                ))}
+                {gridItems.map((card: POCProductCardProps, index) => {
+                    return (
+                        <Grid
+                            item
+                            key={index}
+                            xs={12 / columns} // evenly distributes across row (e.g., 6, 4, or 3 columns)
+                            sx={{
+                                height: '100%', // stretch to container height
+                            }}
+                        >
+                            <ProductCardPOC {...card} width="100%" />
+                        </Grid>
+                    );
+                })}
             </Grid>
         </Box>
     );

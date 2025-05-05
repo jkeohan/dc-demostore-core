@@ -18,14 +18,6 @@ const WayfindingCardsPOC = ({ cardsDisplay, gridType, gridItems, text }: Wayfind
     else if (isSm) columns = 3;
     else if (isMd) columns = 4;
 
-    const position: 'left' | 'center' | 'right' = 'right';
-
-    const alignmentMap = {
-        left: { ml: 0, mr: 'auto' },
-        center: { ml: 'auto', mr: 'auto' },
-        right: { ml: 'auto', mr: 0 },
-    };
-
     const halign = text?.halign === 'left' ? 'flex-start' : text?.halign === 'right' ? 'flex-end' : 'center'
 
     return (

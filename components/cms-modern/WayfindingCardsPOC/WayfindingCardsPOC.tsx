@@ -20,7 +20,7 @@ const WayfindingCardsPOC = ({ cardsDisplay, gridType, gridItems, text }: Wayfind
         4: 480,
     };
 
-    const containerWidth = widthMap[cardsDisplay] || 480;
+    // const containerWidth = widthMap[cardsDisplay] || 480;
 
     const halign = text?.halign === 'left' ? 'flex-start' : text?.halign === 'right' ? 'flex-end' : 'center';
 
@@ -56,7 +56,7 @@ const WayfindingCardsPOC = ({ cardsDisplay, gridType, gridItems, text }: Wayfind
                         key={index}
                         xs={12 / columns} // evenly distributes across row (e.g., 6, 4, or 3 columns)
                         sx={{
-                            height: '100%', // stretch to container height
+                            height: '100%' // stretch to container height
                         }}
                     >
                         <ProductCardPOC {...card} />

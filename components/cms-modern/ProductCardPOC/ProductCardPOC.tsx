@@ -8,7 +8,7 @@ const getMediaUrl = (image?: POCProductCardProps['image'][0]['image']): string =
     return `https://${image.defaultHost}/i/${image.endpoint}/${image.name}?w=800`;
 };
 
-const ProductCardPOC = ({ image, cardType, text }: POCProductCardProps) => {
+const ProductCardPOC = ({ image, cardType, text, width }: POCProductCardProps) => {
     const backgroundImage = image?.[0]?.image;
     const altText = image?.[0]?.altText || 'Card image';
     const blocks = text?.block || [];
@@ -46,7 +46,7 @@ const ProductCardPOC = ({ image, cardType, text }: POCProductCardProps) => {
     return (
         <Box
             sx={{
-                maxWidth: 400,
+                maxWidth: width ?? 400,
                 textAlign: 'center',
                 color: '#000',
             }}

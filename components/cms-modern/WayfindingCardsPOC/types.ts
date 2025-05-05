@@ -1,25 +1,19 @@
 export interface WayfindingCardsProps {
-    _meta: Meta;
+    cardsDisplay: number;
     gridType: string;
     gridItems: ProductCardPOCProps[];
     text?: {
         block: TextBlock[];
+        halign: 'left' | 'center' | 'right'
     };
 }
 
 export interface ProductCardPOCProps {
-    _meta: Meta;
     image: ImageObject[];
     cardType: 'overlay' | 'under'; // adjust if more types exist
     text: {
         block: TextBlock[];
     };
-}
-
-interface Meta {
-    name: string;
-    schema: string;
-    deliveryId: string;
 }
 
 interface ImageObject {
@@ -47,7 +41,22 @@ interface Variation {
     variation: string;
 }
 
-type TextBlock = HeaderBlock | SubheaderBlock | CTABlock;
+type TextBlock = HeaderBlock | SubheaderBlock 
+
+type TypographyVariant =
+    | 'h1'
+    | 'h2'
+    | 'h3'
+    | 'h4'
+    | 'h5'
+    | 'h6'
+    | 'subtitle1'
+    | 'subtitle2'
+    | 'body1'
+    | 'body2'
+    | 'caption'
+    | 'overline'
+    | 'button';
 
 interface HeaderBlock {
     type: 'header';
@@ -74,7 +83,7 @@ interface CTABlock {
 }
 
 interface StyledText {
-    class: string;
+    class: TypographyVariant;
     color: string;
     text: string;
 }

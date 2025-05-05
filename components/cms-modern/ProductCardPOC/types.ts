@@ -1,5 +1,4 @@
 export interface POCProductCardProps {
-
         image: {
             image: {
                 _meta: { schema: string };

@@ -5,6 +5,7 @@ const BannerPOC = ({ background = [], textBlocks, layout, ...other }: BannerPOCP
     const [isMobile, setIsMobile] = useState(false);
     const { desktopBannerSize } = layout;
 
+
     useEffect(() => {
         const checkIfMobile = () => {
             setIsMobile(window.innerWidth <= 768);
@@ -152,6 +153,7 @@ const BannerPOC = ({ background = [], textBlocks, layout, ...other }: BannerPOCP
     };
 
     return (
+        
         <section className={`banner banner--${desktopBannerSize}`} style={{ position: 'relative' }}>
             {renderBackgroundMedia()}
             {textBlocks?.contentBlocksDesktop?.map((group, index) => (
@@ -211,3 +213,6 @@ function alignment(textBlocks: TextBlocks) {
         ctaAlignHorizontalClass,
     };
 }
+
+
+  

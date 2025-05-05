@@ -1,21 +1,7 @@
 import React from 'react';
 import { Stack, Button, Link } from '@mui/material';
+import {CTAGroupProps} from './types'
 
-interface CTA {
-    buttonLabel: string;
-    buttonValue: string;
-}
-
-interface CTAStyle {
-    buttonStyle?: 'solid' | 'border' | 'underline';
-    buttonColor?: 'dark' | 'light';
-    layoutType?: 'linear' | 'stacked';
-}
-
-interface CTAGroupProps {
-    ctas: { cta: CTA }[];
-    buttonStyle?: CTAStyle;
-}
 
 const CTAGroup = ({ ctas = [], buttonStyle = {} }: CTAGroupProps) => {
     const direction = buttonStyle.layoutType === 'linear' ? 'row' : 'column';

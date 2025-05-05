@@ -62,16 +62,12 @@ export interface TextBlocks {
     contentBlocksDesktop?: ContentBlocks[];
 }
 
-interface BannerProps {
-    background: BackgroundImage[];
-    contentPlacement?: string;
-    layout?: string;
-    textBlocks?: {
-        contentBlocksDesktop?: ContentBlockGroup[];
-        contentBlocksMobile?: ContentBlockGroup[];
-    };
+interface Link {
+    wrapper: {
+        label: string;
+        value: string;
+    }
 }
-
 interface ContentBlockGroup {
     block: TextBlock[];
     halign: 'left' | 'center' | 'right';
@@ -127,4 +123,5 @@ export interface BannerPOCProps {
         };
         contentPlacement?: string;
     };
+    link?: Link;
 }

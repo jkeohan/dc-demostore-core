@@ -1,8 +1,19 @@
 import ReactMarkdown from 'react-markdown';
 import { Typography, Link } from '@mui/material';
+import { TypographyPropsVariantOverrides } from '@mui/material/Typography';
+import { OverridableStringUnion } from '@mui/types';
 import remarkGfm from 'remark-gfm';
 
-const MarkdownTypography = ({ markdown, variant = 'body1', color = 'textPrimary' }) => {
+interface MarkdownTypographyProps {
+    markdown: string;
+    variant?: OverridableStringUnion<
+        'body1' | 'body2' | 'subtitle1' | 'subtitle2' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6',
+        TypographyPropsVariantOverrides
+    >;
+    color?: string;
+}
+
+const MarkdownTypography = ({ markdown, variant = 'body1', color = 'textPrimary' }: MarkdownTypographyProps) => {
     return (
         <ReactMarkdown
             remarkPlugins={[remarkGfm]}

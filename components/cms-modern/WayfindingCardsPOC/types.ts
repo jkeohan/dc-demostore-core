@@ -1,3 +1,5 @@
+
+import { CTAStyle } from '@components/cms-modern/CTAGroupPOC/types'
 export interface WayfindingCardsProps {
     cardsDisplay: number;
     gridType: string;
@@ -42,7 +44,7 @@ interface Variation {
     variation: string;
 }
 
-type TextBlock = HeaderBlock | SubheaderBlock 
+type TextBlock = HeaderBlock | SubheaderBlock | CTABlock | EyebrowBlock;
 
 type TypographyVariant =
     | 'h1'
@@ -69,17 +71,18 @@ interface SubheaderBlock {
     text: StyledText;
 }
 
+interface EyebrowBlock {
+    type: 'eyebrow';
+    text: StyledText;
+}
+
 interface CTABlock {
     type: 'cta';
     text: {
         ctas: {
             cta: CTA;
         }[];
-        buttonStyle: {
-            buttonColor: string;
-            buttonStyle: string;
-            layoutType: string;
-        };
+        buttonStyle: CTAStyle;
     };
 }
 

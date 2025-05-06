@@ -4,7 +4,7 @@ import { Typography, Link } from '@mui/material';
 import remarkGfm from 'remark-gfm';
 
 interface MarkdownTypographyProps {
-    markdown: string;
+    markdown?: string;
     color?: string;
 }
 

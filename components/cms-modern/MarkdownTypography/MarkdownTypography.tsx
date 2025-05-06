@@ -4,11 +4,12 @@ import { Typography, Link } from '@mui/material';
 import remarkGfm from 'remark-gfm';
 
 interface MarkdownTypographyProps {
-    markdown: string;
+    markdown?: string;
     color?: string;
 }
 
 const MarkdownTypography = ({ markdown, color }: MarkdownTypographyProps) => {
+    console.log("MarkdownTypography - color", color)
     return (
         <ReactMarkdown
             remarkPlugins={[remarkGfm]}

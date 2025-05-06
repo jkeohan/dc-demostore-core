@@ -1,3 +1,5 @@
+type AllowedTextBlockType = 'header' | 'subheader' | 'cta' | 'eyebrow';
+import { CTAStyle } from '@components/cms-modern/CTAGroupPOC/types'
 export interface POCProductCardProps {
     image: {
         image: {
@@ -15,25 +17,23 @@ export interface POCProductCardProps {
         enableChroma?: boolean;
         chromaQuality?: number;
     }[];
-    cardType?: string;
-    text?: {
-        block?: {
-            type: 'header' | 'cta' | 'subheader';
-            text: {
-                class?: string;
-                color?: string;
-                text?: string;
-                ctas?: {
-                    cta: CTA;
-                }[];
-                buttonStyle?: {
-                    buttonColor?: string;
-                    buttonStyle?: string;
-                    layoutType?: string;
+    cardContent: {
+        cardType?: string;
+        text?: {
+            block?: {
+                type: AllowedTextBlockType;
+                text?: {
+                    class?: string;
+                    text?: string;
+                    ctas?: {
+                        cta: CTA;
+                    }[];
+                    buttonStyle?: CTAStyle;
                 };
-            };
-        }[];
-        halign?: 'left' | 'center' | 'right';
+            }[];
+            halign?: 'left' | 'center' | 'right';
+            color?: string;
+        };
     };
     width?: number | string;
     color?: string;

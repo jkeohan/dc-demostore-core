@@ -1,57 +1,45 @@
 import React from 'react';
 import { Box, Typography, Link, Stack, Button } from '@mui/material';
 import { POCProductCardProps, CTA } from './types';
-import CTAGroup from '../CTAGroupPOC';
+import CTAGroup from '@components/cms-modern/CTAGroupPOC';
+import MarkdownTypography from '@components/cms-modern/MarkdownTypography';
 
 const getMediaUrl = (image?: POCProductCardProps['image'][0]['image']): string => {
     if (!image) return '';
     return `https://${image.defaultHost}/i/${image.endpoint}/${image.name}?w=800`;
 };
 
-const ProductCardPOC = ({ image, cardType, text, width, color }: POCProductCardProps) => {
+const ProductCardPOC = ({ image, cardContent, width}: POCProductCardProps) => {
+    const { text, cardType } = cardContent;
+    const color = text?.color === "primary" ? "black" : "white"
     const backgroundImage = image?.[0]?.image;
+
     const altText = image?.[0]?.altText || 'Card image';
     const blocks = text?.block || [];
-    console.log('ProductCard - color', color)
 
     const imageUrl = backgroundImage ? getMediaUrl(backgroundImage) : '';
 
-    const renderBlock = (block: any, index: number) => {
+    const content = text?.block?.map((block, index) => {
+        console.log('block', block, color);
         switch (block.type) {
             case 'header':
-                return (
-                    <Typography
-                        key={index}
-                        sx={{ fontWeight: 'bold', color: color }}
-                        variant="h2"
-                        component="h1"
-                        gutterBottom
-                        textAlign={text?.halign}
-                    >
-                        {block.text?.text}
-                    </Typography>
-                );
+                return <MarkdownTypography markdown={block.text?.text} key={index} color={color} />;
             case 'subheader':
-                return (
-                    <Typography key={index} variant="body1" component="p" gutterBottom>
-                        {block.text?.text}
-                    </Typography>
-                );
+                return <MarkdownTypography markdown={block.text?.text} key={index} color={color} />;
             case 'cta':
                 return (
                     <CTAGroup
                         key={index}
                         ctas={block.text?.ctas || []}
-                        buttonStyle={block.text?.buttonStyle}
+                        buttonStyle={block.text?.buttonStyle || {}}
                         halign={text?.halign}
-                        color={color}
+                        color={text?.color}
                     />
                 );
-
             default:
                 return null;
         }
-    };
+    })
 
     return (
         <Box
@@ -77,14 +65,14 @@ const ProductCardPOC = ({ image, cardType, text, width, color }: POCProductCardP
             >
                 {cardType === 'overlay' && (
                     <Box sx={{ marginBottom: 10, width: 270 }}>
-                        {blocks.map((block, index) => renderBlock(block, index))}
+                        {content}
                     </Box>
                 )}
             </Box>
 
             {cardType === 'under' && (
                 <Box sx={{ mt: 2, textAlign: text?.halign }}>
-                    {blocks.map((block, index) => renderBlock(block, index))}
+                    {content}
                 </Box>
             )}
         </Box>

@@ -1,13 +1,11 @@
 export interface CTA {
-    buttonLabel: string;
-    buttonValue: string;
+    buttonLabel?: string;
+    buttonValue?: string;
 }
 
 export interface CTAStyle {
-    buttonStyle?: 'solid' | 'border' | 'underline';
-    buttonColor?: 'dark' | 'light';
+    buttonStyle?: 'solid' | 'outline' | 'underline';
     layoutType?: 'linear' | 'stacked';
-
 }
 
 export interface CTAGroupProps {

@@ -2,63 +2,74 @@ import React from 'react';
 import {
     Box,
     Grid,
-    Typography,
     useMediaQuery,
     useTheme,
-    createTheme,
-    ThemeProvider as MuiThemeProvider,
 } from '@mui/material';
 import ProductCardPOC from '../ProductCardPOC';
 import { WayfindingCardsProps } from './types';
 import { POCProductCardProps } from '../ProductCardPOC/types';
-import TextRenderer from './components/TextRenderer';
-import MarkdownTypography from './components/MarkdownTypography';
+import MarkdownTypography from '@components/cms-modern/MarkdownTypography';
+import CTAGroup from '../CTAGroupPOC';
 const WayfindingCardsPOC = ({ cardsDisplay, gridType, gridItems, text }: WayfindingCardsProps) => {
     const theme = useTheme();
-    const color = text?.color;
-
+    const color = text?.color === "primary" ? "black" : "white"
+    const halign = text?.halign === 'left' ? 'flex-start' : text?.halign === 'right' ? 'flex-end' : 'center';
 
     const isXs = useMediaQuery(theme.breakpoints.down('sm'));
     const isSm = useMediaQuery(theme.breakpoints.between('sm', 'md'));
     const isMd = useMediaQuery(theme.breakpoints.between('md', 'lg'));
 
-    const dynamicTheme = createTheme({
-        palette: {
-            primary: {
-                main: color === 'primary' ? '#1976d2' : '#dc004e',
-            },
-            secondary: {
-                main: color === 'primary' ? '#dc004e' : '#1976d2',
-            },
-        },
-    });
-
     const columns = cardsDisplay >= 2 && cardsDisplay <= 4 ? cardsDisplay : 4;
-    const widthMap = {
-        2: 960,
-        3: 640,
-        4: 480,
-    };
 
-    // const containerWidth = widthMap[cardsDisplay] || 480;
+    const content = text?.block.map((block, index) => {
+        switch (block.type) {
+            case 'header':
+                return <MarkdownTypography markdown={block.text.text} key={index} color={color} />;
+            case 'subheader':
+                return <MarkdownTypography markdown={block.text.text} key={index} color={color} />;
+            case 'eyebrow':
+                return <MarkdownTypography markdown={block?.text.text} key={index} color={color} />;
+                
 
-    const halign = text?.halign === 'left' ? 'flex-start' : text?.halign === 'right' ? 'flex-end' : 'center';
+            case 'cta':
+                return (
+                    <CTAGroup
+                        key={index}
+                        ctas={block.text?.ctas || []}
+                        // buttonStyle={block.text?.buttonStyle.buttonStyle}
+                        buttonStyle={{ buttonStyle: block.text.buttonStyle.buttonStyle }}
+                        halign={text?.halign}
+                        color={color}
+                    />
+                );
+            default:
+                return null;
+        }
+    });
 
     return (
         <Box
             sx={{
                 textAlign: 'center',
                 padding: theme.spacing(4, 2),
-                backgroundColor: 'grey'
             }}
         >
             <Box
                 sx={{
                     display: 'flex',
                     justifyContent: halign,
+                    backgroundPosition: 'top',
                 }}
             >
-                <Box sx={{ width: 800 }}>{text?.block && <TextRenderer text={text} color={color} />}</Box>
+                <Box
+                    sx={{
+                        textAlign: 'center',
+                        padding: theme.spacing(2, 2),
+                    }}
+                >
+                    {content}
+                </Box>
+                {/* <Box sx={{ width: 800 }}>{text?.block && <TextRenderer text={text} color={color} />}</Box> */}
             </Box>
             <Grid
                 container
@@ -71,7 +82,8 @@ const WayfindingCardsPOC = ({ cardsDisplay, gridType, gridItems, text }: Wayfind
                     overflow: 'hidden',
                 }}
             >
-                {gridItems.map((card: POCProductCardProps, index) => {
+                {gridItems.map((card, index) => {
+                    console.log('WayfindingCards - card', card);
                     return (
                         <Grid
                             item
@@ -81,7 +93,10 @@ const WayfindingCardsPOC = ({ cardsDisplay, gridType, gridItems, text }: Wayfind
                                 height: '100%', // stretch to container height
                             }}
                         >
-                            <ProductCardPOC {...card} width="100%" color={color}/>
+                            <ProductCardPOC cardContent={{
+                                cardType: undefined,
+                                text: undefined
+                            }} {...card} width="100%" color={color} />
                         </Grid>
                     );
                 })}

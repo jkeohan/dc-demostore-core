@@ -65,7 +65,7 @@ const ProductCardPOC = ({ image, cardType, text, width, color }: POCProductCardP
                 sx={{
                     backgroundImage: `url(${imageUrl})`,
                     backgroundSize: 'cover',
-                    backgroundPosition: 'center',
+                    backgroundPosition: 'top',
                     height: 600,
                     ...(cardType === 'overlay' && {
                         display: 'flex',

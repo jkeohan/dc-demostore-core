@@ -5,6 +5,7 @@ import { useContent } from '@components/core/WithVisualization/WithVisualization
 import AdvancedBanner from '@components/cms-modern/AdvancedBanner';
 // POCs
 import BannerPOC from '@components/cms-modern/BannerPOC';
+import CarouselPOC from '@components/cms-modern/CarouselPOC';
 import GlobalBannerPOC from '@components/cms-modern/GlobalBannerPOC';
 import ProductCardPOC from '@components/cms-modern/ProductCardPOC';
 import WayfindingCardsPOC from '@components/cms-modern//WayfindingCardsPOC';
@@ -61,17 +62,18 @@ const ComponentMapping: any = {
     'https://demostore.amplience.com/content/advanced-banner': AdvancedBanner,
     // POCs
     'https://cms.gap.com/schema/v1/poc-banner': BannerPOC,
-    "https://cms.gap.com/schema/v1/sitewide-banner.json": GlobalBannerPOC,
+    'https://cms.gap.com/schema/v1/poc-carousel.json': CarouselPOC,
+    'https://cms.gap.com/schema/v1/sitewide-banner.json': GlobalBannerPOC,
     'https://cms.gap.com/schema/v1/poc-image-card.json': ProductCardPOC,
     'https://cms.gap.com/schema/v1/poc-grid-of-image-cards.json': WayfindingCardsPOC,
-    // 
+    //
     'https://demostore.amplience.com/content/blog-list': BlogList,
     'https://demostore.amplience.com/content/blog-snippet': BlogSnippet,
     'https://demostore.amplience.com/content/blog': Blog,
     'https://demostore.amplience.com/content/card-list': CardList,
     'https://schema-examples-accelerators.com/card.json': Card,
     'https://demostore.amplience.com/content/card': Card,
-    'https://cms.gap.com/schema/v1/poc-carousel.json': Carousel,
+
     'https://demostore.amplience.com/content/container': Container,
     'https://demostore.amplience.com/content/curated-product-grid': CuratedProductGrid,
     'https://demostore.amplience.com/content/dynamic-blog-list': DynamicBlogList,

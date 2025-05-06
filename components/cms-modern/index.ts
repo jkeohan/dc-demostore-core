@@ -10,6 +10,7 @@ export { default as FlexibleSlot } from './FlexibleSlot';
 export { default as Image } from './Image';
 export { default as ContentPage } from './ContentPage';
 export { default as LocalizedBannerSlot } from './LocalizedBannerSlot';
+export {default as MarkdownTypography} from './MarkdownTypography'
 export { default as PersonalizedBannerSlot } from './PersonalizedBannerSlot';
 export { default as SimpleBanner } from './SimpleBanner';
 export { default as Slider } from './Slider';

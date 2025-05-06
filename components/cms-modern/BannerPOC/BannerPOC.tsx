@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { BannerPOCProps, TextBlocks, ImageData, Block } from './types';
 
 const BannerPOC = ({ background = [], textBlocks, layout}: BannerPOCProps) => {
+    console.log("BannerPOC - layout", layout)
     const [isMobile, setIsMobile] = useState(false);
-    const { desktopBannerSize } = layout;
+    const { desktopBannerSize } = layout || "large"
 
 
     useEffect(() => {

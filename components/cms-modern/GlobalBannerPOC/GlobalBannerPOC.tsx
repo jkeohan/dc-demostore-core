@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { BannerContent, TextBlock } from './types';
-import MarkdownTypography  from './components/MarkdownTypography'
+import MarkdownTypography from './components/MarkdownTypography';
+import { Typography } from '@mui/material';
 
 const styles = {
     cta: {
@@ -15,6 +16,13 @@ const styles = {
         textUnderlineOffset: '3px',
         fontWeight: 400,
         height: '18px',
+        fontSize: '14px',
+        display: 'inline-block',
+    },
+    legalPrefix: {
+        fontWeight: 400,
+        height: '18px',
+        fontSize: '14px',
         display: 'inline-block',
     },
     bannerRow: {
@@ -29,12 +37,7 @@ const styles = {
     } as const,
 };
 
-const GlobalBannerPOC = ({
-    backgroundColor,
-    link,
-    content: { textBlocks },
-    isMobile = false,
-}: BannerContent) => {
+const GlobalBannerPOC = ({ backgroundColor, link, content: { textBlocks }, isMobile = false }: BannerContent) => {
     const [isHydrated, setIsHydrated] = useState(false);
 
     useEffect(() => {
@@ -74,9 +77,18 @@ const GlobalBannerPOC = ({
 
                     case 'legal':
                         return (
-                            <a target="_blank" rel="noopener noreferrer" style={styles.legal}>
-                                {block.text.prefix}
-                            </a>
+                            <>
+                                <Typography
+                                    sx={styles.legalPrefix}
+                                    variant="body2" // Map to an appropriate variant or make this dynamic
+                                    color={backgroundColor.contentColor}
+                                >
+                                    {block.text.prefix}
+                                </Typography>
+                                <a target="_blank" rel="noopener noreferrer" style={styles.legal}>
+                                    {block.text.label}
+                                </a>
+                            </>
                         );
 
                     default:
@@ -89,17 +101,18 @@ const GlobalBannerPOC = ({
     const bgColor = backgroundColor.bgColor === 'custom' ? backgroundColor.customColor : backgroundColor.bgColor;
 
     return (
-        <div style={{ backgroundColor: bgColor, color: backgroundColor.contentColor, padding: '10px' }}>
+        <div style={{ backgroundColor: bgColor, color: backgroundColor.contentColor }}>
             {isHydrated && link?.wrapper?.value ? (
                 <a
                     href={link.wrapper.value}
                     aria-label={link.wrapper.label || 'Promotional banner'}
                     style={{ display: 'block', textDecoration: 'none' }}
+                    target="_blank"
                 >
-                    {content}
+                    <div style={{ padding: '10px' }}>{content}</div>
                 </a>
             ) : (
-                content
+                <div style={{ padding: '10px' }}>{content}</div>
             )}
         </div>
     );

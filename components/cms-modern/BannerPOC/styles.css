@@ -89,7 +89,7 @@
 
 /* Horizontal alignment */
 .halign-left {
-    left: 0;
+    left: 10px;
 }
 
 .halign-center {
@@ -97,7 +97,7 @@
 }
 
 .halign-right {
-    right: 0;
+    right: 10px;
 }
 
 .valign-middle {

@@ -5,7 +5,7 @@ export interface BannerPayload {
 export interface BannerContent {
     _meta: MetaData;
     backgroundColor: BackgroundColor;
-    content: BannerBodyContent;
+    content?: BannerBodyContent;
     link: {
         wrapper: {
             label: string;

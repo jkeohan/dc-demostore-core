@@ -4,7 +4,7 @@ import { POCProductCardProps, CTA } from './types';
 import CTAGroup from '@components/cms-modern/CTAGroupPOC';
 import MarkdownTypography from '@components/cms-modern/MarkdownTypography';
 
-const getMediaUrl = (image?: POCProductCardProps['image'][0]['image']): string => {
+const getMediaUrl = (image?: POCProductCardProps['image']): string => {
     if (!image) return '';
     return `https://${image.defaultHost}/i/${image.endpoint}/${image.name}?w=800`;
 };
@@ -14,12 +14,11 @@ const ProductCardPOC = ({ image, cardContent, width }: POCProductCardProps) => {
     const valign = text?.valign;
     const halign = text?.halign;
     const color = text?.color === 'primary' ? 'black' : 'white';
-    const backgroundImage = image?.[0]?.image;
 
-    const altText = image?.[0]?.altText || 'Card image';
+    const altText = image || 'Card image';
     const blocks = text?.block || [];
 
-    const imageUrl = backgroundImage ? getMediaUrl(backgroundImage) : '';
+    const imageUrl = image ? getMediaUrl(image) : '';
 
     const valignment = {
         top: 'flex-start',
@@ -38,9 +37,10 @@ const ProductCardPOC = ({ image, cardContent, width }: POCProductCardProps) => {
     const content = text?.block?.map((block, index) => {
         console.log('block', block, color);
         switch (block.type) {
+            case 'eyebrow':
             case 'header':
-                return <MarkdownTypography markdown={block.text?.text} key={index} color={color} />;
             case 'subheader':
+            case 'paragraph':
                 return <MarkdownTypography markdown={block.text?.text} key={index} color={color} />;
             case 'cta':
                 return (

@@ -10,7 +10,8 @@ import { WayfindingCardsProps } from './types';
 import { POCProductCardProps } from '../ProductCardPOC/types';
 import MarkdownTypography from '@components/cms-modern/MarkdownTypography';
 import CTAGroup from '../CTAGroupPOC';
-const WayfindingCardsPOC = ({ cardsDisplay, gridType, gridItems, text }: WayfindingCardsProps) => {
+
+const WayfindingCardsPOC = ({ cardsDisplay = 4, gridType = "static", gridItems = [], text }: WayfindingCardsProps) => {
     const theme = useTheme();
     const color = text?.color === "primary" ? "black" : "white"
     const hjustify = text?.textAlign === 'left' ? 'flex-start' : text?.textAlign === 'right' ? 'flex-end' : 'center';
@@ -22,14 +23,13 @@ const WayfindingCardsPOC = ({ cardsDisplay, gridType, gridItems, text }: Wayfind
 
     const columns = cardsDisplay >= 2 && cardsDisplay <= 4 ? cardsDisplay : 4;
 
-    const content = text?.block.map((block, index) => {
+    const content = Array.isArray(text?.block) ? text?.block.map((block, index) => {
         switch (block.type) {
             case 'header':
-                return <MarkdownTypography markdown={block.text.text} key={index} color={color} />;
             case 'subheader':
-                return <MarkdownTypography markdown={block.text.text} key={index} color={color} />;
             case 'eyebrow':
-                return <MarkdownTypography markdown={block?.text.text} key={index} color={color} />;
+            case 'paragraph':
+                return <MarkdownTypography markdown={block?.text?.text} key={index} color={color} />;
             case 'cta':
                 return (
                     <CTAGroup
@@ -43,7 +43,7 @@ const WayfindingCardsPOC = ({ cardsDisplay, gridType, gridItems, text }: Wayfind
             default:
                 return null;
         }
-    });
+    }) : null
 
     return (
         <Box
@@ -62,7 +62,7 @@ const WayfindingCardsPOC = ({ cardsDisplay, gridType, gridItems, text }: Wayfind
                 <Box
                     sx={{
                         textAlign: text?.textAlign,
-                        padding: theme.spacing(2, 2)
+                        padding: theme.spacing(2, 2),
                     }}
                 >
                     {content}
@@ -80,29 +80,34 @@ const WayfindingCardsPOC = ({ cardsDisplay, gridType, gridItems, text }: Wayfind
                     overflow: 'hidden',
                 }}
             >
-                {gridItems.map((card, index) => {
-                    console.log('WayfindingCards - card', card);
-                    return (
-                        <Grid
-                            item
-                            key={index}
-                            xs={12 / columns} // evenly distributes across row (e.g., 6, 4, or 3 columns)
-                            sx={{
-                                height: '100%', // stretch to container height
-                            }}
-                        >
-                            <ProductCardPOC
-                                cardContent={{
-                                    cardType: undefined,
-                                    text: undefined,
+                {Array.isArray(gridItems) &&
+                    gridItems.length > 0 &&
+                    gridItems.map((card, index) => {
+                          console.log("card", card)
+                          if (!card || typeof card !== 'object') return null;
+
+                        //   const cardContent = card.cardContent || { cardType: undefined, text: undefined };
+                        return (
+                            <Grid
+                                item
+                                key={index}
+                                xs={12 / columns} // evenly distributes across row (e.g., 6, 4, or 3 columns)
+                                sx={{
+                                    height: '100%', // stretch to container height
                                 }}
-                                {...card}
-                                width="100%"
-                                color={color}
-                            />
-                        </Grid>
-                    );
-                })}
+                            >
+                                <ProductCardPOC
+                                    cardContent={{
+                                        cardType: undefined,
+                                        text: undefined,
+                                    }}
+                                    {...card}
+                                    width="100%"
+                                    color={color}
+                                />
+                            </Grid>
+                        );
+                    })}
             </Grid>
         </Box>
     );

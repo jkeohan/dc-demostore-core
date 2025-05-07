@@ -1,23 +1,16 @@
-import { CTAStyle } from '@components/cms-modern/CTAGroupPOC/types'
+import { CTAStyle } from '@components/cms-modern/CTAGroupPOC/types';
 
-type AllowedTextBlockType = 'header' | 'subheader' | 'cta' | 'eyebrow';
+type AllowedTextBlockType = 'header' | 'subheader' | 'paragraph' | 'cta' | 'eyebrow';
 export interface POCProductCardProps {
     image: {
-        image: {
-            _meta: { schema: string };
-            id: string;
-            name: string;
-            endpoint: string;
-            defaultHost: string;
-            mimeType: string;
-        };
-        altText?: string;
-        variations?: { variation: string }[];
-        fliph?: boolean;
-        flipv?: boolean;
-        enableChroma?: boolean;
-        chromaQuality?: number;
-    }[];
+        _meta: { schema: string };
+        id: string;
+        name: string;
+        endpoint: string;
+        defaultHost: string;
+        mimeType: string;
+    };
+
     cardContent: {
         cardType?: string;
         text?: {

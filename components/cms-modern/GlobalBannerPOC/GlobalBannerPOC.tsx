@@ -37,7 +37,9 @@ const styles = {
     } as const,
 };
 
-const GlobalBannerPOC = ({ backgroundColor, link, content: { textBlocks }, isMobile = false }: BannerContent) => {
+const GlobalBannerPOC = ({ backgroundColor, link, content, isMobile = false }: BannerContent) => {
+    const textBlocks = content?.textBlocks;
+
     const [isHydrated, setIsHydrated] = useState(false);
 
     useEffect(() => {
@@ -45,25 +47,26 @@ const GlobalBannerPOC = ({ backgroundColor, link, content: { textBlocks }, isMob
     }, []);
 
     const blocks: TextBlock[] =
-        isMobile && textBlocks.contentBlocksMobile
+        isMobile && textBlocks?.contentBlocksMobile?.block
             ? textBlocks.contentBlocksMobile.block
-            : textBlocks.contentBlocksDesktop.block;
+            : textBlocks?.contentBlocksDesktop?.block || [];
 
-    const content = (
+    const contentBlock = (
         <div style={styles.bannerRow}>
             {blocks.map((block, index) => {
+                console.log('block', block);
                 switch (block.type) {
                     case 'text':
                         return (
                             <MarkdownTypography
-                                markdown={block.text.text}
+                                markdown={block?.text?.text || ''}
                                 key={index}
                                 color={backgroundColor.contentColor}
                             />
                         );
 
                     case 'cta':
-                        return block.text.ctas.map((ctaObj, i) => (
+                        return block?.text?.ctas.map((ctaObj, i) => (
                             <a
                                 key={`${index}-${i}`}
                                 href={ctaObj.cta.buttonValue}
@@ -83,10 +86,10 @@ const GlobalBannerPOC = ({ backgroundColor, link, content: { textBlocks }, isMob
                                     variant="body2" // Map to an appropriate variant or make this dynamic
                                     color={backgroundColor.contentColor}
                                 >
-                                    {block.text.prefix}
+                                    {block?.text?.prefix || ''}
                                 </Typography>
                                 <a target="_blank" rel="noopener noreferrer" style={styles.legal}>
-                                    {block.text.label}
+                                    {block?.text?.label || ''}
                                 </a>
                             </>
                         );
@@ -98,7 +101,12 @@ const GlobalBannerPOC = ({ backgroundColor, link, content: { textBlocks }, isMob
         </div>
     );
 
-    const bgColor = backgroundColor.bgColor === 'custom' ? backgroundColor.customColor : backgroundColor.bgColor;
+    const bgColor =
+        backgroundColor.bgColor === 'custom'
+            ? backgroundColor.customColor
+            : backgroundColor.bgColor === 'black'
+              ? 'white'
+              : 'black';
 
     return (
         <div style={{ backgroundColor: bgColor, color: backgroundColor.contentColor }}>
@@ -109,10 +117,10 @@ const GlobalBannerPOC = ({ backgroundColor, link, content: { textBlocks }, isMob
                     style={{ display: 'block', textDecoration: 'none' }}
                     target="_blank"
                 >
-                    <div style={{ padding: '10px' }}>{content}</div>
+                    <div style={{ padding: '10px' }}>{contentBlock}</div>
                 </a>
             ) : (
-                <div style={{ padding: '10px' }}>{content}</div>
+                <div style={{ padding: '10px' }}>{contentBlock}</div>
             )}
         </div>
     );

@@ -22,6 +22,10 @@ interface BackgroundImage {
     };
 }
 
+interface ButtonStyle {
+    buttonColor: string;
+    buttonStyle: string;
+}
 interface CTA {
     cta: {
         buttonLabel: string;
@@ -29,28 +33,25 @@ interface CTA {
     };
 }
 
-interface ButtonStyle {
-    buttonColor: string;
-    buttonStyle: string;
+export interface CTAStyle {
+    buttonStyle?: 'solid' | 'outline' | 'underline';
+    layoutType?: 'linear' | 'stacked';
 }
-
 export interface TextBlockText {
-    buttonStyle: any;
     text: string;
     color?: string;
     class?: string;
-    ctas?: {
-        ctas: CTA[];
-        buttonStyle: ButtonStyle;
-    };
+    buttonStyle?: CTAStyle;
+    ctas?: CTAWrapper[];
 }
 
 export interface Block {
-    type: 'header' | 'subheader' | 'eyebrow' | 'cta';
+    type: 'header' | 'subheader' | 'eyebrow' | 'cta' | 'paragraph';
     text: TextBlockText;
 }
 
 interface ContentBlocks {
+    [x: string]: any;
     block: Block[];
     halign?: 'left' | 'center' | 'right';
     valign?: 'top' | 'middle' | 'bottom';
@@ -95,6 +96,10 @@ interface SubheaderBlock {
     };
 }
 
+export interface CTAWrapper {
+    cta: CTA;
+}
+
 interface CTABlock {
     type: 'cta';
     text: {
@@ -105,7 +110,6 @@ interface CTABlock {
             };
         }[];
         buttonStyle: {
-            buttonColor: string;
             buttonStyle: string;
             layoutType: string;
         };

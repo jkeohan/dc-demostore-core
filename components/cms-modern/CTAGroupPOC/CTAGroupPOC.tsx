@@ -7,6 +7,7 @@ const CTAGroup = ({ ctas = [], buttonStyle = {}, halign, color }: CTAGroupProps)
     const isSolid = buttonStyle.buttonStyle === 'solid';
     const buttonColor = color === 'primary' ? "black" : "white"
     const hjustify = halign === 'left' ? 'flex-start' : halign === 'right' ? 'flex-end' : 'center';
+    console.log("CTAGROup - halign", halign)
 
     console.log("hjustify", halign, hjustify)
 
@@ -71,6 +72,7 @@ const CTAGroup = ({ ctas = [], buttonStyle = {}, halign, color }: CTAGroupProps)
                 return null;
         }
     });
+
     return (
         <Stack
             direction={direction}

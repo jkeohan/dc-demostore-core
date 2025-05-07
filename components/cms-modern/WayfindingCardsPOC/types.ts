@@ -12,21 +12,11 @@ export interface WayfindingCardsProps {
 }
 
 export interface ProductCardPOCProps {
-    image: ImageObject[];
+    image: ImageLink;
     cardType: 'overlay' | 'under'; // adjust if more types exist
     text: {
         block: TextBlock[];
     };
-}
-
-interface ImageObject {
-    image: ImageLink;
-    altText: string;
-    variations: Variation[];
-    fliph: boolean;
-    flipv: boolean;
-    enableChroma: boolean;
-    chromaQuality: number;
 }
 
 interface ImageLink {
@@ -44,7 +34,7 @@ interface Variation {
     variation: string;
 }
 
-type TextBlock = HeaderBlock | SubheaderBlock | CTABlock | EyebrowBlock;
+type TextBlock = HeaderBlock | SubheaderBlock | CTABlock | EyebrowBlock | Paragraph;
 
 type TypographyVariant =
     | 'h1'
@@ -73,6 +63,11 @@ interface SubheaderBlock {
 
 interface EyebrowBlock {
     type: 'eyebrow';
+    text: StyledText;
+}
+
+interface Paragraph {
+    type: 'paragraph';
     text: StyledText;
 }
 

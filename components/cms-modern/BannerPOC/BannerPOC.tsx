@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { BannerPOCProps, TextBlocks, ImageData, Block } from './types';
+import MarkdownTypography from '../MarkdownTypography';
+import CTAGroup from '../CTAGroupPOC';
 
-const BannerPOC = ({ background = [], textBlocks, layout}: BannerPOCProps) => {
-    console.log("BannerPOC - layout", layout)
+const BannerPOC = ({ background = [], textBlocks, layout }: BannerPOCProps) => {
+    console.log('BannerPOC - layout', layout);
     const [isMobile, setIsMobile] = useState(false);
-    const { desktopBannerSize } = layout || "large"
-
+    const { desktopBannerSize } = layout || 'large';
+    console.log('isMobile', isMobile);
 
     useEffect(() => {
         const checkIfMobile = () => {
@@ -20,6 +22,11 @@ const BannerPOC = ({ background = [], textBlocks, layout}: BannerPOCProps) => {
     const desktopContent = textBlocks?.contentBlocksDesktop?.[0] || { block: [] };
     const mobileContent = textBlocks?.contentBlocksMobile?.[0] || { block: [] };
 
+    const activeContent = isMobile ? [mobileContent] : [desktopContent];
+    const activeColor = activeContent[0].color === 'primary' ? 'black' : 'white';
+
+    console.log('activeContent', activeContent);
+
     const { ctaAlignVerticalClass, halignClass, valignClass, textAlignClass, ctaAlignHorizontalClass } =
         alignment(textBlocks);
 
@@ -32,11 +39,12 @@ const BannerPOC = ({ background = [], textBlocks, layout}: BannerPOCProps) => {
         if (!backgroundItem) return null;
 
         if (backgroundItem.type === 'backgroundColor') {
-            const desktopColor = backgroundItem.bgColor?.desktop?.color1;
+            const color = isMobile ? backgroundItem.bgColor?.mobile.color1 : backgroundItem.bgColor?.desktop?.color1;
+
             return (
                 <div
                     style={{
-                        backgroundColor: desktopColor,
+                        backgroundColor: color,
                         position: 'absolute',
                         top: 0,
                         left: 0,
@@ -52,13 +60,13 @@ const BannerPOC = ({ background = [], textBlocks, layout}: BannerPOCProps) => {
             const desktopImg = backgroundItem.image?.desktop?.image?.[0]?.image;
             const mobileImg = backgroundItem.image?.mobile?.image?.[0]?.image;
             if (!desktopImg && !mobileImg) return null;
-
+            if ((isMobile && !mobileImg) || !desktopImg) return null;
+            const activeImage = isMobile ? mobileImg : desktopImg;
             return (
                 <picture>
-                    <source media="(max-width: 768px)" srcSet={mobileImg ? getMediaUrl(mobileImg) : ''} />
                     <img
                         className="banner-image"
-                        src={desktopImg ? getMediaUrl(desktopImg) : ''}
+                        src={desktopImg ? getMediaUrl(activeImage) : ''}
                         alt={desktopImg?.altText || 'Banner'}
                     />
                 </picture>
@@ -100,52 +108,31 @@ const BannerPOC = ({ background = [], textBlocks, layout}: BannerPOCProps) => {
         if (!block) return null;
 
         switch (block.type) {
-            case 'header':
-                const HeaderTag = (block.text.class || 'h1') as keyof JSX.IntrinsicElements;
-                return (
-                    <HeaderTag key={index} style={{ color: block.text.color }}>
-                        {block.text.text}
-                    </HeaderTag>
-                );
-
-            case 'subheader':
-                return (
-                    <p key={index} style={{ color: block.text.color }}>
-                        {block.text.text}
-                    </p>
-                );
-
             case 'eyebrow':
-                return (
-                    <p key={index} style={{ color: block.text.color }} className={block.text.class}>
-                        {block.text.text}
-                    </p>
-                );
+            case 'header':
+            case 'subheader':
+            case 'paragraph':
+                return <MarkdownTypography markdown={block.text?.text} key={index} color={activeColor} />;
 
             case 'cta':
                 const ctas = Array.isArray(block.text.ctas) ? block.text.ctas : [];
                 const buttonStyles = block.text.buttonStyle || {};
-                const buttonColor = buttonStyles?.buttonColor || '';
-                const buttonStyle = buttonStyles?.buttonStyle || '';
                 const buttonLayout = buttonStyles?.layoutType || '';
+                console.log("ctas", ctas)
 
                 return (
                     <div
                         key={index}
                         className={`cta-buttons ${ctaAlignVerticalClass} ${buttonLayout} ${ctaAlignHorizontalClass}`}
                     >
-                        {ctas.map((cta, i) => (
-                            <a
-                                key={i}
-                                href={cta.cta.buttonValue || '#'}
-                                className={`button ${buttonStyle} ${buttonColor}`}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                style={{textAlign: 'center'}}
-                            >
-                                {cta.cta.buttonLabel}
-                            </a>
-                        ))}
+                        <CTAGroup
+                            key={index}
+                            ctas={block.text?.ctas as any|| []}
+                            buttonStyle={block.text?.buttonStyle || {}}
+                            color={activeContent[0].color}
+                            halign={activeContent[0].textAlign}
+                     
+                        />
                     </div>
                 );
 
@@ -155,15 +142,15 @@ const BannerPOC = ({ background = [], textBlocks, layout}: BannerPOCProps) => {
     };
 
     return (
-        
         <section className={`banner banner--${desktopBannerSize}`} style={{ position: 'relative' }}>
             {renderBackgroundMedia()}
-            {textBlocks?.contentBlocksDesktop?.map((group, index) => (
+            {activeContent.map((content, index) => (
                 <div
                     key={index}
-                    className={`banner-text halign-${group.halign} valign-${group.valign} text-align-${group.textAlign}`}
+                    className={`banner-text halign-${content.halign} valign-${content.valign} text-align-${content.textAlign}`}
                 >
-                    {Array.isArray(group.block) && group.block.map((block, i) => renderBlock(block, i))}
+                    {Array.isArray(content.block) &&
+                        content.block.map((block: Block, i: number) => renderBlock(block, i))}
                 </div>
             ))}
         </section>
@@ -215,6 +202,3 @@ function alignment(textBlocks: TextBlocks) {
         ctaAlignHorizontalClass,
     };
 }
-
-
-  

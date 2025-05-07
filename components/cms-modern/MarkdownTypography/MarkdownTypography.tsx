@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import { Typography, Link } from '@mui/material';
+// remarkGrm used for GitHub flavored markdown
 import remarkGfm from 'remark-gfm';
 
 interface MarkdownTypographyProps {
@@ -36,12 +37,12 @@ const MarkdownTypography = ({ markdown, color }: MarkdownTypographyProps) => {
                     </Link>
                 ),
                 h1: ({ children }) => (
-                    <Typography variant="h1" gutterBottom sx={{ color }}>
+                    <Typography variant="h1" gutterBottom sx={{ color, textTransform: 'none' }}>
                         {children}
                     </Typography>
                 ),
                 h2: ({ children }) => (
-                    <Typography variant="h2" gutterBottom sx={{ color }}>
+                    <Typography variant="h2" gutterBottom sx={{ color, textTransform: 'none' }}>
                         {children}
                     </Typography>
                 ),

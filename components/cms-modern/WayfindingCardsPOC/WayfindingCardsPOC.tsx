@@ -13,7 +13,8 @@ import CTAGroup from '../CTAGroupPOC';
 const WayfindingCardsPOC = ({ cardsDisplay, gridType, gridItems, text }: WayfindingCardsProps) => {
     const theme = useTheme();
     const color = text?.color === "primary" ? "black" : "white"
-    const halign = text?.halign === 'left' ? 'flex-start' : text?.halign === 'right' ? 'flex-end' : 'center';
+    const hjustify = text?.textAlign === 'left' ? 'flex-start' : text?.textAlign === 'right' ? 'flex-end' : 'center';
+
 
     const isXs = useMediaQuery(theme.breakpoints.down('sm'));
     const isSm = useMediaQuery(theme.breakpoints.between('sm', 'md'));
@@ -29,17 +30,14 @@ const WayfindingCardsPOC = ({ cardsDisplay, gridType, gridItems, text }: Wayfind
                 return <MarkdownTypography markdown={block.text.text} key={index} color={color} />;
             case 'eyebrow':
                 return <MarkdownTypography markdown={block?.text.text} key={index} color={color} />;
-                
-
             case 'cta':
                 return (
                     <CTAGroup
                         key={index}
                         ctas={block.text?.ctas || []}
-                        // buttonStyle={block.text?.buttonStyle.buttonStyle}
                         buttonStyle={{ buttonStyle: block.text.buttonStyle.buttonStyle }}
-                        halign={text?.halign}
-                        color={color}
+                        halign={text?.textAlign}
+                        color={text?.color}
                     />
                 );
             default:
@@ -57,14 +55,14 @@ const WayfindingCardsPOC = ({ cardsDisplay, gridType, gridItems, text }: Wayfind
             <Box
                 sx={{
                     display: 'flex',
-                    justifyContent: halign,
+                    justifyContent: hjustify,
                     backgroundPosition: 'top',
                 }}
             >
                 <Box
                     sx={{
-                        textAlign: 'center',
-                        padding: theme.spacing(2, 2),
+                        textAlign: text?.textAlign,
+                        padding: theme.spacing(2, 2)
                     }}
                 >
                     {content}
@@ -93,10 +91,15 @@ const WayfindingCardsPOC = ({ cardsDisplay, gridType, gridItems, text }: Wayfind
                                 height: '100%', // stretch to container height
                             }}
                         >
-                            <ProductCardPOC cardContent={{
-                                cardType: undefined,
-                                text: undefined
-                            }} {...card} width="100%" color={color} />
+                            <ProductCardPOC
+                                cardContent={{
+                                    cardType: undefined,
+                                    text: undefined,
+                                }}
+                                {...card}
+                                width="100%"
+                                color={color}
+                            />
                         </Grid>
                     );
                 })}

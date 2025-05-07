@@ -58,7 +58,7 @@ interface ContentBlockProps {
     components?: { [key: string]: any };
 }
 
-const ComponentMapping: any = {
+export const ComponentMapping: any = {
     'https://demostore.amplience.com/content/advanced-banner': AdvancedBanner,
     // POCs
     'https://cms.gap.com/schema/v1/poc-banner': BannerPOC,

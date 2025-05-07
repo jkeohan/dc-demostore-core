@@ -6,8 +6,8 @@ export interface WayfindingCardsProps {
     gridItems: ProductCardPOCProps[];
     text?: {
         block: TextBlock[];
-        halign: 'left' | 'center' | 'right'
-        color: string
+        textAlign: 'left' | 'center' | 'right';
+        color: string;
     };
 }
 
@@ -83,6 +83,7 @@ interface CTABlock {
             cta: CTA;
         }[];
         buttonStyle: CTAStyle;
+     
     };
 }
 

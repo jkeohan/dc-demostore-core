@@ -6,12 +6,15 @@ const CTAGroup = ({ ctas = [], buttonStyle = {}, halign, color }: CTAGroupProps)
     const direction = buttonStyle.layoutType === 'linear' ? 'row' : 'column';
     const isSolid = buttonStyle.buttonStyle === 'solid';
     const buttonColor = color === 'primary' ? "black" : "white"
+    const hjustify = halign === 'left' ? 'flex-start' : halign === 'right' ? 'flex-end' : 'center';
+
+    console.log("hjustify", halign, hjustify)
 
     const stackedProps =
         direction === 'column'
             ? {
-                  alignItems: 'center',
-                  sx: { width: 'max-content', marginX: 'auto' },
+                  alignItems:hjustify,
+                //   sx: { width: 'max-content' },
               }
             : {};
 
@@ -73,7 +76,7 @@ const CTAGroup = ({ ctas = [], buttonStyle = {}, halign, color }: CTAGroupProps)
             direction={direction}
             spacing={2}
             justifyContent={halign === 'left' ? 'flex-start' : halign === 'right' ? 'flex-end' : 'center'}
-            mt={2}
+             mt={2}
             sx={{ width: '100%' }}
             {...stackedProps}
         >

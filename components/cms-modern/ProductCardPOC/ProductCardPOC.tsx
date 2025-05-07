@@ -9,15 +9,31 @@ const getMediaUrl = (image?: POCProductCardProps['image'][0]['image']): string =
     return `https://${image.defaultHost}/i/${image.endpoint}/${image.name}?w=800`;
 };
 
-const ProductCardPOC = ({ image, cardContent, width}: POCProductCardProps) => {
+const ProductCardPOC = ({ image, cardContent, width }: POCProductCardProps) => {
     const { text, cardType } = cardContent;
-    const color = text?.color === "primary" ? "black" : "white"
+    const valign = text?.valign;
+    const halign = text?.halign;
+    const color = text?.color === 'primary' ? 'black' : 'white';
     const backgroundImage = image?.[0]?.image;
 
     const altText = image?.[0]?.altText || 'Card image';
     const blocks = text?.block || [];
 
     const imageUrl = backgroundImage ? getMediaUrl(backgroundImage) : '';
+
+    const valignment = {
+        top: 'flex-start',
+        middle: 'center',
+        bottom: 'flex-end',
+    }[valign ?? 'top'];
+
+    const halignment = {
+        left: 'left',
+        center: 'center',
+        right: 'right',
+    }[halign ?? 'center'];
+
+    console.log('halignment', halignment);
 
     const content = text?.block?.map((block, index) => {
         console.log('block', block, color);
@@ -39,7 +55,7 @@ const ProductCardPOC = ({ image, cardContent, width}: POCProductCardProps) => {
             default:
                 return null;
         }
-    })
+    });
 
     return (
         <Box
@@ -57,21 +73,22 @@ const ProductCardPOC = ({ image, cardContent, width}: POCProductCardProps) => {
                     height: 600,
                     ...(cardType === 'overlay' && {
                         display: 'flex',
-                        alignItems: 'flex-end',
+                        alignItems: valignment,
                         justifyContent: 'center',
                         px: 2,
                     }),
                 }}
             >
-                {cardType === 'overlay' && (
-                    <Box sx={{ marginBottom: 10, width: 270 }}>
-                        {content}
-                    </Box>
-                )}
+                {cardType === 'overlay' && <Box sx={{ mt: 2, mb: 2}}>{content}</Box>}
             </Box>
 
             {cardType === 'under' && (
-                <Box sx={{ mt: 2, textAlign: text?.halign }}>
+                <Box
+                    sx={{
+                        mt: 2,
+                        textAlign: halignment,
+                    }}
+                >
                     {content}
                 </Box>
             )}

@@ -33,7 +33,12 @@ const typographyVariants = {
         fontSize: '30px',
         fontWeight: 300,
     },
-    wayfinder: {
+    wayfinderHeader: {
+        fontFamily: 'serif',
+        fontSize: '70px',
+        fontWeight: 300,
+    },
+    wayfinderSubheader: {
         fontFamily: 'serif',
         fontSize: '30px',
         fontWeight: 300,
@@ -47,6 +52,7 @@ interface MarkdownTypographyProps {
 }
 
 const MarkdownTypography = ({ markdown, color, category = 'paragraph' }: MarkdownTypographyProps) => {
+    console.log("markdown - category", category)
  
     const baseStyle = {
         color,

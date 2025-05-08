@@ -27,9 +27,15 @@ const WayfindingCardsPOC = ({ cardsDisplay = 4, gridType = "static", gridItems =
     const content = Array.isArray(text?.block) ? text?.block.map((block, index) => {
         switch (block.type) {
             case 'header':
+                 return (<MarkdownTypography
+                     markdown={block?.text?.text}
+                     key={index}
+                     color={color}
+                     category={'wayfinderHeader'}
+                 />)
             case 'subheader':
                 return (
-                    <MarkdownTypography markdown={block?.text?.text} key={index} color={color} category={'wayfinder'} />
+                    <MarkdownTypography markdown={block?.text?.text} key={index} color={color} category={'wayfinderSubheader'} />
                 );
             case 'eyebrow':
             case 'paragraph':
@@ -53,7 +59,7 @@ const WayfindingCardsPOC = ({ cardsDisplay = 4, gridType = "static", gridItems =
         <Box
             sx={{
                 textAlign: 'center',
-                padding: theme.spacing(4, 2),
+                padding: theme.spacing(4, 2, 4, 2),
             }}
         >
             <Box
@@ -66,7 +72,7 @@ const WayfindingCardsPOC = ({ cardsDisplay = 4, gridType = "static", gridItems =
                 <Box
                     sx={{
                         textAlign: text?.textAlign,
-                        padding: theme.spacing(1,0, 5, 0),
+                        padding: theme.spacing(1,0, 0, 0),
                     }}
                 >
                     {content}
@@ -76,10 +82,10 @@ const WayfindingCardsPOC = ({ cardsDisplay = 4, gridType = "static", gridItems =
             <Grid
                 container
                 spacing={1}
-                mt={2}
+                // mt={2}
                 sx={{
                     width: '100%', // 960 / 640 / 480 based on cardsDisplay
-                    height: '750px',
+                    height: '720px',
                     margin: '0 auto',
                     overflow: 'hidden',
                 }}
@@ -98,7 +104,7 @@ const WayfindingCardsPOC = ({ cardsDisplay = 4, gridType = "static", gridItems =
                                 key={index}
                                 xs={12 / columns} // evenly distributes across row (e.g., 6, 4, or 3 columns)
                                 sx={{
-                                    height: '800px', // stretch to container height
+                                    height: '600px', // stretch to container height
                                 }}
                             >
                                 <ProductCardPOC

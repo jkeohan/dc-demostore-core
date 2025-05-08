@@ -39,7 +39,6 @@ const TopNav = () => {
                     placeholder="Search"
                     style={{
                         border: 'none',
-                        borderBottom: '1px solid black',
                         outline: 'none',
                         fontSize: '14px',
                         padding: '4px',

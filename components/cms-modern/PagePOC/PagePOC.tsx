@@ -1,6 +1,7 @@
 import React from 'react';
 import { ComponentMapping } from '@components/cms-modern/ContentBlock';
 import TopNav from '@components/cms-modern/TopNavPOC'
+import UtilityNav from '@components/cms-modern/UtilityNav'
 
 interface PageProps {
     globalCarousel?: any;
@@ -24,6 +25,8 @@ const Page: React.FC<PageProps> = ({ globalCarousel, content }) => {
                 // padding: '0 16px',
             }}
         >
+            <UtilityNav />
+            
             {/* Optional Global Carousel */}
             {globalCarousel && Object.keys(globalCarousel).length > 0 && (
                 <>

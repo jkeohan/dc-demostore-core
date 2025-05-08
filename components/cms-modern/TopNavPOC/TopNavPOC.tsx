@@ -1,4 +1,9 @@
 const TopNav = () => {
+    const styles = {
+        nav: {
+
+        }
+    }
     return (
         <nav
             style={{
@@ -13,7 +18,7 @@ const TopNav = () => {
             }}
         >
             {/* Left: Logo */}
-            <div style={{ fontSize: '20px', fontWeight: 'bold' }}>Gap Inc Brand</div>
+            <div style={{ fontSize: '40px', fontFamily: 'serif' }}>Gap Inc Brand</div>
 
             {/* Center: Nav links */}
             <div
@@ -23,13 +28,24 @@ const TopNav = () => {
                     flex: '1',
                     justifyContent: 'center',
                     letterSpacing: '1px',
+                    fontSize: "15px"
                 }}
             >
-                <a href="#">Women</a>
-                <a href="#">Men</a>
-                <a href="#">Linen</a>
-                <a href="#">Personal Styling</a>
-                <a href="#">Sale</a>
+                <a style={{ width: '150px', textAlign: 'center' }} href="#">
+                    Women
+                </a>
+                <a style={{ width: '150px', textAlign: 'center' }} href="#">
+                    Men
+                </a>
+                <a style={{ width: '150px', textAlign: 'center' }} href="#">
+                    Linen
+                </a>
+                <a style={{ width: '170px', textAlign: 'center' }} href="#">
+                    Personal Styling
+                </a>
+                <a style={{ width: '150px', textAlign: 'center' }} href="#">
+                    Sale
+                </a>
             </div>
 
             {/* Right: Search */}

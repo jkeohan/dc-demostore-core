@@ -4,6 +4,7 @@ import MarkdownTypography from '@components/cms-modern/MarkdownTypography';
 import CTAGroup from '../CTAGroupPOC';
 
 const BannerPOC = ({ background = [], textBlocks, layout }: BannerPOCProps) => {
+    console.log("textBlocks", textBlocks)
     const [isMobile, setIsMobile] = useState(false);
     const { desktopBannerSize } = layout || 'large';
 
@@ -50,7 +51,9 @@ const BannerPOC = ({ background = [], textBlocks, layout }: BannerPOCProps) => {
     };
 
     // const activeContent = isMobile ? [mobileContent] : [desktopContent];
-    const activeContent = isMobile ? [mergedBlocks] : [desktopContent];
+    const activeContent = isMobile
+        ? [mergedBlocks] // optionally: handle multiple mobile blocks in future
+        : textBlocks?.contentBlocksDesktop || [defaultContentBlock];
     const activeColor = activeContent[0].color === 'primary' ? 'black' : 'white';
 
     const { ctaAlignVerticalClass, ctaAlignHorizontalClass } = alignment(textBlocks);
@@ -163,7 +166,7 @@ const BannerPOC = ({ background = [], textBlocks, layout }: BannerPOCProps) => {
     return (
         <section
             className={`banner banner--${desktopBannerSize}`}
-            style={{ position: 'relative', fontFamily: '"Playfair Display, serif !important' }}
+            style={{ position: 'relative', fontFamily: 'serif !important' }}
         >
             {background.length > 0 && renderBackgroundMedia()}
             {activeContent.map((content, index) => (

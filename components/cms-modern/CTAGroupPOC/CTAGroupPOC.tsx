@@ -68,7 +68,7 @@ const CTAGroup = ({ ctas = [], buttonStyle = {}, halign, color }: CTAGroupProps)
                             borderBottom: `2px solid ${buttonColor}`,
                             paddingBottom: '2px',
                             fontFamily: 'sans-serif',
-                            fontSize: '14px',
+                            fontSize: '12px',
                             letterSpacing: '2px'
                         }}
                     >

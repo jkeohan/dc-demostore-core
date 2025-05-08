@@ -1,19 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import { BannerContent, TextBlock } from './types';
-import MarkdownTypography from './components/MarkdownTypography';
+import MarkdownTypography from '@components/cms-modern/MarkdownTypography';
 import { Typography } from '@mui/material';
 
-const styles = {
+const styles: {
+    cta: React.CSSProperties;
+    legal: React.CSSProperties;
+    legalPrefix: React.CSSProperties;
+    bannerRow: React.CSSProperties;
+} = {
     cta: {
         textDecoration: 'underline',
-        textUnderlineOffset: '3px',
-        fontWeight: 600,
+        textTransform: 'uppercase',
+        textUnderlineOffset: '1px',
+        fontFamily: 'sans-serif',
+        fontWeight: 900,
         height: '18px',
         display: 'inline-block',
+        fontSize: '14px',
     },
     legal: {
         textDecoration: 'underline',
-        textUnderlineOffset: '3px',
+        textUnderlineOffset: '1px',
         fontWeight: 400,
         height: '18px',
         fontSize: '14px',
@@ -62,6 +70,7 @@ const GlobalBannerPOC = ({ backgroundColor, link, content, isMobile = false }: B
                                 markdown={block?.text?.text || ''}
                                 key={index}
                                 color={backgroundColor.contentColor}
+
                             />
                         );
 

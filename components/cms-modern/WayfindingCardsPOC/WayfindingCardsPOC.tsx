@@ -79,7 +79,7 @@ const WayfindingCardsPOC = ({ cardsDisplay = 4, gridType = "static", gridItems =
                 mt={2}
                 sx={{
                     width: '100%', // 960 / 640 / 480 based on cardsDisplay
-                    height: 810,
+                    height: '750px',
                     margin: '0 auto',
                     overflow: 'hidden',
                 }}

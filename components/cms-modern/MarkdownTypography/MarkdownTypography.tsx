@@ -37,7 +37,7 @@ const typographyVariants = {
         fontFamily: 'serif',
         fontSize: '30px',
         fontWeight: 300,
-    },
+    }
 };
 
 interface MarkdownTypographyProps {

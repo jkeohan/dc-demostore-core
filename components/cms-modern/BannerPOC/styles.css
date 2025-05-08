@@ -43,6 +43,7 @@
     min-width: unset;
     width: 850px;
     box-sizing: border-box;
+    margin:60px;
 }
 
 .banner {

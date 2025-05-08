@@ -84,12 +84,6 @@ const BannerPOC = ({ background = [], textBlocks, layout }: BannerPOCProps) => {
                 isMobile && backgroundItem.image?.mobile?.image
                     ? backgroundItem.image.mobile.image
                     : backgroundItem.image?.desktop?.image;
-            console.log('backgroudnImage', backgroundImage);
-            // const desktopImg = backgroundItem.image?.desktop?.image;
-            // const mobileImg = backgroundItem.image?.mobile?.image;
-            // if (!desktopImg && !mobileImg) return null;
-            // if ((isMobile && !mobileImg) || !desktopImg) return null;
-            // const activeImage = isMobile ? mobileImg : desktopImg;
             return (
                 <>
                     {backgroundImage ? (
@@ -102,12 +96,14 @@ const BannerPOC = ({ background = [], textBlocks, layout }: BannerPOCProps) => {
         }
 
         if (backgroundItem.type === 'video') {
-            const desktopVid = backgroundItem.video?.desktopVideo?.url;
-            const mobileVid = backgroundItem.video?.mobileVideo?.url;
-            const videoSource = isMobile ? mobileVid : desktopVid;
-            if (!desktopVid && !mobileVid) return null;
+            const backgroundVideo =
+                isMobile && backgroundItem.video?.desktopVideo
+                    ? backgroundItem.video.desktopVideo
+                    : backgroundItem.video?.desktopVideo
 
-            return videoSource ? (
+            console.log("backgroundVide", backgroundVideo, backgroundItem)
+
+            return backgroundVideo ? (
                 <video
                     className="banner-video"
                     autoPlay
@@ -115,7 +111,7 @@ const BannerPOC = ({ background = [], textBlocks, layout }: BannerPOCProps) => {
                     muted
                     playsInline
                     controls
-                    src={videoSource}
+                    src={backgroundVideo.url}
                     style={{
                         position: 'absolute',
                         top: 0,

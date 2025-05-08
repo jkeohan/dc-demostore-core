@@ -1,12 +1,13 @@
 export interface ImageData {
-    image: any;
-    defaultHost: string;
-    endpoint: string;
-    name: string;
+    _meta: { schema: string };
+        id: string;
+        name: string;
+        endpoint: string;
+        defaultHost: string;
+        mimeType: string;
 }
-
 interface DeviceImage {
-    image: ImageData[];
+    image: ImageData;
     altText?: string;
 }
 
@@ -50,8 +51,8 @@ export interface Block {
     text: TextBlockText;
 }
 
-interface ContentBlocks {
-    [x: string]: any;
+export interface ContentBlocks {
+    color: any;
     block: Block[];
     halign?: 'left' | 'center' | 'right';
     valign?: 'top' | 'middle' | 'bottom';
@@ -128,4 +129,5 @@ export interface BannerPOCProps {
         contentPlacement?: string;
     };
     link?: Link;
+    color?: 'string';
 }

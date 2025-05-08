@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { BannerPOCProps, TextBlocks, ImageData, Block } from './types';
-import MarkdownTypography from '../MarkdownTypography';
+import { BannerPOCProps, TextBlocks, ContentBlocks, ImageData, Block } from './types';
+import MarkdownTypography from '@components/cms-modern/MarkdownTypography';
 import CTAGroup from '../CTAGroupPOC';
 
 const BannerPOC = ({ background = [], textBlocks, layout }: BannerPOCProps) => {
-    console.log('BannerPOC - layout', layout);
     const [isMobile, setIsMobile] = useState(false);
     const { desktopBannerSize } = layout || 'large';
     console.log('isMobile', isMobile);
@@ -19,25 +18,49 @@ const BannerPOC = ({ background = [], textBlocks, layout }: BannerPOCProps) => {
         return () => window.removeEventListener('resize', checkIfMobile);
     }, []);
 
-    const desktopContent = textBlocks?.contentBlocksDesktop?.[0] || { block: [] };
-    const mobileContent = textBlocks?.contentBlocksMobile?.[0] || { block: [] };
+    const defaultContentBlock: ContentBlocks = {
+        color: 'primary',
+        block: [],
+        halign: 'center',
+        valign: 'middle',
+        textAlign: 'center',
+    };
 
-    const activeContent = isMobile ? [mobileContent] : [desktopContent];
+    const desktopContent = textBlocks?.contentBlocksDesktop?.[0] || defaultContentBlock;
+    const mobileContent = textBlocks?.contentBlocksMobile?.[0] || defaultContentBlock;
+
+    const desktopBlocksByType = Object.fromEntries(
+        (desktopContent.block || []).map((block: any) => [block.type, block]),
+    );
+
+    const mobileBlocksByType = Object.fromEntries((mobileContent.block || []).map((block: any) => [block.type, block]));
+
+    const mergedBlockTypes = new Set([...Object.keys(desktopBlocksByType), ...Object.keys(mobileBlocksByType)]);
+
+    const mergedBlocks: ContentBlocks = {
+        ...desktopContent,
+        ...mobileContent,
+        block: Array.from(mergedBlockTypes).map((type) => ({
+            ...desktopBlocksByType[type],
+            ...mobileBlocksByType[type],
+        })),
+        halign: mobileContent.halign ?? desktopContent.halign,
+        valign: mobileContent.valign ?? desktopContent.valign,
+        textAlign: mobileContent.textAlign ?? desktopContent.textAlign,
+        color: mobileContent.color ?? desktopContent.color,
+    };
+
+    // const activeContent = isMobile ? [mobileContent] : [desktopContent];
+    const activeContent = isMobile ? [mergedBlocks] : [desktopContent];
     const activeColor = activeContent[0].color === 'primary' ? 'black' : 'white';
 
-    console.log('activeContent', activeContent);
-
-    const { ctaAlignVerticalClass, halignClass, valignClass, textAlignClass, ctaAlignHorizontalClass } =
-        alignment(textBlocks);
+    const { ctaAlignVerticalClass, ctaAlignHorizontalClass } = alignment(textBlocks);
 
     const getMediaUrl = (mediaObj: ImageData) =>
         `https://${mediaObj?.defaultHost}/i/${mediaObj?.endpoint}/${mediaObj?.name}`;
 
-    const backgroundItem = background[0];
-
     const renderBackgroundMedia = () => {
-        if (!backgroundItem) return null;
-
+        const backgroundItem = background[0];
         if (backgroundItem.type === 'backgroundColor') {
             const color = isMobile ? backgroundItem.bgColor?.mobile.color1 : backgroundItem.bgColor?.desktop?.color1;
 
@@ -57,19 +80,24 @@ const BannerPOC = ({ background = [], textBlocks, layout }: BannerPOCProps) => {
         }
 
         if (backgroundItem.type === 'image') {
-            const desktopImg = backgroundItem.image?.desktop?.image?.[0]?.image;
-            const mobileImg = backgroundItem.image?.mobile?.image?.[0]?.image;
-            if (!desktopImg && !mobileImg) return null;
-            if ((isMobile && !mobileImg) || !desktopImg) return null;
-            const activeImage = isMobile ? mobileImg : desktopImg;
+            const backgroundImage =
+                isMobile && backgroundItem.image?.mobile?.image
+                    ? backgroundItem.image.mobile.image
+                    : backgroundItem.image?.desktop?.image;
+            console.log('backgroudnImage', backgroundImage);
+            // const desktopImg = backgroundItem.image?.desktop?.image;
+            // const mobileImg = backgroundItem.image?.mobile?.image;
+            // if (!desktopImg && !mobileImg) return null;
+            // if ((isMobile && !mobileImg) || !desktopImg) return null;
+            // const activeImage = isMobile ? mobileImg : desktopImg;
             return (
-                <picture>
-                    <img
-                        className="banner-image"
-                        src={desktopImg ? getMediaUrl(activeImage) : ''}
-                        alt={desktopImg?.altText || 'Banner'}
-                    />
-                </picture>
+                <>
+                    {backgroundImage ? (
+                        <picture>
+                            <img className="banner-image" src={getMediaUrl(backgroundImage)} />
+                        </picture>
+                    ) : null}
+                </>
             );
         }
 
@@ -118,7 +146,7 @@ const BannerPOC = ({ background = [], textBlocks, layout }: BannerPOCProps) => {
                 const ctas = Array.isArray(block.text.ctas) ? block.text.ctas : [];
                 const buttonStyles = block.text.buttonStyle || {};
                 const buttonLayout = buttonStyles?.layoutType || '';
-                console.log("ctas", ctas)
+                console.log('ctas', ctas);
 
                 return (
                     <div
@@ -127,11 +155,10 @@ const BannerPOC = ({ background = [], textBlocks, layout }: BannerPOCProps) => {
                     >
                         <CTAGroup
                             key={index}
-                            ctas={block.text?.ctas as any|| []}
+                            ctas={(block.text?.ctas as any) || []}
                             buttonStyle={block.text?.buttonStyle || {}}
                             color={activeContent[0].color}
                             halign={activeContent[0].textAlign}
-                     
                         />
                     </div>
                 );
@@ -143,7 +170,7 @@ const BannerPOC = ({ background = [], textBlocks, layout }: BannerPOCProps) => {
 
     return (
         <section className={`banner banner--${desktopBannerSize}`} style={{ position: 'relative' }}>
-            {renderBackgroundMedia()}
+            {background.length > 0 && renderBackgroundMedia()}
             {activeContent.map((content, index) => (
                 <div
                     key={index}

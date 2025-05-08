@@ -41,6 +41,10 @@ const CTAGroup = ({ ctas = [], buttonStyle = {}, halign, color }: CTAGroupProps)
                             minWidth: '150px',
                             textAlign: 'center',
                             boxShadow: 'none',
+                            fontWeight: 600,
+                            letterSpacing: '1px',
+                            fontFamily: 'sans-serif',
+                            textTransform: 'uppercase',
                         }}
                     >
                         {button.buttonLabel}

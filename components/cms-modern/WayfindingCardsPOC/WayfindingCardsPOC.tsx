@@ -31,11 +31,11 @@ const WayfindingCardsPOC = ({ cardsDisplay = 4, gridType = "static", gridItems =
                      markdown={block?.text?.text}
                      key={index}
                      color={color}
-                     category={'wayfinderHeader'}
+                     category={'header'}
                  />)
             case 'subheader':
                 return (
-                    <MarkdownTypography markdown={block?.text?.text} key={index} color={color} category={'wayfinderSubheader'} />
+                    <MarkdownTypography markdown={block?.text?.text} key={index} color={color} category={'subheader'} />
                 );
             case 'eyebrow':
             case 'paragraph':

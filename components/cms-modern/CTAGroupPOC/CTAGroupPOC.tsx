@@ -29,7 +29,6 @@ const CTAGroup = ({ ctas = [], buttonStyle = {}, halign, color }: CTAGroupProps)
                         rel="noopener noreferrer"
                         variant="contained"
                         sx={{
-              
                             backgroundColor: buttonColor === 'black' ? 'black' : 'white',
                             color: buttonColor === 'black' ? 'white' : 'black',
                             padding: '25px 40px',
@@ -45,6 +44,12 @@ const CTAGroup = ({ ctas = [], buttonStyle = {}, halign, color }: CTAGroupProps)
                             width: '280px',
                             height: '16px',
                             lineHeight: 2,
+                            // ✅ Media query override
+                            '@media (max-width: 768px)': {
+                                padding: '16px 14px',
+                                fontSize: '10px',
+                                width: "50%",
+                            },
                         }}
                     >
                         {button.buttonLabel}

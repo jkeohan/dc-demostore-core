@@ -10,39 +10,41 @@ const typographyVariants = {
         fontSize: '80px',
         fontWeight: 400,
         lineHeight: 1.3,
+        '@media (max-width: 768px)': {
+            fontSize: '40px',
+        },
     },
     subheader: {
         fontFamily: 'sans-serif',
         fontSize: '48px',
         fontWeight: 400,
         lineHeight: 1.6,
+        '@media (max-width: 768px)': {
+            fontSize: '24px',
+        },
     },
     paragraph: {
         fontFamily: 'serif',
         fontSize: '20px',
         fontWeight: 400,
         lineHeight: 1.5,
+        '@media (max-width: 768px)': {
+            fontSize: '14px',
+        },
     },
     eyebrow: {
         fontFamily: 'sans-serif"',
         fontSize: '16px',
         fontWeight: 300,
+        '@media (max-width: 768px)': {
+            fontSize: '12px',
+        },
     },
     productCard: {
         fontFamily: 'sans-serif',
         fontSize: '30px',
         fontWeight: 300,
     },
-    wayfinderHeader: {
-        fontFamily: 'serif',
-        fontSize: '70px',
-        fontWeight: 300,
-    },
-    wayfinderSubheader: {
-        fontFamily: 'serif',
-        fontSize: '30px',
-        fontWeight: 300,
-    }
 };
 
 interface MarkdownTypographyProps {

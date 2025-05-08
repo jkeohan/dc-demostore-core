@@ -6,7 +6,6 @@ import CTAGroup from '../CTAGroupPOC';
 const BannerPOC = ({ background = [], textBlocks, layout }: BannerPOCProps) => {
     const [isMobile, setIsMobile] = useState(false);
     const { desktopBannerSize } = layout || 'large';
-    console.log('isMobile', isMobile);
 
     useEffect(() => {
         const checkIfMobile = () => {
@@ -101,8 +100,6 @@ const BannerPOC = ({ background = [], textBlocks, layout }: BannerPOCProps) => {
                     ? backgroundItem.video.desktopVideo
                     : backgroundItem.video?.desktopVideo
 
-            console.log("backgroundVide", backgroundVideo, backgroundItem)
-
             return backgroundVideo ? (
                 <video
                     className="banner-video"
@@ -142,7 +139,6 @@ const BannerPOC = ({ background = [], textBlocks, layout }: BannerPOCProps) => {
                 const ctas = Array.isArray(block.text.ctas) ? block.text.ctas : [];
                 const buttonStyles = block.text.buttonStyle || {};
                 const buttonLayout = buttonStyles?.layoutType || '';
-                console.log('ctas', ctas);
 
                 return (
                     <div

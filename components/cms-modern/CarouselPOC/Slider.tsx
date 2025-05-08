@@ -37,6 +37,7 @@ const CarouselPOC = ({ className, navigationDots, slidesObj, carouselSettings }:
             >
                 <PureSlider>
                     {slides.map((slide: any, index: number) => {
+                        console.log("slide", slide)
                         return (
                             <Slide key={index} index={index}>
                                 <ContentBlock content={slide} />

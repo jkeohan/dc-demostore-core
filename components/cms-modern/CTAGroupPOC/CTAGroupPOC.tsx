@@ -7,9 +7,6 @@ const CTAGroup = ({ ctas = [], buttonStyle = {}, halign, color }: CTAGroupProps)
     const isSolid = buttonStyle.buttonStyle === 'solid';
     const buttonColor = color === 'primary' ? "black" : "white"
     const hjustify = halign === 'left' ? 'flex-start' : halign === 'right' ? 'flex-end' : 'center';
-    console.log("CTAGROup - halign", halign)
-
-    console.log("hjustify", halign, hjustify)
 
     const stackedProps =
         direction === 'column'
@@ -21,7 +18,6 @@ const CTAGroup = ({ ctas = [], buttonStyle = {}, halign, color }: CTAGroupProps)
 
     const content = ctas.map((cta, i) => {
         const button = cta.cta
-        console.log("CTA", cta)
         switch (buttonStyle.buttonStyle) {
             case 'solid':
                 return (

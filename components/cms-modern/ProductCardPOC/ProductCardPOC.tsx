@@ -5,11 +5,13 @@ import CTAGroup from '@components/cms-modern/CTAGroupPOC';
 import MarkdownTypography from '@components/cms-modern/MarkdownTypography';
 
 const getMediaUrl = (image?: POCProductCardProps['image']): string => {
+    console.log("getMediaUrl - image", image)
     if (!image) return '';
     return `https://${image.defaultHost}/i/${image.endpoint}/${image.name}?w=800`;
 };
 
 const ProductCardPOC = ({ image, cardContent, width }: POCProductCardProps) => {
+    console.log("ProductCard - image", image)
     const { text, cardType } = cardContent;
     const valign = text?.valign;
     const halign = text?.halign;
@@ -19,6 +21,7 @@ const ProductCardPOC = ({ image, cardContent, width }: POCProductCardProps) => {
     const blocks = text?.block || [];
 
     const imageUrl = image ? getMediaUrl(image) : '';
+
 
     const valignment = {
         top: 'flex-start',
@@ -32,10 +35,7 @@ const ProductCardPOC = ({ image, cardContent, width }: POCProductCardProps) => {
         right: 'right',
     }[halign ?? 'center'];
 
-    console.log('halignment', halignment);
-
     const content = text?.block?.map((block, index) => {
-        console.log('block', block, color);
         switch (block.type) {
             case 'eyebrow':
             case 'header':
@@ -57,6 +57,7 @@ const ProductCardPOC = ({ image, cardContent, width }: POCProductCardProps) => {
         }
     });
 
+        console.log('imageUrl', imageUrl);
     return (
         <Box
             sx={{

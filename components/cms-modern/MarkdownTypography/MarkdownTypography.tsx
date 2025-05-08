@@ -10,7 +10,6 @@ interface MarkdownTypographyProps {
 }
 
 const MarkdownTypography = ({ markdown, color }: MarkdownTypographyProps) => {
-    console.log("MarkdownTypography - color", color)
     return (
         <ReactMarkdown
             remarkPlugins={[remarkGfm]}

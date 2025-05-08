@@ -7,6 +7,7 @@ import AdvancedBanner from '@components/cms-modern/AdvancedBanner';
 import BannerPOC from '@components/cms-modern/BannerPOC';
 import CarouselPOC from '@components/cms-modern/CarouselPOC';
 import GlobalBannerPOC from '@components/cms-modern/GlobalBannerPOC';
+import PagePOC from '@components/cms-modern/PagePOC';
 import ProductCardPOC from '@components/cms-modern/ProductCardPOC';
 import WayfindingCardsPOC from '@components/cms-modern//WayfindingCardsPOC';
 // 
@@ -65,6 +66,7 @@ export const ComponentMapping: any = {
     'https://cms.gap.com/schema/v1/poc-carousel.json': CarouselPOC,
     'https://cms.gap.com/schema/v1/sitewide-banner.json': GlobalBannerPOC,
     'https://cms.gap.com/schema/v1/poc-image-card.json': ProductCardPOC,
+    "https://cms.gap.com/schema/v1/poc-page": PagePOC,
     'https://cms.gap.com/schema/v1/poc-grid-of-image-cards.json': WayfindingCardsPOC,
     //
     'https://demostore.amplience.com/content/blog-list': BlogList,

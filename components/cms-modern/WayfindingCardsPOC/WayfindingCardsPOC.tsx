@@ -12,6 +12,7 @@ import MarkdownTypography from '@components/cms-modern/MarkdownTypography';
 import CTAGroup from '../CTAGroupPOC';
 
 const WayfindingCardsPOC = ({ cardsDisplay = 4, gridType = "static", gridItems = [], text }: WayfindingCardsProps) => {
+    console.log("WayfindingCardsPOC - gridItems", gridItems)
     const theme = useTheme();
     const color = text?.color === "primary" ? "black" : "white"
     const hjustify = text?.textAlign === 'left' ? 'flex-start' : text?.textAlign === 'right' ? 'flex-end' : 'center';
@@ -62,7 +63,7 @@ const WayfindingCardsPOC = ({ cardsDisplay = 4, gridType = "static", gridItems =
                 <Box
                     sx={{
                         textAlign: text?.textAlign,
-                        padding: theme.spacing(2, 2),
+                        // padding: theme.spacing(2, 2),
                     }}
                 >
                     {content}
@@ -83,6 +84,7 @@ const WayfindingCardsPOC = ({ cardsDisplay = 4, gridType = "static", gridItems =
                 {Array.isArray(gridItems) &&
                     gridItems.length > 0 &&
                     gridItems.map((card, index) => {
+                        console.log("card", card)
                           console.log("card", card)
                           if (!card || typeof card !== 'object') return null;
 
@@ -93,7 +95,7 @@ const WayfindingCardsPOC = ({ cardsDisplay = 4, gridType = "static", gridItems =
                                 key={index}
                                 xs={12 / columns} // evenly distributes across row (e.g., 6, 4, or 3 columns)
                                 sx={{
-                                    height: '100%', // stretch to container height
+                                    height: '800px', // stretch to container height
                                 }}
                             >
                                 <ProductCardPOC

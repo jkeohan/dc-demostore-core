@@ -9,11 +9,11 @@ const PageContent = (props: PageContentProps) => {
 
     return (
         <div
-            style={{
-                padding: '0 32px',
-                margin: '0 auto',
-                maxWidth: 1400,
-            }}
+            // style={{
+            //     padding: '0 32px',
+            //     margin: '0 auto',
+            //     maxWidth: 1400,
+            // }}
             className={className}
             {...other}
         >

@@ -29,10 +29,11 @@ const CTAGroup = ({ ctas = [], buttonStyle = {}, halign, color }: CTAGroupProps)
                         rel="noopener noreferrer"
                         variant="contained"
                         sx={{
-                            backgroundColor: buttonColor === 'black' ? 'black' : 'lightgrey',
+              
+                            backgroundColor: buttonColor === 'black' ? 'black' : 'white',
                             color: buttonColor === 'black' ? 'white' : 'black',
-                            padding: '0.75rem 1.5rem',
-                            fontSize: '8px',
+                            padding: '25px 40px',
+                            fontSize: '12px',
                             borderRadius: 0,
                             minWidth: '150px',
                             textAlign: 'center',
@@ -41,6 +42,9 @@ const CTAGroup = ({ ctas = [], buttonStyle = {}, halign, color }: CTAGroupProps)
                             letterSpacing: '1px',
                             fontFamily: 'sans-serif',
                             textTransform: 'uppercase',
+                            width: '280px',
+                            height: '16px',
+                            lineHeight: 2,
                         }}
                     >
                         {button.buttonLabel}
@@ -58,11 +62,14 @@ const CTAGroup = ({ ctas = [], buttonStyle = {}, halign, color }: CTAGroupProps)
                         underline="hover"
                         sx={{
                             display: 'inline-block',
-                            fontWeight: 'bold',
+           
                             color: buttonColor,
                             textDecoration: 'none',
                             borderBottom: `2px solid ${buttonColor}`,
                             paddingBottom: '2px',
+                            fontFamily: 'sans-serif',
+                            fontSize: '14px',
+                            letterSpacing: '2px'
                         }}
                     >
                         {button.buttonLabel}

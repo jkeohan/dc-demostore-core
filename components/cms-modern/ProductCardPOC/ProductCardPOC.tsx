@@ -40,8 +40,9 @@ const ProductCardPOC = ({ image, cardContent, width }: POCProductCardProps) => {
             case 'eyebrow':
             case 'header':
             case 'subheader':
+                    return <MarkdownTypography markdown={block.text?.text || ''} key={index} color={color} category={'productCard'} />;
             case 'paragraph':
-                return <MarkdownTypography markdown={block.text?.text} key={index} color={color} />;
+                return <MarkdownTypography markdown={block.text?.text || ''} key={index} color={color} category={block.type} />;
             case 'cta':
                 return (
                     <CTAGroup

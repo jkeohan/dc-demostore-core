@@ -1,7 +1,7 @@
 import React from 'react';
 import { ComponentMapping } from '@components/cms-modern/ContentBlock';
-import TopNav from '@components/cms-modern/TopNavPOC'
-import UtilityNav from '@components/cms-modern/UtilityNav'
+import TopNav from '@components/cms-modern/TopNavPOC';
+import UtilityNav from '@components/cms-modern/UtilityNav';
 
 interface PageProps {
     globalCarousel?: any;
@@ -14,6 +14,35 @@ interface PageProps {
 }
 
 const Page: React.FC<PageProps> = ({ globalCarousel, content }) => {
+    const sitewideBanner = content.find(
+        (item) => item._meta?.schema === 'https://cms.gap.com/schema/v1/sitewide-banner.json',
+    );
+
+    const renderGlobalBanner = () => {
+        if (globalCarousel && globalCarousel._meta?.schema) {
+            const schema = globalCarousel._meta.schema;
+            const Component = ComponentMapping[schema];
+
+            if (Component) {
+                return <Component {...globalCarousel} />;
+            } else {
+                console.warn(`No component found for globalCarousel schema: ${schema}`);
+            }
+        }
+
+        // Optional fallback: look in content array for a sitewide banner
+        const sitewideBanner = content.find(
+            (item) => item._meta?.schema === 'https://cms.gap.com/schema/v1/sitewide-banner.json',
+        );
+
+        if (sitewideBanner) {
+            const Component = ComponentMapping[sitewideBanner._meta.schema];
+            return Component ? <Component {...sitewideBanner} /> : null;
+        }
+
+        return null;
+    };
+
     return (
         <main
             style={{
@@ -26,17 +55,21 @@ const Page: React.FC<PageProps> = ({ globalCarousel, content }) => {
             }}
         >
             <UtilityNav />
-            
-            {/* Optional Global Carousel */}
-            {globalCarousel && Object.keys(globalCarousel).length > 0 && (
-                <>
-                    {ComponentMapping['https://cms.gap.com/schema/v1/poc-carousel.json'] &&
-                        React.createElement(ComponentMapping['https://cms.gap.com/schema/v1/poc-carousel.json'], {
-                            ...globalCarousel,
-                        })}
-                </>
-            )}
 
+            {renderGlobalBanner()}
+            {/* Optional Global Carousel */}
+            {/* {globalCarousel && Object.keys(globalCarousel).length > 0
+                ? ComponentMapping['https://cms.gap.com/schema/v1/poc-carousel.json'] &&
+                  React.createElement(ComponentMapping['https://cms.gap.com/schema/v1/poc-carousel.json'], {
+                      ...globalCarousel,
+                  })
+                : sitewideBanner
+                  ? ComponentMapping['https://cms.gap.com/schema/v1/sitewide-banner.json'] &&
+                    React.createElement(ComponentMapping['https://cms.gap.com/schema/v1/sitewide-banner.json'], {
+                        ...sitewideBanner,
+                    })
+                  : null}
+                   */}
             <TopNav />
 
             {/* Dynamic Content Blocks */}
@@ -49,7 +82,7 @@ const Page: React.FC<PageProps> = ({ globalCarousel, content }) => {
                 }
 
                 return (
-                    <section key={block._meta?.deliveryId || index} style={{ width: '100%', padding:'0 !important' }}>
+                    <section key={block._meta?.deliveryId || index} style={{ width: '100%', padding: '0 !important' }}>
                         <Component {...block} />
                     </section>
                 );

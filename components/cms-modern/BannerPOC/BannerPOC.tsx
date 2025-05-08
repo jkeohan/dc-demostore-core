@@ -133,7 +133,7 @@ const BannerPOC = ({ background = [], textBlocks, layout }: BannerPOCProps) => {
             case 'header':
             case 'subheader':
             case 'paragraph':
-                return <MarkdownTypography markdown={block.text?.text} key={index} color={activeColor} />;
+                return <MarkdownTypography markdown={block.text?.text} key={index} color={activeColor} category={block.type} />;
 
             case 'cta':
                 const ctas = Array.isArray(block.text.ctas) ? block.text.ctas : [];
@@ -161,7 +161,10 @@ const BannerPOC = ({ background = [], textBlocks, layout }: BannerPOCProps) => {
     };
 
     return (
-        <section className={`banner banner--${desktopBannerSize}`} style={{ position: 'relative' }}>
+        <section
+            className={`banner banner--${desktopBannerSize}`}
+            style={{ position: 'relative', fontFamily: '"Playfair Display, serif !important' }}
+        >
             {background.length > 0 && renderBackgroundMedia()}
             {activeContent.map((content, index) => (
                 <div

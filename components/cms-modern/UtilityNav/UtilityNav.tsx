@@ -18,7 +18,7 @@ const UtilityNav = () => {
             <div style={{ display: 'flex', gap: '24px' }}>
                 <a href="#">GAP</a>
                 <a href="#">OLD NAVY</a>
-                <a href="#" style={{ fontWeight: 'bold' }}>
+                <a href="#">
                     BANANA REPUBLIC
                 </a>
                 <a href="#">ATHLETA</a>

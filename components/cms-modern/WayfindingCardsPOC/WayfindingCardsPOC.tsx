@@ -28,9 +28,12 @@ const WayfindingCardsPOC = ({ cardsDisplay = 4, gridType = "static", gridItems =
         switch (block.type) {
             case 'header':
             case 'subheader':
+                return (
+                    <MarkdownTypography markdown={block?.text?.text} key={index} color={color} category={'wayfinder'} />
+                );
             case 'eyebrow':
             case 'paragraph':
-                return <MarkdownTypography markdown={block?.text?.text} key={index} color={color} />;
+                return <MarkdownTypography markdown={block?.text?.text} key={index} color={color} category={block.type}/>;
             case 'cta':
                 return (
                     <CTAGroup
@@ -63,7 +66,7 @@ const WayfindingCardsPOC = ({ cardsDisplay = 4, gridType = "static", gridItems =
                 <Box
                     sx={{
                         textAlign: text?.textAlign,
-                        // padding: theme.spacing(2, 2),
+                        padding: theme.spacing(1,0, 5, 0),
                     }}
                 >
                     {content}
@@ -72,7 +75,7 @@ const WayfindingCardsPOC = ({ cardsDisplay = 4, gridType = "static", gridItems =
             </Box>
             <Grid
                 container
-                spacing={0}
+                spacing={1}
                 mt={2}
                 sx={{
                     width: '100%', // 960 / 640 / 480 based on cardsDisplay

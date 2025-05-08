@@ -4,52 +4,119 @@ import { Typography, Link } from '@mui/material';
 // remarkGrm used for GitHub flavored markdown
 import remarkGfm from 'remark-gfm';
 
+const typographyVariants = {
+    header: {
+        fontFamily: 'serif',
+        fontSize: '80px',
+        fontWeight: 400,
+        lineHeight: 1.3,
+    },
+    subheader: {
+        fontFamily: 'sans-serif',
+        fontSize: '48px',
+        fontWeight: 400,
+        lineHeight: 1.6,
+    },
+    paragraph: {
+        fontFamily: 'serif',
+        fontSize: '20px',
+        fontWeight: 400,
+        lineHeight: 1.5,
+    },
+    eyebrow: {
+        fontFamily: 'sans-serif"',
+        fontSize: '16px',
+        fontWeight: 300,
+    },
+    productCard: {
+        fontFamily: 'sans-serif',
+        fontSize: '30px',
+        fontWeight: 300,
+    },
+    wayfinder: {
+        fontFamily: 'serif',
+        fontSize: '30px',
+        fontWeight: 300,
+    },
+};
+
 interface MarkdownTypographyProps {
-    markdown?: string;
+    markdown: string;
     color?: string;
+    category?: keyof typeof typographyVariants;
 }
 
-const MarkdownTypography = ({ markdown, color }: MarkdownTypographyProps) => {
+const MarkdownTypography = ({ markdown, color, category = 'paragraph' }: MarkdownTypographyProps) => {
+ 
+    const baseStyle = {
+        color,
+        ...typographyVariants[category],
+    };
+       console.log('Markdown - color', color, baseStyle, category);
+
     return (
         <ReactMarkdown
-            remarkPlugins={[remarkGfm]}
+            remarkPlugins={[]} // <-- disables GFM if you want to disable formatting
             components={{
-                p: ({ children }) => <Typography sx={{ color }}>{children}</Typography>,
-                strong: ({ children }) => (
-                    <Typography component="span" sx={{ fontWeight: 700, color }}>
-                        {children}
-                    </Typography>
-                ),
-                em: ({ children }) => (
-                    <Typography component="span" sx={{ fontStyle: 'italic', color }}>
-                        {children}
-                    </Typography>
-                ),
-                del: ({ children }) => (
-                    <Typography component="span" sx={{ textDecoration: 'line-through', color }}>
-                        {children}
-                    </Typography>
-                ),
-                a: ({ href, children }) => (
-                    <Link href={href} target="_blank" rel="noopener noreferrer" sx={{ color }}>
-                        {children}
-                    </Link>
-                ),
-                h1: ({ children }) => (
-                    <Typography variant="h1" gutterBottom sx={{ color, textTransform: 'none' }}>
-                        {children}
-                    </Typography>
-                ),
-                h2: ({ children }) => (
-                    <Typography variant="h2" gutterBottom sx={{ color, textTransform: 'none' }}>
-                        {children}
-                    </Typography>
-                ),
+                p: ({ children }) => <Typography sx={baseStyle}>{children}</Typography>,
             }}
         >
             {markdown}
         </ReactMarkdown>
     );
 };
+
+// const MarkdownTypography = ({ markdown, color }: MarkdownTypographyProps) => {
+//     const baseStyle = {
+//         color,
+//         fontFamily: '"Playfair Display", serif',
+//     };
+
+//     return (
+//         <ReactMarkdown
+//             remarkPlugins={[remarkGfm]}
+//             components={{
+//                 p: ({ children }) => <Typography sx={baseStyle}>{children}</Typography>,
+//                 strong: ({ children }) => (
+//                     <Typography component="span" sx={{ ...baseStyle, fontWeight: 700 }}>
+//                         {children}
+//                     </Typography>
+//                 ),
+//                 em: ({ children }) => (
+//                     <Typography component="span" sx={{ ...baseStyle, fontStyle: 'italic' }}>
+//                         {children}
+//                     </Typography>
+//                 ),
+//                 del: ({ children }) => (
+//                     <Typography component="span" sx={{ ...baseStyle, textDecoration: 'line-through' }}>
+//                         {children}
+//                     </Typography>
+//                 ),
+//                 a: ({ href, children }) => (
+//                     <Link
+//                         href={href}
+//                         target="_blank"
+//                         rel="noopener noreferrer"
+//                         sx={{ ...baseStyle, textDecoration: 'underline' }}
+//                     >
+//                         {children}
+//                     </Link>
+//                 ),
+//                 h1: ({ children }) => (
+//                     <Typography variant="h1" gutterBottom sx={{ ...baseStyle, textTransform: 'none' }}>
+//                         {children}
+//                     </Typography>
+//                 ),
+//                 h2: ({ children }) => (
+//                     <Typography variant="h2" gutterBottom sx={{ ...baseStyle, textTransform: 'none' }}>
+//                         {children}
+//                     </Typography>
+//                 ),
+//             }}
+//         >
+//             {markdown}
+//         </ReactMarkdown>
+//     );
+// };
 
 export default MarkdownTypography

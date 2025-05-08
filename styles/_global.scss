@@ -2,7 +2,7 @@
 
 html *
 {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Playfair Display', 'Roboto', sans-serif;
   font-size: 14px;
   line-height: 1.5em;
   color: inherit;
@@ -10,7 +10,7 @@ html *
 }
 
 @mixin header() {
-  font-family: 'Roboto Condensed', sans-serif;
+  font-family: 'Playfair Display', 'Roboto Condensed', sans-serif;
   font-weight: 900;
   line-height: 1em;
   font-size: 48px;
@@ -21,7 +21,7 @@ html *
 }
 
 @mixin button() {
-  font-family: 'Roboto Condensed', sans-serif;
+  font-family: 'Playfair Display', 'Roboto Condensed', sans-serif;
   display: inline-block;
   border: 1px solid #999;
   color: $textColor;

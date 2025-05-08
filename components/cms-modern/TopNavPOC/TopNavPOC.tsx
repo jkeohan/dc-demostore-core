@@ -13,7 +13,7 @@ const TopNav = () => {
             }}
         >
             {/* Left: Logo */}
-            <div style={{ fontSize: '20px', fontWeight: 'bold' }}>Banana Republic</div>
+            <div style={{ fontSize: '20px', fontWeight: 'bold' }}>Gap Inc Brand</div>
 
             {/* Center: Nav links */}
             <div

@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { BannerPOCProps, TextBlocks, ContentBlocks, ImageData, Block } from './types';
 import MarkdownTypography from '@components/cms-modern/MarkdownTypography';
 import CTAGroup from '../CTAGroupPOC';
+import Typography from '@mui/material/Typography';
+import { Link } from '@mui/material';
 
 const BannerPOC = ({ background = [], textBlocks, layout }: BannerPOCProps) => {
-    console.log("textBlocks", textBlocks)
+    console.log('textBlocks', textBlocks);
     const [isMobile, setIsMobile] = useState(false);
     const { desktopBannerSize } = layout || 'large';
 
@@ -55,7 +57,7 @@ const BannerPOC = ({ background = [], textBlocks, layout }: BannerPOCProps) => {
         : textBlocks?.contentBlocksDesktop || [defaultContentBlock];
     const activeColor = activeContent[0].color === 'primary' ? 'black' : 'white';
 
-    console.log("activeContent", activeContent)
+    console.log('activeContent', activeContent);
 
     const { ctaAlignVerticalClass, ctaAlignHorizontalClass } = alignment(textBlocks);
 
@@ -83,7 +85,6 @@ const BannerPOC = ({ background = [], textBlocks, layout }: BannerPOCProps) => {
         }
 
         if (backgroundItem.type === 'image') {
-            
             const backgroundImage =
                 isMobile && backgroundItem.image?.mobile?.image
                     ? backgroundItem.image.mobile.image
@@ -94,7 +95,7 @@ const BannerPOC = ({ background = [], textBlocks, layout }: BannerPOCProps) => {
                 <>
                     {backgroundImage ? (
                         <picture>
-                            <img className="banner-image" src={getMediaUrl(backgroundImage)} alt=""/>
+                            <img className="banner-image" src={getMediaUrl(backgroundImage)} alt="" />
                         </picture>
                     ) : null}
                 </>
@@ -105,7 +106,7 @@ const BannerPOC = ({ background = [], textBlocks, layout }: BannerPOCProps) => {
             const backgroundVideo =
                 isMobile && backgroundItem.video?.desktopVideo
                     ? backgroundItem.video.desktopVideo
-                    : backgroundItem.video?.desktopVideo
+                    : backgroundItem.video?.desktopVideo;
 
             return backgroundVideo ? (
                 <video
@@ -140,7 +141,14 @@ const BannerPOC = ({ background = [], textBlocks, layout }: BannerPOCProps) => {
             case 'header':
             case 'subheader':
             case 'paragraph':
-                return <MarkdownTypography markdown={block.text?.text} key={index} color={activeColor} category={block.type} />;
+                return (
+                    <MarkdownTypography
+                        markdown={block.text?.text}
+                        key={index}
+                        color={activeColor}
+                        category={block.type}
+                    />
+                );
 
             case 'cta':
                 const ctas = Array.isArray(block.text.ctas) ? block.text.ctas : [];
@@ -162,6 +170,41 @@ const BannerPOC = ({ background = [], textBlocks, layout }: BannerPOCProps) => {
                     </div>
                 );
 
+            case 'legal':
+                return (
+                    <>
+                        <Typography
+                            sx={{
+                                fontWeight: 400,
+                                height: '18px',
+                                fontSize: '14px',
+                                display: 'inline-block',
+                                marginRight: '10px !important',
+                                color: theme => `${activeColor} !important`,
+                            }}
+                            variant="body2" // Map to an appropriate variant or make this dynamic
+        
+                        >
+                            {block?.text?.prefix || ''}
+                        </Typography>
+                        <Link
+                            href="#"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            sx={{
+                                textDecoration: 'underline',
+                                textUnderlineOffset: '1px',
+                                fontWeight: 400,
+                                height: '18px',
+                                fontSize: '14px',
+                                display: 'inline-block',
+                                color: { activeColor },
+                            }}
+                        >
+                            {block?.text?.label || ''}
+                        </Link>
+                    </>
+                );
             default:
                 return null;
         }

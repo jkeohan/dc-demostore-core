@@ -39,6 +39,8 @@ export interface CTAStyle {
     layoutType?: 'linear' | 'stacked';
 }
 export interface TextBlockText {
+    label: string;
+    prefix: string;
     text: string;
     color?: string;
     class?: string;
@@ -47,7 +49,7 @@ export interface TextBlockText {
 }
 
 export interface Block {
-    type: 'header' | 'subheader' | 'eyebrow' | 'cta' | 'paragraph';
+    type: 'header' | 'subheader' | 'eyebrow' | 'cta' | 'paragraph' | 'legal';
     text: TextBlockText;
 }
 

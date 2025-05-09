@@ -50,11 +50,12 @@ const BannerPOC = ({ background = [], textBlocks, layout }: BannerPOCProps) => {
         color: mobileContent.color ?? desktopContent.color,
     };
 
-    // const activeContent = isMobile ? [mobileContent] : [desktopContent];
     const activeContent = isMobile
         ? [mergedBlocks] // optionally: handle multiple mobile blocks in future
         : textBlocks?.contentBlocksDesktop || [defaultContentBlock];
     const activeColor = activeContent[0].color === 'primary' ? 'black' : 'white';
+
+    console.log("activeContent", activeContent)
 
     const { ctaAlignVerticalClass, ctaAlignHorizontalClass } = alignment(textBlocks);
 
@@ -131,7 +132,7 @@ const BannerPOC = ({ background = [], textBlocks, layout }: BannerPOCProps) => {
         return null;
     };
 
-    const renderBlock = (block: Block, index: number) => {
+    const renderBlock = (block: Block, index: number, content: ContentBlocks) => {
         if (!block) return null;
 
         switch (block.type) {
@@ -155,8 +156,8 @@ const BannerPOC = ({ background = [], textBlocks, layout }: BannerPOCProps) => {
                             key={index}
                             ctas={(block.text?.ctas as any) || []}
                             buttonStyle={block.text?.buttonStyle || {}}
-                            color={activeContent[0].color}
-                            halign={activeContent[0].textAlign}
+                            color={content.color}
+                            halign={content.textAlign}
                         />
                     </div>
                 );
@@ -172,15 +173,17 @@ const BannerPOC = ({ background = [], textBlocks, layout }: BannerPOCProps) => {
             style={{ position: 'relative', fontFamily: 'serif !important' }}
         >
             {background.length > 0 && renderBackgroundMedia()}
-            {activeContent.map((content, index) => (
-                <div
-                    key={index}
-                    className={`banner-text halign-${content.halign} valign-${content.valign} text-align-${content.textAlign}`}
-                >
-                    {Array.isArray(content.block) &&
-                        content.block.map((block: Block, i: number) => renderBlock(block, i))}
-                </div>
-            ))}
+            {activeContent.map((content, index) => {
+                return (
+                    <div
+                        key={index}
+                        className={`banner-text halign-${content.halign} valign-${content.valign} text-align-${content.textAlign}`}
+                    >
+                        {Array.isArray(content.block) &&
+                            content.block.map((block: Block, i: number) => renderBlock(block, i, content))}
+                    </div>
+                );
+            })}
         </section>
     );
 };

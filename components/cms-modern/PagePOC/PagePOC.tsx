@@ -87,13 +87,41 @@ const Page: React.FC<PageProps> = ({ globalCarousel, content }) => {
                     </section>
                 );
             })}
-            <div style={{ width: '100%' }}>
-                <img
-                    src="https://jkeohandemo.a.bigcontent.io/v1/static/footer1?fmt=auto"
-                    alt="example"
-                    style={{ maxWidth: '100%', height: 'auto', display: 'block' }}
-                />
-            </div>
+            <>
+                {/* Desktop Footer */}
+                <div className="desktop-only" style={{ width: '100%' }}>
+                    <img
+                        src="https://jkeohandemo.a.bigcontent.io/v1/static/footer1?fmt=auto"
+                        alt="desktop footer"
+                        style={{ maxWidth: '100%', height: 'auto', display: 'block' }}
+                    />
+                </div>
+
+                {/* Mobile Footer */}
+                <div className="mobile-only" style={{ width: '100%' }}>
+                    <img
+                        src="https://jkeohandemo.a.bigcontent.io/v1/static/footer-mobile?fmt=auto"
+                        alt="mobile footer"
+                        style={{ maxWidth: '100%', height: 'auto', display: 'block' }}
+                    />
+                </div>
+
+                {/* Inline media query styles */}
+                <style>
+                    {`
+                    @media (min-width: 769px) {
+                        .mobile-only {
+                            display: none !important;
+                        }
+                    }
+                    @media (max-width: 768px) {
+                        .desktop-only {
+                            display: none !important;
+                        }
+                    }
+                `}
+                </style>
+            </>
         </main>
     );
 };

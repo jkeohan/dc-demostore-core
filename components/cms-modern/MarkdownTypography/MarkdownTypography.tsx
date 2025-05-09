@@ -40,10 +40,45 @@ const typographyVariants = {
             fontSize: '12px',
         },
     },
-    productCard: {
+    productCardHeader: {
+        fontFamily: 'sans-serif',
+        fontSize: '40px',
+        fontWeight: 350,
+        '@media (max-width: 768px)': {
+            fontSize: '20px',
+        },
+    },
+    productCardSubheader: {
         fontFamily: 'sans-serif',
         fontSize: '30px',
-        fontWeight: 300,
+        fontWeight: 350,
+        '@media (max-width: 768px)': {
+            fontSize: '15px',
+        },
+    },
+    productCardEyebrow: {
+        fontFamily: 'sans-serif',
+        fontSize: '20px',
+        fontWeight: 350,
+        '@media (max-width: 768px)': {
+            fontSize: '16px',
+        },
+    },
+    productCardBody: {
+        fontFamily: 'sans-serif',
+        fontSize: '20px',
+        fontWeight: 350,
+        '@media (max-width: 768px)': {
+            fontSize: '16px',
+        },
+    },
+    globalBanner: {
+        fontFamily: 'serif',
+        fontWeight: 400,
+        lineHeight: 1.3,
+        '@media (max-width: 768px)': {
+            fontSize: '14px',
+        },
     },
 };
 
@@ -54,13 +89,13 @@ interface MarkdownTypographyProps {
 }
 
 const MarkdownTypography = ({ markdown, color, category = 'paragraph' }: MarkdownTypographyProps) => {
-    console.log("markdown - category", category)
- 
+    console.log('markdown - category', category);
+
     const baseStyle = {
         color,
         ...typographyVariants[category],
     };
-       console.log('Markdown - color', color, baseStyle, category);
+    console.log('Markdown - color', color, baseStyle, category);
 
     return (
         <ReactMarkdown
@@ -127,4 +162,4 @@ const MarkdownTypography = ({ markdown, color, category = 'paragraph' }: Markdow
 //     );
 // };
 
-export default MarkdownTypography
+export default MarkdownTypography;

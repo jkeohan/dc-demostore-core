@@ -36,13 +36,30 @@ const ProductCardPOC = ({ image, cardContent, width }: POCProductCardProps) => {
     }[halign ?? 'center'];
 
     const content = text?.block?.map((block, index) => {
+        console.log('block.type')
         switch (block.type) {
             case 'eyebrow':
+                return (
+                    <MarkdownTypography
+                        markdown={block.text?.text || ''}
+                        key={index}
+                        color={color}
+                        category={'productCardEyebrow'}
+                    />
+                );
             case 'header':
+                return (
+                    <MarkdownTypography
+                        markdown={block.text?.text || ''}
+                        key={index}
+                        color={color}
+                        category={'productCardHeader'}
+                    />
+                );
             case 'subheader':
-                    return <MarkdownTypography markdown={block.text?.text || ''} key={index} color={color} category={'productCard'} />;
+                    return <MarkdownTypography markdown={block.text?.text || ''} key={index} color={color} category={'productCardSubheader'} />;
             case 'paragraph':
-                return <MarkdownTypography markdown={block.text?.text || ''} key={index} color={color} category={block.type} />;
+                return <MarkdownTypography markdown={block.text?.text || ''} key={index} color={color} category={'productCardBody'} />;
             case 'cta':
                 return (
                     <CTAGroup
@@ -65,7 +82,7 @@ const ProductCardPOC = ({ image, cardContent, width }: POCProductCardProps) => {
                 maxWidth: width ?? 400,
                 textAlign: 'center',
                 color: '#000',
-                height: "100%",
+                height: '100%',
                 // height: 'auto'
             }}
         >
@@ -83,14 +100,15 @@ const ProductCardPOC = ({ image, cardContent, width }: POCProductCardProps) => {
                     }),
                 }}
             >
-                {cardType === 'overlay' && <Box sx={{ mt: 2, mb: 2}}>{content}</Box>}
+                {cardType === 'overlay' && <Box sx={{ mt: 2, mb: 2 }}>{content}</Box>}
             </Box>
 
-            { cardType === 'under' && content  && (
+            {cardType === 'under' && content && (
                 <Box
                     sx={{
-                        mt: 2,
+                        mt: 1,
                         textAlign: halignment,
+                        padding: '0 0 5px 0',
                     }}
                 >
                     {content}

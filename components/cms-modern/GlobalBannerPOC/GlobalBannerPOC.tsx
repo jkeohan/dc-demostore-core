@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { BannerContent, TextBlock } from './types';
 import MarkdownTypography from '@components/cms-modern/MarkdownTypography';
-import { Typography } from '@mui/material';
+import { Typography, Box } from '@mui/material';
 
 const styles: {
     cta: React.CSSProperties;
@@ -37,21 +37,28 @@ const styles: {
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'center',
+        flexWrap: 'wrap',
         alignItems: 'baseline',
-        whiteSpace: 'nowrap',
         gap: '24px',
         textAlign: 'center',
         overflowX: 'auto',
+        overflowY: 'hidden',
     } as const,
 };
 
-const GlobalBannerPOC = ({ backgroundColor, link, content, isMobile = false }: BannerContent) => {
+const GlobalBannerPOC = ({ backgroundColor, link, content }: BannerContent) => {
     const textBlocks = content?.textBlocks;
 
-    const [isHydrated, setIsHydrated] = useState(false);
+    const [isMobile, setIsMobile] = useState(false);
 
     useEffect(() => {
-        setIsHydrated(true);
+        const checkIfMobile = () => {
+            setIsMobile(window.innerWidth <= 768);
+        };
+
+        checkIfMobile();
+        window.addEventListener('resize', checkIfMobile);
+        return () => window.removeEventListener('resize', checkIfMobile);
     }, []);
 
     const blocks: TextBlock[] =
@@ -60,7 +67,25 @@ const GlobalBannerPOC = ({ backgroundColor, link, content, isMobile = false }: B
             : textBlocks?.contentBlocksDesktop?.block || [];
 
     const contentBlock = (
-        <div style={styles.bannerRow}>
+        <Box
+            sx={{
+                display: 'flex',
+                flexDirection: 'row',
+                justifyContent: 'center',
+                alignItems: 'baseline',
+                flexWrap: isMobile ? 'wrap' : 'nowrap',
+                whiteSpace: isMobile ? 'normal' : 'nowrap',
+                textAlign: 'center',
+                overflowX: 'auto',
+                overflowY: 'hidden',
+                gap: {
+                    xs: '8px',
+                    sm: '12px',
+                    md: '16px',
+                    lg: '24px',
+                },
+            }}
+        >
             {blocks.map((block, index) => {
                 console.log('block', block);
                 switch (block.type) {
@@ -70,7 +95,7 @@ const GlobalBannerPOC = ({ backgroundColor, link, content, isMobile = false }: B
                                 markdown={block?.text?.text || ''}
                                 key={index}
                                 color={backgroundColor.contentColor}
-
+                                category="globalBanner"
                             />
                         );
 
@@ -107,7 +132,7 @@ const GlobalBannerPOC = ({ backgroundColor, link, content, isMobile = false }: B
                         return null;
                 }
             })}
-        </div>
+        </Box>
     );
 
     const bgColor =
@@ -119,18 +144,7 @@ const GlobalBannerPOC = ({ backgroundColor, link, content, isMobile = false }: B
 
     return (
         <div style={{ backgroundColor: bgColor, color: backgroundColor.contentColor }}>
-            {isHydrated && link?.wrapper?.value ? (
-                <a
-                    href={link.wrapper.value}
-                    aria-label={link.wrapper.label || 'Promotional banner'}
-                    style={{ display: 'block', textDecoration: 'none' }}
-                    target="_blank"
-                >
-                    <div style={{ padding: '10px' }}>{contentBlock}</div>
-                </a>
-            ) : (
-                <div style={{ padding: '10px' }}>{contentBlock}</div>
-            )}
+            <div style={{ padding: '10px' }}>{contentBlock}</div>
         </div>
     );
 };

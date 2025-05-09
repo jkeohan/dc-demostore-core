@@ -48,7 +48,8 @@ const CTAGroup = ({ ctas = [], buttonStyle = {}, halign, color }: CTAGroupProps)
                             '@media (max-width: 768px)': {
                                 padding: '16px 14px',
                                 fontSize: '10px',
-                                width: '47%'
+                                width: '47%',
+                                letterSpacing: '1px'
                      
                             },
                         }}

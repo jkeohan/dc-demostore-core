@@ -82,15 +82,18 @@ const BannerPOC = ({ background = [], textBlocks, layout }: BannerPOCProps) => {
         }
 
         if (backgroundItem.type === 'image') {
+            
             const backgroundImage =
                 isMobile && backgroundItem.image?.mobile?.image
                     ? backgroundItem.image.mobile.image
                     : backgroundItem.image?.desktop?.image;
+
+            console.log('background', backgroundItem, backgroundImage);
             return (
                 <>
                     {backgroundImage ? (
                         <picture>
-                            <img className="banner-image" src={getMediaUrl(backgroundImage)} />
+                            <img className="banner-image" src={getMediaUrl(backgroundImage)} alt=""/>
                         </picture>
                     ) : null}
                 </>

@@ -17,6 +17,7 @@ interface SliderProps {
 }
 
 const CarouselPOC = ({ className, navigationDots, slidesObj, carouselSettings }: SliderProps) => {
+    console.log("slidesObj", slidesObj)
     const { slidesType, slides = []} = slidesObj
     const loop = carouselSettings.type === 'autoplay' ? true : false
     const { carouselControlsIconsColor } = carouselSettings

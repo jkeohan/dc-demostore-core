@@ -5,9 +5,13 @@ import { WayfindingCardsProps } from './types';
 import { POCProductCardProps } from '../ProductCardPOC/types';
 import MarkdownTypography from '@components/cms-modern/MarkdownTypography';
 import CTAGroup from '../CTAGroupPOC';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import ArrowBackIos from '@mui/icons-material/ArrowBackIos';
+import ArrowForwardIos from '@mui/icons-material/ArrowForwardIos';
 
 const WayfindingCardsPOC = ({ cardsDisplay = 4, gridType = 'static', gridItems = [], text }: WayfindingCardsProps) => {
-    console.log('WayfindingCardsPOC - gridItems', gridItems);
+    console.log('WayfindingCardsPOC - gridItems', gridItems, gridType);
     const theme = useTheme();
     const color = text?.color === 'primary' ? 'black' : 'white';
     const hjustify = text?.textAlign === 'left' ? 'flex-start' : text?.textAlign === 'right' ? 'flex-end' : 'center';
@@ -72,6 +76,7 @@ const WayfindingCardsPOC = ({ cardsDisplay = 4, gridType = 'static', gridItems =
                 padding: {
                     xs: '10px', // mobile
                     sm: theme.spacing(4, 2, 4, 2), // tablet and up
+                    position: 'relative',
                 },
             }}
         >
@@ -87,7 +92,7 @@ const WayfindingCardsPOC = ({ cardsDisplay = 4, gridType = 'static', gridItems =
                         textAlign: text?.textAlign,
                         padding: {
                             xs: '10px', // mobile
-                            paddingLeft: "5px"
+                            paddingLeft: '5px',
                         },
                     }}
                 >
@@ -95,6 +100,32 @@ const WayfindingCardsPOC = ({ cardsDisplay = 4, gridType = 'static', gridItems =
                 </Box>
                 {/* <Box sx={{ width: 800 }}>{text?.block && <TextRenderer text={text} color={color} />}</Box> */}
             </Box>
+            {gridType === 'carousel' && (
+                <Box
+                    sx={{
+                        position: 'absolute',
+                        top: 0,
+                        left: 20,
+                        height: '100%',
+                        width: '48px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        zIndex: 2,
+                        cursor: 'pointer',
+                    }}
+                >
+                    <svg width="32" height="64" viewBox="0 0 24 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M18 4 L6 24 L18 44"
+                            stroke={color}
+                            strokeWidth="3"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                        />
+                    </svg>
+                </Box>
+            )}
             <Grid
                 container
                 spacing={1}
@@ -144,6 +175,32 @@ const WayfindingCardsPOC = ({ cardsDisplay = 4, gridType = 'static', gridItems =
                         );
                     })}
             </Grid>
+            {gridType === 'carousel' && (
+                <Box
+                    sx={{
+                        position: 'absolute',
+                        top: 0,
+                        right: 20,
+                        height: '100%',
+                        width: '48px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        zIndex: 2,
+                        cursor: 'pointer',
+                    }}
+                >
+                    <svg width="32" height="64" viewBox="0 0 24 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M6 4L18 24L6 44"
+                            stroke={color}
+                            strokeWidth="3"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                        />
+                    </svg>
+                </Box>
+            )}
         </Box>
     );
 };

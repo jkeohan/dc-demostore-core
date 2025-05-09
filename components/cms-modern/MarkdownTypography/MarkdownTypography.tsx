@@ -89,13 +89,13 @@ interface MarkdownTypographyProps {
 }
 
 const MarkdownTypography = ({ markdown, color, category = 'paragraph' }: MarkdownTypographyProps) => {
-    console.log('markdown - category', category);
+    // console.log('markdown - category', category);
 
     const baseStyle = {
         color,
         ...typographyVariants[category],
     };
-    console.log('Markdown - color', color, baseStyle, category);
+    // console.log('Markdown - color', color, baseStyle, category);
 
     return (
         <ReactMarkdown

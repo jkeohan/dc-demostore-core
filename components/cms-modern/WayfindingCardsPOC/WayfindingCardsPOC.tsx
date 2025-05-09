@@ -85,7 +85,7 @@ const WayfindingCardsPOC = ({ cardsDisplay = 4, gridType = "static", gridItems =
                 // mt={2}
                 sx={{
                     width: '100%', // 960 / 640 / 480 based on cardsDisplay
-                    height: '720px',
+                    // height: '720px',
                     margin: '0 auto',
                     overflow: 'hidden',
                 }}
@@ -104,7 +104,8 @@ const WayfindingCardsPOC = ({ cardsDisplay = 4, gridType = "static", gridItems =
                                 key={index}
                                 xs={12 / columns} // evenly distributes across row (e.g., 6, 4, or 3 columns)
                                 sx={{
-                                    height: '600px', // stretch to container height
+                                    // height: '600px', // stretch to container height
+                                    height: 'auto'
                                 }}
                             >
                                 <ProductCardPOC

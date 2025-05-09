@@ -87,6 +87,13 @@ const Page: React.FC<PageProps> = ({ globalCarousel, content }) => {
                     </section>
                 );
             })}
+            <div style={{ width: '100%' }}>
+                <img
+                    src="https://jkeohandemo.a.bigcontent.io/v1/static/footer1?fmt=auto"
+                    alt="example"
+                    style={{ maxWidth: '100%', height: 'auto', display: 'block' }}
+                />
+            </div>
         </main>
     );
 };

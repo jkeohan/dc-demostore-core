@@ -5,19 +5,19 @@ import { CTAGroupProps } from './types';
 const CTAGroup = ({ ctas = [], buttonStyle = {}, halign, color }: CTAGroupProps) => {
     const direction = buttonStyle.layoutType === 'linear' ? 'row' : 'column';
     const isSolid = buttonStyle.buttonStyle === 'solid';
-    const buttonColor = color === 'primary' ? "black" : "white"
+    const buttonColor = color === 'primary' ? 'black' : 'white';
     const hjustify = halign === 'left' ? 'flex-start' : halign === 'right' ? 'flex-end' : 'center';
 
     const stackedProps =
         direction === 'column'
             ? {
-                  alignItems:hjustify,
-                //   sx: { width: 'max-content' },
+                  alignItems: hjustify,
+                  //   sx: { width: 'max-content' },
               }
             : {};
 
     const content = ctas.map((cta, i) => {
-        const button = cta.cta
+        const button = cta.cta;
         switch (buttonStyle.buttonStyle) {
             case 'solid':
                 return (
@@ -48,7 +48,8 @@ const CTAGroup = ({ ctas = [], buttonStyle = {}, halign, color }: CTAGroupProps)
                             '@media (max-width: 768px)': {
                                 padding: '16px 14px',
                                 fontSize: '10px',
-                                width: "50%",
+                                width: '47%'
+                     
                             },
                         }}
                     >
@@ -67,14 +68,14 @@ const CTAGroup = ({ ctas = [], buttonStyle = {}, halign, color }: CTAGroupProps)
                         underline="hover"
                         sx={{
                             display: 'inline-block',
-           
+
                             color: buttonColor,
                             textDecoration: 'none',
                             borderBottom: `2px solid ${buttonColor}`,
                             paddingBottom: '2px',
                             fontFamily: 'sans-serif',
                             fontSize: '12px',
-                            letterSpacing: '2px'
+                            letterSpacing: '2px',
                         }}
                     >
                         {button.buttonLabel}
@@ -90,8 +91,8 @@ const CTAGroup = ({ ctas = [], buttonStyle = {}, halign, color }: CTAGroupProps)
             direction={direction}
             spacing={2}
             justifyContent={halign === 'left' ? 'flex-start' : halign === 'right' ? 'flex-end' : 'center'}
-             mt={2}
-            sx={{ width: '100%' }}
+            mt={2}
+            sx={{ width: '100%'}}
             {...stackedProps}
         >
             {content}

@@ -65,6 +65,8 @@ const ProductCardPOC = ({ image, cardContent, width }: POCProductCardProps) => {
                 maxWidth: width ?? 400,
                 textAlign: 'center',
                 color: '#000',
+                height: "100%",
+                // height: 'auto'
             }}
         >
             <Box
@@ -72,7 +74,7 @@ const ProductCardPOC = ({ image, cardContent, width }: POCProductCardProps) => {
                     backgroundImage: `url(${imageUrl})`,
                     backgroundSize: 'cover',
                     backgroundPosition: 'top',
-                    height: 600,
+                    minHeight: 500,
                     ...(cardType === 'overlay' && {
                         display: 'flex',
                         alignItems: valignment,
@@ -84,7 +86,7 @@ const ProductCardPOC = ({ image, cardContent, width }: POCProductCardProps) => {
                 {cardType === 'overlay' && <Box sx={{ mt: 2, mb: 2}}>{content}</Box>}
             </Box>
 
-            {cardType === 'under' && (
+            { cardType === 'under' && content  && (
                 <Box
                     sx={{
                         mt: 2,

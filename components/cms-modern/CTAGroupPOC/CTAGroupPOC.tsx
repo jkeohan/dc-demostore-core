@@ -3,6 +3,7 @@ import { Stack, Button, Link, Box } from '@mui/material';
 import { CTAGroupProps } from './types';
 
 const CTAGroup = ({ ctas = [], buttonStyle = {}, halign, color }: CTAGroupProps) => {
+
     const direction = buttonStyle.layoutType === 'linear' ? 'row' : 'column';
     const isSolid = buttonStyle.buttonStyle === 'solid';
     const buttonColor = color === 'primary' ? 'black' : 'white';
@@ -71,12 +72,13 @@ const CTAGroup = ({ ctas = [], buttonStyle = {}, halign, color }: CTAGroupProps)
                             display: 'inline-block',
 
                             color: buttonColor,
-                            textDecoration: 'none',
-                            borderBottom: `2px solid ${buttonColor}`,
+                            textDecoration: `underline 2px solid ${buttonColor}`,
+                            textUnderlineOffset: '4px', // optional: space between text and underline,
                             paddingBottom: '2px',
                             fontFamily: 'sans-serif',
                             fontSize: '12px',
                             letterSpacing: '2px',
+                            textTransform: 'uppercase'
                         }}
                     >
                         {button.buttonLabel}

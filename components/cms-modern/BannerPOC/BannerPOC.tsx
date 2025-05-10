@@ -55,7 +55,7 @@ const BannerPOC = ({ background = [], textBlocks, layout }: BannerPOCProps) => {
     const activeContent = isMobile
         ? [mergedBlocks] // optionally: handle multiple mobile blocks in future
         : textBlocks?.contentBlocksDesktop || [defaultContentBlock];
-    const activeColor = activeContent[0].color === 'primary' ? 'black' : 'white';
+   
 
     console.log('activeContent', activeContent);
 
@@ -135,8 +135,9 @@ const BannerPOC = ({ background = [], textBlocks, layout }: BannerPOCProps) => {
 
     const renderBlock = (block: Block, index: number, content: ContentBlocks) => {
         if (!block) return null;
-
+        const activeColor = content.color === 'primary' ? 'black' : 'white';
         switch (block.type) {
+   
             case 'eyebrow':
             case 'header':
             case 'subheader':
@@ -149,12 +150,11 @@ const BannerPOC = ({ background = [], textBlocks, layout }: BannerPOCProps) => {
                         category={block.type}
                     />
                 );
-
             case 'cta':
                 const ctas = Array.isArray(block.text.ctas) ? block.text.ctas : [];
                 const buttonStyles = block.text.buttonStyle || {};
                 const buttonLayout = buttonStyles?.layoutType || '';
-
+                console.log('content', content);
                 return (
                     <div
                         key={index}
@@ -169,7 +169,6 @@ const BannerPOC = ({ background = [], textBlocks, layout }: BannerPOCProps) => {
                         />
                     </div>
                 );
-
             case 'legal':
                 return (
                     <>
@@ -180,10 +179,9 @@ const BannerPOC = ({ background = [], textBlocks, layout }: BannerPOCProps) => {
                                 fontSize: '14px',
                                 display: 'inline-block',
                                 marginRight: '10px !important',
-                                color: theme => `${activeColor} !important`,
+                                color: (theme) => `${activeColor} !important`,
                             }}
                             variant="body2" // Map to an appropriate variant or make this dynamic
-        
                         >
                             {block?.text?.prefix || ''}
                         </Typography>
@@ -198,7 +196,7 @@ const BannerPOC = ({ background = [], textBlocks, layout }: BannerPOCProps) => {
                                 height: '18px',
                                 fontSize: '14px',
                                 display: 'inline-block',
-                                color: { activeColor },
+                                color: `${activeColor} !important`,
                             }}
                         >
                             {block?.text?.label || ''}
@@ -217,6 +215,7 @@ const BannerPOC = ({ background = [], textBlocks, layout }: BannerPOCProps) => {
         >
             {background.length > 0 && renderBackgroundMedia()}
             {activeContent.map((content, index) => {
+
                 return (
                     <div
                         key={index}

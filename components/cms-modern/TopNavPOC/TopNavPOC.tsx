@@ -76,7 +76,7 @@ const TopNav = () => {
                 {/* Left: Hamburger and Search */}
                 <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
                     <div style={{ cursor: 'pointer' }}>{hamburgerSvg}</div>
-                    <div style={{ cursor: 'pointer' }}>{searchSvg}</div>
+                    {/* <div style={{ cursor: 'pointer' }}>{searchSvg}</div> */}
                 </div>
 
                 {/* Center: Logo */}

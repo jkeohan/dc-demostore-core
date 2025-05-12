@@ -104,8 +104,8 @@ const BannerPOC = ({ background = [], textBlocks, layout }: BannerPOCProps) => {
 
         if (backgroundItem.type === 'video') {
             const backgroundVideo =
-                isMobile && backgroundItem.video?.desktopVideo
-                    ? backgroundItem.video.desktopVideo
+                isMobile && backgroundItem.video?.mobileVideo
+                    ? backgroundItem.video.mobileVideo
                     : backgroundItem.video?.desktopVideo;
 
             return backgroundVideo ? (

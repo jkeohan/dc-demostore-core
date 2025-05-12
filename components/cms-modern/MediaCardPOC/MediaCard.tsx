@@ -38,7 +38,7 @@ const MediaCardPOC = ({
 
     const halignment = alignmentMap[(halign as HorizontalAlignment) ?? 'center'];
 
-    const content = text?.block?.map((block: Block, index: number) => {
+    const content = text?.block?.map((block, index: number) => {
         switch (block.type) {
             case 'eyebrow':
                 return (

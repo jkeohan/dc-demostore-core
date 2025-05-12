@@ -42,27 +42,27 @@ export interface CTAStyle {
 export interface TextBlockText {
     text: string;
     color?: string;
-    class?: string;
     buttonStyle?: CTAStyle;
     ctas?: CTAWrapper[];
 }
 
 export interface Block {
     type: 'header' | 'subheader' | 'eyebrow' | 'cta' | 'paragraph';
-    text: TextBlockText;
+    text?: TextBlockText;
 }
 
 export interface ContentBlocks {
-    halign: any;
-    color: any;
-    block: Block[];
+    halign?: any;
     valign?: 'top' | 'middle' | 'bottom';
+    color?: any;
+    block?: Block[];
+
 }
 
 export interface TextBlocks {
-    text: ContentBlocks;
-    cardType: string
-    halign: string
+    text?: ContentBlocks;
+    cardType?: string
+    halign?: string
 }
 
 interface Link {
@@ -124,7 +124,25 @@ interface CTABlock {
 
 export interface MediaCardProps {
     background?: Background[];
-    cardContent: TextBlocks;
+        cardContent: {
+            cardType?: string;
+            text?: {
+                block?: {
+                    type: 'header' | 'subheader' | 'paragraph' | 'cta' | 'eyebrow';
+                    text?: {
+                        class?: string;
+                        text?: string;
+                        ctas?: {
+                            cta: CTA;
+                        }[];
+                        buttonStyle?: CTAStyle;
+                    };
+                }[];
+                halign?: 'left' | 'center' | 'right';
+                valign?: 'top' | 'middle' | 'bottom';
+                color?: string;
+            };
+        };
     link?: Link;
     color?: string;
     width?: string | number

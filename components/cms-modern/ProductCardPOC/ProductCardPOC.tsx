@@ -9,11 +9,11 @@ const getMediaUrl = (image?: POCProductCardProps['image']): string => {
     return `https://${image.defaultHost}/i/${image.endpoint}/${image.name}?w=800`;
 };
 
-const ProductCardPOC = ({ image, cardContent, width }: POCProductCardProps) => {
+const ProductCardPOC = ({ image, cardContent, width, color: wayFindingColor }: POCProductCardProps) => {
     const { text, cardType } = cardContent;
     const valign = text?.valign;
     const halign = text?.halign;
-    const color = text?.color === 'primary' ? 'black' : 'white';
+    const color = wayFindingColor ? wayFindingColor : text?.color === 'primary' ? 'black' : 'white';
 
     const altText = image || 'Card image';
     const blocks = text?.block || [];

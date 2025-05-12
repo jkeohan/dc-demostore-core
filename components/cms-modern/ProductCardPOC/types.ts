@@ -2,6 +2,7 @@ import { CTAStyle } from '@components/cms-modern/CTAGroupPOC/types';
 
 type AllowedTextBlockType = 'header' | 'subheader' | 'paragraph' | 'cta' | 'eyebrow';
 export interface POCProductCardProps {
+    _meta: any;
     image: {
         _meta: { schema: string };
         id: string;

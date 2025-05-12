@@ -1,19 +1,17 @@
 import React from 'react';
 import { Box, Grid, useMediaQuery, useTheme } from '@mui/material';
-import ProductCardPOC from '../ProductCardPOC';
+import ProductCardPOC from '@components/cms-modern/ProductCardPOC';
+import MediaCardPOC from '@components/cms-modern/MediaCardPOC'
 import { WayfindingCardsProps } from './types';
-import { POCProductCardProps } from '../ProductCardPOC/types';
 import MarkdownTypography from '@components/cms-modern/MarkdownTypography';
 import CTAGroup from '../CTAGroupPOC';
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import ArrowBackIos from '@mui/icons-material/ArrowBackIos';
-import ArrowForwardIos from '@mui/icons-material/ArrowForwardIos';
+import { MediaCardProps } from '@components/cms-modern/MediaCardPOC/types';
 
 const WayfindingCardsPOC = ({ cardsDisplay = 4, gridType = 'static', gridItems = [], text }: WayfindingCardsProps) => {
     console.log('WayfindingCardsPOC - gridItems', gridItems, gridType);
     const theme = useTheme();
     const color = text?.color === 'primary' ? 'black' : 'white';
+    console.log('Wayfinding - gridItems', gridItems);
     const hjustify = text?.textAlign === 'left' ? 'flex-start' : text?.textAlign === 'right' ? 'flex-end' : 'center';
 
     const isXs = useMediaQuery(theme.breakpoints.down('sm'));
@@ -140,9 +138,9 @@ const WayfindingCardsPOC = ({ cardsDisplay = 4, gridType = 'static', gridItems =
                 {Array.isArray(gridItems) &&
                     gridItems.length > 0 &&
                     gridItems.map((card, index) => {
-                        console.log('card', card);
-                        console.log('card', card);
+                        const isMediaCard = card._meta.schema === 'https://cms.gap.com/schema/v1/poc-media-card.json' ? true : false;
                         if (!card || typeof card !== 'object') return null;
+                        console.log("card", card)
 
                         //   const cardContent = card.cardContent || { cardType: undefined, text: undefined };
                         return (
@@ -162,15 +160,11 @@ const WayfindingCardsPOC = ({ cardsDisplay = 4, gridType = 'static', gridItems =
                                     },
                                 }}
                             >
-                                <ProductCardPOC
-                                    cardContent={{
-                                        cardType: undefined,
-                                        text: undefined,
-                                    }}
-                                    {...card}
-                                    width="100%"
-                                    color={color}
-                                />
+                                {isMediaCard ? (
+                                    <MediaCardPOC {...(card as MediaCardProps)} width="100%" color={color} />
+                                ) : (
+                                    <ProductCardPOC {...card} width="100%" color={color} />
+                                )}
                             </Grid>
                         );
                     })}

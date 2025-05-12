@@ -1,24 +1,16 @@
 
 import { CTAStyle } from '@components/cms-modern/CTAGroupPOC/types'
+import {POCProductCardProps} from "@components/cms-modern/ProductCardPOC/types"
 export interface WayfindingCardsProps {
     cardsDisplay: number;
     gridType: string;
-    gridItems: ProductCardPOCProps[];
+    gridItems: POCProductCardProps[];
     text?: {
         block: TextBlock[];
         textAlign: 'left' | 'center' | 'right';
         color: string;
     };
 }
-
-export interface ProductCardPOCProps {
-    image: ImageLink;
-    cardType: 'overlay' | 'under'; // adjust if more types exist
-    text: {
-        block: TextBlock[];
-    };
-}
-
 interface ImageLink {
     _meta: {
         schema: string;
@@ -84,7 +76,7 @@ interface CTABlock {
 
 interface StyledText {
     class: TypographyVariant;
-    color: string;
+    color?: string;
     text: string;
 }
 

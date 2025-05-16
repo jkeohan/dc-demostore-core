@@ -1,0 +1,371 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"$id": "https://cms.gap.com/schema/v1/poc-banner",
+	"title": "POC Banner",
+	"description": "Description",
+	"allOf": [
+		{
+			"$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content"
+		}
+	],
+	"type": "object",
+	"properties": {
+		"layout": {
+			"title": "title",
+			"type": "object",
+			"properties": {
+				"desktopBannerSize": {
+					"title": "Banner Height",
+					"type": "string",
+					"default": "large",
+					"oneOf": [
+						{
+							"title": "Small",
+							"const": "small"
+						},
+						{
+							"title": "Medium",
+							"const": "medium"
+						},
+						{
+							"title": "Large",
+							"const": "large"
+						}
+					]
+				},
+				"mobileBannerSize": {
+					"title": "Banner Height",
+					"type": "string",
+					"default": "large",
+					"oneOf": [
+						{
+							"title": "Small",
+							"const": "small"
+						},
+						{
+							"title": "Medium",
+							"const": "medium"
+						},
+						{
+							"title": "Large",
+							"const": "large"
+						}
+					]
+				},
+				"layout": {
+					"title": "title",
+					"type": "object",
+					"properties": {
+						"showHideBasedOnScreenSize": {
+							"title": "Display by Screen Size",
+							"type": "string",
+							"default": "alwaysShow",
+							"oneOf": [
+								{
+									"title": "Always Show",
+									"const": "alwaysShow"
+								},
+								{
+									"title": "Hide on Mobile",
+									"const": "hideOnMobile"
+								},
+								{
+									"title": "Hide on Desktop",
+									"const": "hideOnDesktop"
+								}
+							]
+						}
+					},
+					"ui:component": {
+						"name": "grid",
+						"params": {
+							"numColumns": 12,
+							"columns": [
+								{
+									"span": 4,
+									"pointers": [
+										"/showHideBasedOnScreenSize"
+									]
+								},
+								{
+									"span": 8,
+									"pointers": [
+										""
+									]
+								}
+							]
+						}
+					},
+					"propertyOrder": [],
+					"required": [
+						"showHideBasedOnScreenSize"
+					]
+				}
+			},
+			"ui:component": {
+				"name": "tabs",
+				"params": {
+					"tabs": {
+						"orientation": "horizontal",
+						"defaultTab": "Desktop (Default)",
+						"items": [
+							{
+								"label": "Desktop (Default)",
+								"pointers": [
+									"/desktopBannerSize"
+								]
+							},
+							{
+								"label": "Mobile (Override)",
+								"pointers": [
+									"/mobileBannerSize"
+								]
+							}
+						]
+					}
+				}
+			},
+			"propertyOrder": [],
+			"required": [
+				"desktopBannerSize",
+				"mobileBannerSize"
+			]
+		},
+		"background": {
+			"type": "array",
+			"maxItems": 1,
+			"title": "Background",
+			"ui:component": {
+				"params": {
+					"icons": {
+						"image": "photo-plus",
+						"video": "video-plus",
+						"backgroundColor": "color-swatch"
+					}
+				}
+			},
+			"items": {
+				"oneOf": [
+					{
+						"type": "object",
+						"title": "Background Color",
+						"properties": {
+							"type": {
+								"const": "backgroundColor",
+								"ui:component": "none"
+							},
+							"bgColor": {
+								"type": "object",
+								"allOf": [
+									{
+										"$ref": "https://cms.gap.com/schema/partials/v1/global-partials.json#/definitions/backgroundColorGroup"
+									}
+								]
+							}
+						}
+					},
+					{
+						"type": "object",
+						"title": "Image",
+						"properties": {
+							"type": {
+								"const": "image",
+								"ui:component": "none"
+							},
+							"image": {
+								"type": "object",
+								"allOf": [
+									{
+										"$ref": "https://cms.gap.com/schema/partials/v1/global-partials.json#/definitions/imageGroup"
+									}
+								]
+							}
+						}
+					},
+					{
+						"type": "object",
+						"title": "Video",
+						"properties": {
+							"type": {
+								"const": "video",
+								"ui:component": "none"
+							},
+							"video": {
+								"type": "object",
+								"allOf": [
+									{
+										"$ref": "https://cms.gap.com/schema/partials/v1/global-partials.json#/definitions/videoGroup"
+									}
+								]
+							}
+						}
+					}
+				]
+			}
+		},
+		"link": {
+			"type": "object",
+			"title": "Link Wrapper",
+			"properties": {
+				"wrapper": {
+					"allOf": [
+						{
+							"$ref": "https://cms.gap.com/schema/partials/v1/global-partials.json#/definitions/linkWrapper"
+						}
+					]
+				}
+			},
+			"ui:component":{
+				"params":{
+					"collapsed":true
+				}
+			}
+		},
+		"textBlocks": {
+			"title": "Content Blocks",
+			"type": "object",
+			"properties": {
+				"contentBlocksDesktop": {
+					"title": "Content Blocks",
+					"type": "array",
+					"minItems": 0,
+					"maxItems": 3,
+					"items": {
+						"type": "object",
+						"allOf": [
+							{
+								"$ref": "https://cms.gap.com/schema/partials/v1/global-partials.json#/definitions/textBlock"
+							}
+						]
+					}
+				},
+				"contentBlocksMobile": {
+					"title": "Content Blocks",
+					"type": "array",
+					"minItems": 0,
+					"maxItems": 3,
+					"items": {
+						"type": "object",
+						"allOf": [
+							{
+								"$ref": "https://cms.gap.com/schema/partials/v1/global-partials.json#/definitions/textBlock"
+							}
+						]
+					}
+				}
+			},
+			"ui:component": {
+				"name": "tabs",
+				"params": {
+					"tabs": {
+						"orientation": "horizontal",
+						"defaultTab": "Desktop (Default)",
+						"items": [
+							{
+								"label": "Desktop (Default)",
+								"pointers": [
+									"/contentBlocksDesktop"
+								]
+							},
+							{
+								"label": "Mobile (Override)",
+								"pointers": [
+									"/contentBlocksMobile"
+								]
+							}
+						]
+					}
+				}
+			}
+		},
+		"personalization": {
+			"type": "object",
+			"title": "Personalization",
+			"properties": {
+				"instanceName": {
+					"allOf": [
+						{
+							"$ref": "https://cms.gap.com/schema/partials/v1/optimizely-partials.json#/definitions/instanceName"
+						}
+					]
+				},
+				"data": {
+					"$comment": "refactored optimizely parttal to remove parent object of Set Fixed Height",
+					"allOf": [
+						{
+							"$ref": "https://cms.gap.com/schema/partials/v1/poc-optimizely-partials#/definitions/fixedHeight"
+						}
+					]
+				},
+				"tealium": {
+					"allOf": [
+						{
+							"$ref": "https://cms.gap.com/schema/partials/v1/poc-global-partials#/definitions/tags"
+						}
+					]
+				}
+			},
+			"ui:component": {
+				"name": "tabs",
+				"params": {
+					"tabs": {
+						"orientation": "vertical",
+						"defaultTab": "Optimizely",
+						"items": [
+							{
+								"label": "Optimizely",
+								"pointers": [
+									"/instanceName",
+									"/data"
+								]
+							},
+							{
+								"label": "Tealium",
+								"pointers": [
+									"/tealium"
+								]
+							}
+						]
+					}
+				}
+			}
+		}
+	},
+	"ui:component": {
+		"name": "tabs",
+		"params": {
+			"tabs": {
+				"defaultTab": "Layout",
+				"items": [
+					{
+						"label": "Layout",
+						"pointers": [
+							"/layout",
+							"/layout/layout"
+						]
+					},
+					{
+						"label": "Background",
+						"pointers": [
+							"/background",
+							"/link"
+						]
+					},
+					{
+						"label": "Content",
+						"pointers": [
+							"/textBlocks"
+						]
+					},
+					{
+						"label": "Personalization",
+						"pointers": [
+							"/personalization"
+						]
+					}
+				]
+			}
+		}
+	},
+	"propertyOrder": []
+}

@@ -4,6 +4,12 @@ globs:
 alwaysApply: true
 ---
 
+---
+description: Next.js, React, and Tailwind best practices and coding standards
+globs: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx"]
+alwaysApply: yes
+---
+  
   You are an expert in Node.js, Next.js App Router, React, Material UI and Tailwind.
   
   Code Style and Structure

@@ -1,0 +1,5 @@
+{
+  "body": "./schemas/poc-banner-schema.json",
+  "schemaId": "https://cms.gap.com/schema/v1/poc-banner",
+  "validationLevel": "CONTENT_TYPE"
+}

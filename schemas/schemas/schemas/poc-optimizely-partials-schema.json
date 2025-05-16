@@ -1,0 +1,34 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"$id": "https://cms.gap.com/schema/partials/v1/poc-optimizely-partials",
+	"title": "Partials for Optimizely Experiments",
+	"description": "Reusable partials specific for Optimizely Experiments",
+	"allOf": [
+		{
+			"$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content"
+		}
+	],
+	"type": "object",
+	"definitions": {
+		"instanceName": {
+			"title": "Personalization Instance Name",
+			"description": "Unique name for Optimizely to target and replace content",
+			"type": "string"
+		},
+		"fixedHeight": {
+			"title": "Set Fixed Height for Optimizely Experiments",
+			"properties": {
+				"desktop": {
+					"title": "Desktop Fixed Height",
+					"description": "Set fixed height for Optimizely initial page load. Example: (100px)",
+					"type": "string"
+				},
+				"mobile": {
+					"title": "Mobile Fixed Height",
+					"description": "Set mobile fixed height for Optimizely initial page load. Example: (50px)",
+					"type": "string"
+				}
+			}
+		}
+	}
+}

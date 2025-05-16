@@ -1,0 +1,2896 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://cms.gap.com/schema/partials/v1/global-partials.json",
+  "title": "Global partials",
+  "description": "Partials that can be re-used in different schemas",
+  "allOf": [
+    {
+      "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content"
+    }
+  ],
+  "type": "object",
+  "definitions": {
+    "textBlock": {
+      "title": "Content Blocks",
+      "type": "object",
+      "properties": {
+        "halign": {
+          "title": "Horizontal Placement",
+          "type": "string",
+          "default": "center",
+          "oneOf": [
+            {
+              "title": "Left",
+              "const": "left"
+            },
+            {
+              "title": "Center",
+              "const": "center"
+            },
+            {
+              "title": "Right",
+              "const": "right"
+            }
+          ]
+        },
+        "valign": {
+          "title": "Vertical Placement",
+          "type": "string",
+          "default": "middle",
+          "oneOf": [
+            {
+              "title": "Top",
+              "const": "top"
+            },
+            {
+              "title": "Middle",
+              "const": "middle"
+            },
+            {
+              "title": "Bottom",
+              "const": "bottom"
+            }
+          ]
+        },
+        "textAlign": {
+          "title": "Horizontal Justification",
+          "type": "string",
+          "default": "center",
+          "oneOf": [
+            {
+              "title": "Left",
+              "const": "left"
+            },
+            {
+              "title": "Center",
+              "const": "center"
+            },
+            {
+              "title": "Right",
+              "const": "right"
+            }
+          ]
+        },
+        "color": {
+          "title": "Content Color",
+          "type": "string",
+          "default": "primary",
+          "oneOf": [
+            {
+              "title": "Primary",
+              "const": "primary"
+            },
+            {
+              "title": "Secondary",
+              "const": "secondary"
+            }
+          ]
+        },
+        "block": {
+          "type": "array",
+          "title": "Content Item",
+          "ui:component": {
+            "params": {
+              "icons": {
+                "header": "heading",
+                "subheader": "blockquote",
+                "paragraph": "text-plus",
+                "eyebrow": "text-plus",
+                "cta": "link"
+              }
+            }
+          },
+          "items": {
+            "oneOf": [
+              {
+                "type": "object",
+                "title": "Eyebrow",
+                "properties": {
+                  "type": {
+                    "const": "eyebrow",
+                    "ui:component": "none"
+                  },
+                  "text": {
+                    "type": "object",
+                    "allOf": [
+                      {
+                        "$ref": "#/definitions/eyebrow"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "type": "object",
+                "title": "Headline",
+                "properties": {
+                  "type": {
+                    "const": "header",
+                    "ui:component": "none"
+                  },
+                  "text": {
+                    "type": "object",
+                    "allOf": [
+                      {
+                        "$ref": "#/definitions/header"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "type": "object",
+                "title": "Subhead",
+                "properties": {
+                  "type": {
+                    "const": "subheader",
+                    "ui:component": "none"
+                  },
+                  "text": {
+                    "type": "object",
+                    "allOf": [
+                      {
+                        "$ref": "#/definitions/subheader"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "type": "object",
+                "title": "Body",
+                "properties": {
+                  "type": {
+                    "const": "paragraph",
+                    "ui:component": "none"
+                  },
+                  "text": {
+                    "type": "object",
+                    "allOf": [
+                      {
+                        "$ref": "#/definitions/paragraph"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "type": "object",
+                "title": "CTA",
+                "properties": {
+                  "type": {
+                    "const": "cta",
+                    "ui:component": "none"
+                  },
+                  "text": {
+                    "type": "object",
+                    "allOf": [
+                      {
+                        "$ref": "#/definitions/ctaGroup"
+                      }
+                    ]
+                  }
+                }
+              },
+                            {
+                "type": "object",
+                "title": "Legal",
+                "properties": {
+                  "type": {
+                    "const": "legal",
+                    "ui:component": "none"
+                  },
+                  "text": {
+                    "type": "object",
+                    "allOf": [
+                      {
+                        "$ref": "#/definitions/legal"
+                      }
+                    ]
+                  }
+                }
+              }  
+            ]
+          }
+        }
+      },
+      "ui:component": {
+        "name": "grid",
+        "params": {
+          "numColumns": 12,
+          "columns": [
+            {
+              "span": 4,
+              "pointers": [
+                "/valign","/color"
+              ]
+            },
+            {
+              "span": 4,
+              "pointers": [
+                "/halign"
+              ]
+            },
+            {
+              "span": 4,
+              "pointers": [
+                "/textAlign"
+              ]
+            },
+            {
+              "span": 12,
+              "pointers": [
+                "/block"
+              ]
+            }
+          ]
+        }
+      },
+      "propertyOrder": [],
+      "required": [
+        "halign",
+        "valign",
+        "textAlign"
+      ]
+    },
+    "textBlockGrid": {
+      "title": "Content Items",
+      "type": "object",
+      "properties": {
+        "textAlign": {
+          "title": "Horizontal Justification",
+          "type": "string",
+          "default": "center",
+          "oneOf": [
+            {
+              "title": "Left",
+              "const": "left"
+            },
+            {
+              "title": "Center",
+              "const": "center"
+            },
+            {
+              "title": "Right",
+              "const": "right"
+            }
+          ]
+        },
+        "color": {
+          "title": "Content Color",
+          "type": "string",
+          "default": "primary",
+          "oneOf": [
+            {
+              "title": "Primary",
+              "const": "primary"
+            },
+            {
+              "title": "Secondary",
+              "const": "secondary"
+            }
+          ]
+        },
+        "block": {
+          "type": "array",
+          "title": "Content Item",
+          "ui:component": {
+            "params": {
+              "icons": {
+                "header": "heading",
+                "subheader": "blockquote",
+                "paragraph": "text-plus",
+                "eyebrow": "text-plus",
+                "cta": "link"
+              }
+            }
+          },
+          "items": {
+            "oneOf": [
+              {
+                "type": "object",
+                "title": "Eyebrow",
+                "properties": {
+                  "type": {
+                    "const": "eyebrow",
+                    "ui:component": "none"
+                  },
+                  "text": {
+                    "type": "object",
+                    "allOf": [
+                      {
+                        "$ref": "#/definitions/eyebrow"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "type": "object",
+                "title": "Headline",
+                "properties": {
+                  "type": {
+                    "const": "header",
+                    "ui:component": "none"
+                  },
+                  "text": {
+                    "type": "object",
+                    "allOf": [
+                      {
+                        "$ref": "#/definitions/header"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "type": "object",
+                "title": "Subhead",
+                "properties": {
+                  "type": {
+                    "const": "subheader",
+                    "ui:component": "none"
+                  },
+                  "text": {
+                    "type": "object",
+                    "allOf": [
+                      {
+                        "$ref": "#/definitions/subheader"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "type": "object",
+                "title": "Body",
+                "properties": {
+                  "type": {
+                    "const": "paragraph",
+                    "ui:component": "none"
+                  },
+                  "text": {
+                    "type": "object",
+                    "allOf": [
+                      {
+                        "$ref": "#/definitions/paragraph"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "type": "object",
+                "title": "CTA",
+                "properties": {
+                  "type": {
+                    "const": "cta",
+                    "ui:component": "none"
+                  },
+                  "text": {
+                    "type": "object",
+                    "allOf": [
+                      {
+                        "$ref": "#/definitions/ctaGroup"
+                      }
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "ui:component": {
+        "name": "grid",
+        "params": {
+          "numColumns": 12,
+          "columns": [
+            {
+              "span": 4,
+              "pointers": [
+                "/textAlign"
+              ]
+            },
+            {
+              "span": 4,
+              "pointers": [
+                "/color"
+              ]
+            },
+            {
+              "span": 12,
+              "pointers": [
+                "/block"
+              ]
+            }
+          ]
+        }
+      },
+      "propertyOrder": [],
+      "required": [
+        "color",
+        "textAlign"
+      ]
+    },
+    "cardTextBlockUnder": {
+      "title": "Content Block",
+      "type": "object",
+      "properties": {
+        "halign": {
+          "title": "Horizontal Justification",
+          "type": "string",
+          "default": "center",
+          "oneOf": [
+            {
+              "title": "Left",
+              "const": "left"
+            },
+            {
+              "title": "Center",
+              "const": "center"
+            },
+            {
+              "title": "Right",
+              "const": "right"
+            }
+          ]
+        },
+        "color": {
+          "title": "Content Color",
+          "type": "string",
+          "default": "primary",
+          "oneOf": [
+            {
+              "title": "Primary",
+              "const": "primary"
+            },
+            {
+              "title": "Secondary",
+              "const": "secondary"
+            }
+          ]
+        },
+        "block": {
+          "type": "array",
+          "title": "Text Block",
+          "ui:component": {
+            "params": {
+              "icons": {
+                "header": "heading",
+                "subheader": "blockquote",
+                "cta": "link"
+              }
+            }
+          },
+          "items": {
+            "oneOf": [
+              {
+                "type": "object",
+                "title": "Header",
+                "properties": {
+                  "type": {
+                    "const": "header",
+                    "ui:component": "none"
+                  },
+                  "text": {
+                    "type": "object",
+                    "allOf": [
+                      {
+                        "$ref": "#/definitions/header"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "type": "object",
+                "title": "Subheader",
+                "properties": {
+                  "type": {
+                    "const": "subheader",
+                    "ui:component": "none"
+                  },
+                  "text": {
+                    "type": "object",
+                    "allOf": [
+                      {
+                        "$ref": "#/definitions/subheader"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "type": "object",
+                "title": "Body",
+                "properties": {
+                  "type": {
+                    "const": "paragraph",
+                    "ui:component": "none"
+                  },
+                  "text": {
+                    "type": "object",
+                    "allOf": [
+                      {
+                        "$ref": "#/definitions/paragraph"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "type": "object",
+                "title": "CTA Block",
+                "properties": {
+                  "type": {
+                    "const": "cta",
+                    "ui:component": "none"
+                  },
+                  "text": {
+                    "type": "object",
+                    "allOf": [
+                      {
+                        "$ref": "#/definitions/ctaGroup"
+                      }
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "ui:component": {
+        "name": "grid",
+        "params": {
+          "numColumns": 12,
+          "columns": [
+            {
+              "span": 6,
+              "pointers": [
+                "/halign"
+              ]
+            },
+            {
+              "span": 6,
+              "pointers": [
+                "/color"
+              ]
+            },
+            {
+              "span": 12,
+              "pointers": [
+                "/block"
+              ]
+            }
+          ]
+        }
+      },
+      "propertyOrder": [],
+      "required": ["halign","color"]
+    },
+    "cardTextBlockOver": {
+      "title": "Content Block",
+      "type": "object",
+      "properties": {
+        "valign": {
+          "title": "Vertical Alignment",
+          "type": "string",
+          "default": "middle",
+          "oneOf": [
+            {
+              "title": "Top",
+              "const": "top"
+            },
+            {
+              "title": "Middle",
+              "const": "middle"
+            },
+            {
+              "title": "Bottom",
+              "const": "bottom"
+            }
+          ]
+        },
+        "color": {
+          "title": "Content Color",
+          "type": "string",
+          "default": "primary",
+          "oneOf": [
+            {
+              "title": "Primary",
+              "const": "primary"
+            },
+            {
+              "title": "Secondary",
+              "const": "secondary"
+            }
+          ]
+        },
+        "block": {
+          "type": "array",
+          "title": "Text Block",
+          "ui:component": {
+            "params": {
+              "icons": {
+                "header": "heading",
+                "subheader": "blockquote",
+                "cta": "link"
+              }
+            }
+          },
+          "items": {
+            "oneOf": [
+              {
+                "type": "object",
+                "title": "Header",
+                "properties": {
+                  "type": {
+                    "const": "header",
+                    "ui:component": "none"
+                  },
+                  "text": {
+                    "type": "object",
+                    "allOf": [
+                      {
+                        "$ref": "#/definitions/header"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "type": "object",
+                "title": "Subheader",
+                "properties": {
+                  "type": {
+                    "const": "subheader",
+                    "ui:component": "none"
+                  },
+                  "text": {
+                    "type": "object",
+                    "allOf": [
+                      {
+                        "$ref": "#/definitions/subheader"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "type": "object",
+                "title": "Body",
+                "properties": {
+                  "type": {
+                    "const": "paragraph",
+                    "ui:component": "none"
+                  },
+                  "text": {
+                    "type": "object",
+                    "allOf": [
+                      {
+                        "$ref": "#/definitions/paragraph"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "type": "object",
+                "title": "CTA Block",
+                "properties": {
+                  "type": {
+                    "const": "cta",
+                    "ui:component": "none"
+                  },
+                  "text": {
+                    "type": "object",
+                    "allOf": [
+                      {
+                        "$ref": "#/definitions/ctaGroup"
+                      }
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "ui:component": {
+        "name": "grid",
+        "params": {
+          "numColumns": 12,
+          "columns": [
+            {
+              "span": 6,
+              "pointers": [
+                "/valign"
+              ]
+            },
+            {
+              "span": 6,
+              "pointers": [
+                "/color"
+              ]
+            },
+            {
+              "span": 12,
+              "pointers": [
+                "/block"
+              ]
+            }
+          ]
+        }
+      },
+      "propertyOrder": [],
+      "required": ["valign","color"]
+    },
+    "sitewideBannerTextBlock": {
+      "title": "Content Items",
+      "type": "object",
+      "properties": {
+        "block": {
+          "type": "array",
+          "title": "Content Items",
+          "ui:component": {
+            "params": {
+              "icons": {
+                "header": "heading",
+                "subheader": "blockquote",
+                "cta": "link"
+              }
+            }
+          },
+          "items": {
+            "oneOf": [
+              {
+                "type": "object",
+                "title": "Text",
+                "properties": {
+                  "type": {
+                    "const": "text",
+                    "ui:component": "none"
+                  },
+                  "text": {
+                    "type": "object",
+                    "allOf": [
+                      {
+                        "$ref": "#/definitions/text"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "type": "object",
+                "title": "CTA Block",
+                "properties": {
+                  "type": {
+                    "const": "cta",
+                    "ui:component": "none"
+                  },
+                  "text": {
+                    "type": "object",
+                    "allOf": [
+                      {
+                        "$ref": "#/definitions/ctaGroupUnstyled"
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "type": "object",
+                "title": "Legal",
+                "properties": {
+                  "type": {
+                    "const": "legal",
+                    "ui:component": "none"
+                  },
+                  "text": {
+                    "type": "object",
+                    "allOf": [
+                      {
+                        "$ref": "#/definitions/legal"
+                      }
+                    ]
+                  }
+                }
+              }   
+            ]
+          }
+        }
+      },
+      "ui:component": {
+          "params": {
+            "withHeader": false
+          }
+        },
+      "propertyOrder": []
+    },
+    "backgroundColor": {
+      "title": "Background Color",
+      "type": "object",
+      "properties": {
+        "backgroundType": {
+          "title": "Background Type",
+          "type": "string",
+          "default": "Solid",
+          "enum": [
+            "Solid",
+            "Gradient"
+          ]
+        }
+      },
+      "ui:component": {
+        "name": "grid",
+        "params": {
+          "numColumns": 12,
+          "columns": [
+            {
+              "span": 3,
+              "pointers": [
+                "/backgroundType"
+              ]
+            },
+            {
+              "span": 3,
+              "pointers": [
+                "/color1"
+              ]
+            },
+            {
+              "span": 3,
+              "pointers": [
+                "/color2"
+              ]
+            }
+          ]
+        }
+      },
+      "if": {
+        "properties": {
+          "backgroundType": {
+            "const": "Solid"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "color1": {
+            "type": "string",
+            "title": "Color",
+            "default": "#ffffff",
+            "examples": [
+              "#F88B8B",
+              "#00E4B3",
+              "#FFA980"
+            ],
+            "ui:component": {
+              "name": "color",
+              "params": {
+                "placeholder": "Swatches are corporate colours",
+                "format": "hex"
+              }
+            }
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "color1": {
+            "type": "string",
+            "title": "Color 1",
+            "default": "#ffffff",
+            "examples": [
+              "#F88B8B",
+              "#00E4B3",
+              "#FFA980"
+            ],
+            "ui:component": {
+              "name": "color",
+              "params": {
+                "placeholder": "Swatches are corporate colours",
+                "format": "hex"
+              }
+            }
+          },
+          "color2": {
+            "type": "string",
+            "title": "Color 2",
+            "default": "#000000",
+            "examples": [
+              "#F88B8B",
+              "#00E4B3",
+              "#FFA980"
+            ],
+            "ui:component": {
+              "name": "color",
+              "params": {
+                "placeholder": "Swatches are corporate colours",
+                "format": "hex"
+              }
+            }
+          }
+        }
+      }
+    },
+    "backgroundColorDesktop": {
+      "title": "Desktop",
+      "type": "object",
+      "properties": {
+        "color1": {
+          "type": "string",
+          "title": "Color",
+          "default": "#ffffff",
+          "examples": [
+            "#F88B8B",
+            "#00E4B3",
+            "#FFA980"
+          ],
+          "ui:component": {
+            "name": "color",
+            "params": {
+              
+              "format": "hex"
+            }
+          }
+        }
+      }
+    },
+    "backgroundColorMobile": {
+      "title": "Mobile",
+      "type": "object",
+      "properties": {
+        "color1": {
+          "type": "string",
+          "title": "Color",
+          "default": "#ffffff",
+          "examples": [
+            "#F88B8B",
+            "#00E4B3",
+            "#FFA980"
+          ],
+          "ui:component": {
+            "name": "color",
+            "params": {
+              
+              "format": "hex"
+            }
+          }
+        }
+      }
+    },
+    "backgroundColorGroup": {
+      "type": "object",
+      "title": "Background Color",
+      "properties": {
+        "desktop": {
+          "title": "Desktop",
+          "allOf": [
+            {
+              "$ref": "https://cms.gap.com/schema/partials/v1/poc-global-partials#/definitions/backgroundColorDesktop"
+            }
+          ]
+        },
+        "mobile": {
+          "title": "Mobile",
+          "allOf": [
+            {
+              "$ref": "https://cms.gap.com/schema/partials/v1/poc-global-partials#/definitions/backgroundColorMobile"
+            }
+          ]
+        }
+      },
+      "ui:component": {
+        "name": "grid",
+        "params": {
+          "numColumns": 12,
+          "columns": [
+            {
+              "span": 6,
+              "pointers": [
+                "/desktop"
+              ]
+            },
+            {
+              "span": 6,
+              "pointers": [
+                "/mobile"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "text": {
+      "title": "Text",
+      "type": "object",
+      "properties": {
+        "text": {
+          "title": "Text",
+          "type": "string",
+          "format": "markdown",
+          "minLength": 0,
+          "maxLength": 200,
+          "ui:component": {
+            "params": {
+              "placeholder": "Text",
+              "withToolbar": false
+            }
+          }
+        }
+      },
+      "ui:component": {
+          "params": {
+            "withHeader": false
+          }
+        },
+      "propertyOrder": []
+    },
+    "header": {
+      "title": "Headline",
+      "type": "object",
+      "properties": {
+        "text": {
+          "title": "Headline",
+          "type": "string",
+          "format": "markdown",
+          "minLength": 0,
+          "maxLength": 200,
+          "ui:component": {
+            "params": {
+              "placeholder": "Headline",
+              "withToolbar": false
+            }
+          }
+        }
+      },
+      "ui:component": {
+          "params": {
+            "withHeader": false
+          }
+        }
+    },
+    "subheader": {
+      "title": "Subhead",
+      "type": "object",
+      "properties": {
+        "text": {
+          "title": "Subhead",
+          "type": "string",
+          "format": "markdown",
+          "minLength": 0,
+          "maxLength": 200,
+          "ui:component": {
+            "params": {
+              "placeholder": "Subhead",
+              "withToolbar": false
+            }
+          }
+        }
+      },
+      "ui:component": {
+          "params": {
+            "withHeader": false
+          }
+        }
+    },
+    "eyebrow": {
+      "title": "Eyebrow",
+      "type": "object",
+      "properties": {
+        "text": {
+          "title": "Eyebrow",
+          "type": "string",
+          "format": "markdown",
+          "minLength": 0,
+          "maxLength": 200,
+          "ui:component": {
+            "params": {
+              "placeholder": "Eyebrow",
+              "withToolbar": false
+            }
+          }
+        }
+      },
+      "ui:component": {
+          "params": {
+            "withHeader": false
+          }
+        }
+    },
+    "paragraph": {
+      "title": "Body",
+      "type": "object",
+      "properties": {
+        "text": {
+          "title": "Body",
+          "type": "string",
+          "format": "markdown",
+          "minLength": 0,
+          "maxLength": 1000,
+          "ui:component": {
+            "params": {
+              "placeholder": "Body",
+              "withToolbar": false
+            }
+          }
+        }
+      },
+      "ui:component": {
+          "params": {
+            "withHeader": false
+          }
+        }
+    },
+    "legal": {
+      "title": "Legal",
+      "type": "object",
+      "properties": {
+        "prefix": {
+          "title": "Legal Prefix Text",
+          "type": "string",
+          "format": "markdown",
+          "minLength": 0,
+          "maxLength": 200,
+          "ui:component": {
+            "params": {
+              "placeholder": "Label for the prefix before the details",
+              "withToolbar": false
+            }
+          }
+        },
+        "label": {
+          "title": "Legal Modal Label",
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 100,
+          "ui:component": {
+            "params": {
+              "withToolbar": false
+            }
+          }
+        },
+        "pemole": {
+          "title": "Pemole Code",
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 100,
+          "ui:component": {
+            "params": {
+              "placeholder": "Pemole Code"
+            }
+          }
+        },
+        "htmlModal": {
+          "title": "HTML Modal URL",
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 250,
+          "ui:component": {
+            "params": {
+              "placeholder": "Add a url to a HTML file. If a URL is entered, the Details link will display the html file in a modal when clicked."
+            }
+          }
+        }
+      },
+      "ui:component": {
+        "name": "grid",
+        "params": {
+          "numColumns": 12,
+          "columns": [
+            {
+              "span": 12,
+              "pointers": [
+                "/prefix"
+              ]
+            },
+            {
+              "span": 12,
+              "pointers": [
+                "/label"
+              ]
+            },
+            {
+              "span": 6,
+              "pointers": [
+                "/pemole"
+              ]
+            },
+            {
+              "span": 6,
+              "pointers": [
+                "/htmlModal"
+              ]
+            }
+          ]
+        }
+      },
+      "propertyOrder": []
+    },
+    "advancedImageExtensionGroup": {
+      "title": "title",
+      "type": "object",
+      "properties": {
+        "desktop": {
+          "type": "object",
+          "allOf": [
+            {
+              "$ref": "#/definitions/advanceImageExtension"
+            }
+          ]
+        },
+        "mobile": {
+          "type": "object",
+          "allOf": [
+            {
+              "$ref": "#/definitions/advanceImageExtension"
+            }
+          ]
+        }
+      },
+      "ui:component": {
+        "name": "grid",
+        "params": {
+          "numColumns": 2,
+          "columns": [
+            {
+              "span": 1,
+              "pointers": [
+                "/desktop"
+              ]
+            },
+            {
+              "span": 1,
+              "pointers": [
+                "/mobile"
+              ]
+            }
+          ]
+        }
+      },
+      "propertyOrder": []
+    },
+    "advanceImageExtension": {
+      "ui:extension": {
+        "name": "advanced-image"
+      },
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [],
+        "properties": {
+          "image": {
+            "allOf": [
+              {
+                "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/image-link"
+              }
+            ]
+          },
+          "altText": {
+            "type": "string",
+            "default": "",
+            "minLength": 0
+          },
+          "variations": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "required": [],
+              "type": "object",
+              "properties": {
+                "variation": {
+                  "type": "string"
+                },
+                "poi": {
+                  "type": "object"
+                },
+                "crop": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "ctaGroup": {
+      "title": "CTA",
+      "type": "object",
+      "properties": {
+        "buttonStyle": {
+          "title": "Button Style",
+          "type": "object",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ctaButtonStyling"
+            }
+          ]
+        },
+        "ctas": {
+          "title": "CTAs",
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 10,
+          "items": {
+            "type": "object",
+            "properties": {
+              "cta": {
+                "type": "object",
+                "allOf": [
+                  {
+                    "$ref": "#/definitions/cta"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "ctaGroupUnstyled": {
+      "title": "CTA",
+      "type": "object",
+      "properties": {
+        "ctas": {
+          "title": "CTAs",
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 10,
+          "items": {
+            "type": "object",
+            "properties": {
+              "cta": {
+                "type": "object",
+                "allOf": [
+                  {
+                    "$ref": "#/definitions/cta"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "ui:component": {
+          "params": {
+            "withHeader": false
+          }
+        }
+    },
+    "cta": {
+      "title": "Call To Action",
+      "type": "object",
+      "properties": {
+        "buttonLabel": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 100,
+          "title": "Button Label",
+          "ui:component": {
+            "params": {
+              "placeholder": "SHOP NOW"
+            }
+          }
+        },
+        "buttonValue": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 250,
+          "title": "Button Value",
+          "pattern": "^\\S*$",
+          "ui:component": {
+            "params": {
+              "placeholder": "https://..."
+            }
+          }
+        }
+      }
+    },
+    "ctaButtonStyling": {
+      "title": "CTA Button Styling",
+      "type": "object",
+      "properties": {
+        "buttonStyle": {
+          "title": "Button Style",
+          "type": "string",
+          "default": "solid",
+          "oneOf": [
+            {
+              "title": "Outline",
+              "const": "outline"
+            },
+            {
+              "title": "Solid",
+              "const": "solid"
+            },
+            {
+              "title": "Underline",
+              "const": "underline"
+            }
+          ]
+        },
+        "layoutType": {
+          "title": "Button Layout",
+          "type": "string",
+          "default": "linear",
+          "oneOf": [
+            {
+              "title": "Linear",
+              "const": "linear"
+            },
+            {
+              "title": "Stacked",
+              "const": "stacked"
+            }
+          ]
+        }
+      },
+      "ui:component": {
+        "name": "grid",
+        "params": {
+          "numColumns": 12,
+          "columns": [
+            {
+              "span": 6,
+              "pointers": [
+                "/buttonStyle"
+               
+              ]
+            },
+            {
+              "span": 6,
+              "pointers": [
+                 "/layoutType"
+              ]
+            }
+          ]
+        }
+      },
+      "required": [
+        "buttonStyle",
+        "layoutType"
+      ]
+    },
+    "ctaButtonStyleChevronUnderline": {
+      "title": "CTA Button Styling",
+      "description": "Choose a style variation for the CTA button",
+      "type": "object",
+      "properties": {
+        "buttonStyle": {
+          "title": "Button Style",
+          "description": "Choose a button style",
+          "type": "string",
+          "default": "border",
+          "ui:extension": {
+            "name": "dropdown",
+            "params": {
+              "items": [
+                "underline|Underline",
+                "chevron|Chevron"
+              ],
+              "required": true
+            }
+          }
+        },
+        "buttonColor": {
+          "title": "Button Color",
+          "description": "Choose a color variation for the button",
+          "type": "string",
+          "default": "dark",
+          "ui:extension": {
+            "name": "dropdown",
+            "params": {
+              "items": [
+                "light|Secondary",
+                "dark|Primary",
+                "custom|Custom"
+              ],
+              "required": true
+            }
+          }
+        },
+        "primaryHex": {
+          "title": "Primary hex",
+          "description": "If using a custom button color, enter a primary hex code",
+          "type": "string",
+          "minLength": 4,
+          "maxLength": 7
+        },
+        "secondaryHex": {
+          "title": "Secondary hex",
+          "description": "If using a custom button color, enter a secondary hex code",
+          "type": "string",
+          "minLength": 4,
+          "maxLength": 7
+        }
+      }
+    },
+    "ctaTextNav": {
+      "title": "Text Navigation Button",
+      "description": "Call to action button Text Nav Variant (includes recommended character count)",
+      "type": "object",
+      "properties": {
+        "label": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 100,
+          "title": "Label",
+          "description": "Add a label for the Text Navigation Button"
+        },
+        "value": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 2000,
+          "title": "Value",
+          "pattern": "^\\S*$",
+          "description": "Enter a URL or style parameters to apply a filter"
+        }
+      }
+    },
+    "link": {
+      "title": "Link",
+      "type": "object",
+      "properties": {
+        "display": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 100,
+          "title": "Display"
+        },
+        "url": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 2000,
+          "title": "URL",
+          "pattern": "^\\S*$",
+          "description": "Enter a URL"
+        }
+      }
+    },
+    "linkWrapper": {
+      "type": "object",
+      "title": "Link Wrapper",
+      "properties": {
+        "label": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 100,
+          "title": "Link Title",
+          "description": "",
+          "ui:component": {
+            "params": {
+              "placeholder": "Alt Text for the screen readers to read the URL"
+            }
+          }
+        },
+        "value": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 2000,
+          "pattern": "^\\S*$",
+          "title": "URL",
+          "description": "",
+          "ui:component": {
+            "params": {
+              "placeholder": "Enter URL for Frame Link."
+            }
+          }
+        }
+      },
+      "ui:component": {
+        "name": "grid",
+        "params": {
+          "numColumns": 12,
+          "columns": [
+            {
+              "span": 5,
+              "pointers": [
+                "/label"
+              ]
+            },
+            {
+              "span": 7,
+              "pointers": [
+                "/value"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "bannerLink": {
+      "title": "Banner Link",
+      "type": "object",
+      "properties": {
+        "display": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 100,
+          "title": "Link Title",
+          "description": "Alt Text for the screen readers to read the URL"
+        },
+        "url": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 2000,
+          "title": "URL",
+          "pattern": "^\\S*$",
+          "description": "Adding a URL will make the entire content type clickable"
+        }
+      }
+    },
+    "url": {
+      "title": "URL",
+      "description": "Standalone URL",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 2000,
+          "title": "Value",
+          "pattern": "^\\S*$",
+          "description": "Enter a URL"
+        }
+      }
+    },
+    "carouselControlsIconsColor": {
+      "title": "Controls/Icons color",
+      "description": "Choose whether the icons and controls use the primary or secondary color scheme",
+      "type": "string",
+      "default": "primary",
+      "ui:extension": {
+        "name": "dropdown",
+        "params": {
+          "items": [
+            "primary|Primary",
+            "secondary|Secondary"
+          ],
+          "required": true
+        }
+      }
+    },
+    "carouselSettings": {
+      "title": "Carousel Settings",
+      "type": "object",
+      "default": {},
+      "properties": {
+        "transition": {
+          "title": "Transition",
+          "description": "Choose a transition style for the carousel",
+          "type": "string",
+          "default": "slide",
+          "ui:extension": {
+            "name": "dropdown",
+            "params": {
+              "items": [
+                "slide|Slide",
+                "fade|Fade"
+              ],
+              "required": true
+            }
+          }
+        },
+        "type": {
+          "title": "Type",
+          "description": "Choose whether the carousel autoplays or if users have to click through to the next slide.",
+          "type": "string",
+          "default": "clickThrough",
+          "ui:extension": {
+            "name": "dropdown",
+            "params": {
+              "items": [
+                "clickThrough|Click Through",
+                "autoplay|Autoplay"
+              ],
+              "required": true
+            }
+          }
+        },
+        "continuousLoop": {
+          "title": "Continuous (Infinite Scroll)",
+          "description": "Check if you want the carousel to continuously cycle through the slides.",
+          "type": "boolean"
+        },
+        "autoplay": {
+          "type": "object",
+          "title": "Autoplay",
+          "description": "Choose Autoplay Settings for the carousel",
+          "properties": {
+            "delay": {
+              "title": "Delay",
+              "description": "Enter the amount of time the carousel should stay on each slide before transitioning. Defaults to 3000ms.",
+              "type": "integer",
+              "minimum": 0,
+              "default": 3000
+            },
+            "pauseOnHover": {
+              "title": "Pause on Hover",
+              "description": "Choose whether the carousel pauses when users hover over the carousel.",
+              "type": "boolean"
+            }
+          }
+        },
+        "animation": {
+          "type": "object",
+          "title": "Animation",
+          "description": "Choose Animation Settings for the carousel",
+          "properties": {
+            "speed": {
+              "title": "Speed",
+              "description": "Enter the speed that the slides transition. Defaults to 500ms.",
+              "type": "integer",
+              "minimum": 0,
+              "default": 500
+            },
+            "ease": {
+              "title": "Ease",
+              "description": "Check if you want the carousel to include “easing”  so that the transition slows down slightly before it stops.",
+              "type": "boolean"
+            }
+          }
+        },
+        "styling": {
+          "type": "object",
+          "title": "Styling",
+          "description": "Choose Style Settings for the carousel",
+          "properties": {
+            "controlsIconsColor": {
+              "title": "Controls/Icons color",
+              "description": "Choose whether the icons and controls use the primary or secondary color scheme",
+              "type": "string",
+              "default": "primary",
+              "ui:extension": {
+                "name": "dropdown",
+                "params": {
+                  "items": [
+                    "primary|Primary",
+                    "secondary|Secondary"
+                  ],
+                  "required": true
+                }
+              }
+            },
+            "pagination": {
+              "title": "Pagination",
+              "description": "Choose whether or not you want to include a paginator for the carousel slides.",
+              "type": "string",
+              "default": "hide",
+              "ui:extension": {
+                "name": "dropdown",
+                "params": {
+                  "items": [
+                    "hide|Hide",
+                    "desktop|Desktop",
+                    "mobile|Mobile",
+                    "desktopAndMobile|Desktop and Mobile"
+                  ],
+                  "required": true
+                }
+              }
+            },
+            "hideChevrons": {
+              "title": "Hide Chevrons",
+              "description": "When checked, chevrons are hidden.",
+              "type": "boolean"
+            }
+          }
+        }
+      }
+    },
+    "ismPlacementConfiguration": {
+      "title": "ISM Placement Configurations",
+      "description": "Configure where ISM content appears",
+      "type": "object",
+      "properties": {
+        "desktop": {
+          "type": "integer",
+          "minimum": 0,
+          "default": 1,
+          "title": "Desktop ISM Row Number",
+          "description": "The row number that the ISM will appear on desktop."
+        },
+        "mobile": {
+          "type": "integer",
+          "minimum": 0,
+          "default": 1,
+          "title": "Mobile ISM Row Number",
+          "description": "The row number that the ISM will appear on mobile."
+        }
+      }
+    },
+    "vimeoVideo": {
+      "title": "Vimeo Video",
+      "type": "object",
+      "properties": {
+        "desktop": {
+          "title": "Desktop",
+          "type": "object",
+          "properties": {
+            "url": {
+              "title": "Desktop Video",
+              "description": "Add a link to embed a video from Vimeo on desktop",
+              "type": "string"
+            },
+            "fallbackImage": {
+              "title": "Desktop Fallback Image",
+              "description": "Choose a fallback image in case the video cannot play on desktop",
+              "type": "array",
+              "allOf": [
+                {
+                  "$ref": "#/definitions/advanceImageExtension"
+                }
+              ],
+              "ui:extension": {
+                "name": "",
+                "params": {
+                  "max": 1
+                }
+              }
+            }
+          }
+        },
+        "mobile": {
+          "title": "Mobile",
+          "type": "object",
+          "properties": {
+            "url": {
+              "title": "Mobile Video",
+              "description": "Add a link to embed a video from Vimeo on mobile",
+              "type": "string"
+            },
+            "fallbackImage": {
+              "title": "Mobile Fallback Image",
+              "description": "Choose a fallback image in case the video cannot play on mobile",
+              "type": "array",
+              "allOf": [
+                {
+                  "$ref": "#/definitions/advanceImageExtension"
+                }
+              ],
+              "ui:extension": {
+                "name": "",
+                "params": {
+                  "max": 1
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "videoDesktop": {
+      "title": "Desktop",
+      "type": "object",
+      "properties": {
+        "url": {
+          "title": "URL",
+          "description": "Add a link to embed a video from a URL on desktop",
+          "type": "string"
+        },
+        "fallbackImage": {
+          "type": "object",
+          "allOf": [
+            {
+              "$ref": "#/definitions/imageAlt"
+            }
+          ]
+        },
+        "displayVideoControls": {
+          "title": "Display Video Controls",
+          "description": "Check if you want to display video controls.",
+          "type": "boolean",
+          "default": true,
+          "ui:component": "none"
+        },
+        "controlsIconsColor": {
+          "title": "Controls/Icons color",
+          "description": "Choose whether the icons and controls use the primary or secondary color scheme.",
+          "type": "string",
+          "default": "primary",
+          "oneOf": [
+            {
+              "title": "Primary",
+              "const": "primary"
+            },
+            {
+              "title": "Secondary",
+              "const": "secondary"
+            }
+          ]
+        },
+        "autoplay": {
+          "title": "Autoplay",
+          "description": "When checked, the video will begin playing automatically.",
+          "type": "boolean",
+          "default": true,
+          "ui:component": "none"
+        },
+        "nonVimeoVideoControlsDisplaySettings": {
+          "title": "Video Controls Display Settings",
+          "description": "Choose when to display the video controls",
+          "type": "string",
+          "default": "displayAlways",
+          "ui:component": "none"
+        },
+        "nonVimeovideoSoundIcons": {
+          "title": "Video Sound Icons",
+          "description": "Check if you want to display mute/sound/volume icons.",
+          "type": "boolean"
+        }
+       
+      }
+    },
+    "videoMobile": {
+      "title": "Mobile",
+      "type": "object",
+      "properties": {
+        "url": {
+          "title": "URL",
+          "description": "Add a link to embed a video from a URL on desktop",
+          "type": "string"
+        },
+        "fallbackImage": {
+          "type": "object",
+          "allOf": [
+            {
+              "$ref": "#/definitions/imageAlt"
+            }
+          ]
+        },
+        "displayVideoControls": {
+          "title": "Display Video Controls",
+          "description": "Check if you want to display video controls.",
+          "type": "boolean",
+          "default": true,
+          "ui:component": "none"
+        },
+        "controlsIconsColor": {
+          "title": "Controls/Icons color",
+          "description": "Choose whether the icons and controls use the primary or secondary color scheme.",
+          "type": "string",
+          "default": "primary",
+          "oneOf": [
+            {
+              "title": "Primary",
+              "const": "primary"
+            },
+            {
+              "title": "Secondary",
+              "const": "secondary"
+            }
+          ]
+        },
+        "autoplay": {
+          "title": "Autoplay",
+          "description": "When checked, the video will begin playing automatically.",
+          "type": "boolean",
+          "default": true,
+          "ui:component": "none"
+        },
+        "nonVimeoVideoControlsDisplaySettings": {
+          "title": "Video Controls Display Settings",
+          "description": "Choose when to display the video controls",
+          "type": "string",
+          "default": "displayAlways",
+          "ui:component": "none"
+        },
+        "nonVimeovideoSoundIcons": {
+          "title": "Video Sound Icons",
+          "description": "Check if you want to display mute/sound/volume icons.",
+          "type": "boolean"
+        }
+      }
+    },
+    "videoGroup": {
+      "title": "title",
+      "type": "object",
+      "properties": {
+        "desktopVideo": {
+          "title": "Desktop",
+          "type": "object",
+          "allOf": [
+            {
+              "$ref": "https://cms.gap.com/schema/partials/v1/global-partials.json#/definitions/videoDesktop"
+            }
+          ]
+        },
+        "mobileVideo": {
+          "title": "Mobile",
+          "type": "object",
+          "allOf": [
+            {
+              "$ref": "https://cms.gap.com/schema/partials/v1/global-partials.json#/definitions/videoMobile"
+            }
+          ]
+        }
+      },
+      "ui:component": {
+        "name": "grid",
+        "params": {
+          "numColumns": 2,
+          "columns": [
+            {
+              "span": 1,
+              "pointers": [
+                "/desktopVideo"
+              ]
+            },
+            {
+              "span": 1,
+              "pointers": [
+                "/mobileVideo"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "videoPlaybackBehavior": {
+      "title": "Video Playback Behavior - Select Only One",
+      "description": "Choose the video playback behavior. Only one should be selected.",
+      "type": "object",
+      "properties": {
+        "singleLoop": {
+          "title": "Single Loop",
+          "description": "Loop the video when only one video is added.",
+          "type": "boolean",
+          "default": true
+        },
+        "sequentialLoop": {
+          "title": "Sequential Loop",
+          "description": "Loop one video after the other when multiple videos are added.",
+          "type": "boolean"
+        }
+      }
+    },
+    "pageType": {
+      "title": "Page Type",
+      "description": "Choose a page type for this rule",
+      "type": "object",
+      "properties": {
+        "pageType": {
+          "title": "Page Type",
+          "description": "Choose a page type for this rule",
+          "type": "string",
+          "oneOf": [
+            {
+              "title": "Category",
+              "const": "category"
+            },
+            {
+              "title": "Division",
+              "const": "division"
+            },
+            {
+              "title": "Home",
+              "const": "home"
+            },
+            {
+              "title": "Sitewide",
+              "const": "sitewide"
+            },
+            {
+              "title": "Product",
+              "const": "product"
+            },
+            {
+              "title": "Profile UI",
+              "const": "profileui"
+            },
+            {
+              "title": "Search",
+              "const": "search"
+            },
+            {
+              "title": "Shopping Bag",
+              "const": "shoppingbag"
+            },
+            {
+              "title": "Store Service",
+              "const": "store"
+            },
+            {
+              "title": "Utility",
+              "const": "utility"
+            },
+            {
+              "title": "Landing Page",
+              "const": "landingPage"
+            },
+            {
+              "title": "Custom Landing Page",
+              "const": "custom-landing-page"
+            },
+            {
+              "title": "Information",
+              "const": "Information"
+            },
+            {
+              "title": "Error Page",
+              "const": "Error_Page"
+            },
+            {
+              "title": "Size Chart",
+              "const": "SizeChart"
+            },
+            {
+              "title": "Customer Service",
+              "const": "CustomerService"
+            },
+            {
+              "title": "YZY",
+              "const": "yzy"
+            }
+          ]
+        }
+      }
+    },
+    "exclusions": {
+      "title": "Exclusions",
+      "type": "object",
+      "properties": {
+        "excludedCIDs": {
+          "title": "Excluded CID",
+          "description": "Content will be excluded from this CID",
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 100,
+          "items": {
+            "type": "string"
+          }
+        },
+        "excludedPageTypes": {
+          "title": "Excluded Page Type",
+          "description": "Content will be excluded from this page type",
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 15,
+          "items": {
+            "allOf": [
+              {
+                "$ref": "#/definitions/pageType"
+              }
+            ]
+          }
+        }
+      },
+      "propertyOrder": [
+        "excludedCIDs",
+        "excludedPageTypes"
+      ]
+    },
+    "inclexcl": {
+      "title": "Images",
+      "type": "object",
+      "properties": {
+        "inclusions": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/inclusions"
+            }
+          ]
+        },
+        "exclusions": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/exclusions"
+            }
+          ]
+        }
+      },
+      "ui:component": {
+        "name": "grid",
+        "params": {
+          "numColumns": 12,
+          "columns": [
+            {
+              "span": 6,
+              "pointers": [
+                "/inclusions"
+              ]
+            },
+            {
+              "span": 6,
+              "pointers": [
+                "/exclusions"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "inclusions": {
+      "title": "Inclusions",
+      "type": "object",
+      "properties": {
+        "includedCIDs": {
+          "title": "Included CID",
+          "description": "Content will be included for this CID",
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 100,
+          "items": {
+            "type": "string"
+          }
+        },
+        "includedPageTypes": {
+          "title": "Included Page Type",
+          "description": "Content will be included for this page type",
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 15,
+          "items": {
+            "allOf": [
+              {
+                "$ref": "#/definitions/pageType"
+              }
+            ]
+          }
+        }
+      },
+      "propertyOrder": [
+        "includedCIDs",
+        "includedPageTypes"
+      ]
+    },
+    "countdownClockTypography": {
+      "title": "Countdown Clock Styles",
+      "default": {},
+      "properties": {
+        "size": {
+          "title": "Font Size",
+          "description": "Choose the font size of the text and countdown clock",
+          "type": "string",
+          "default": "body1",
+          "ui:extension": {
+            "name": "dropdown",
+            "params": {
+              "items": [
+                "body1|Body 1",
+                "body2|Body 2",
+                "body3|Body 3",
+                "body4|Body 4",
+                "body5|Body 5",
+                "headline1|Headline 1",
+                "headline2|Headline 2",
+                "headline3|Headline 3",
+                "headline4|Headline 4",
+                "headline5|Headline 5",
+                "headline6|Headline 6",
+                "headline7|Headline 7",
+                "subhead1|Subhead 1",
+                "subhead2|Subhead 2",
+                "subhead3|Subhead 3",
+                "eyebrow1|Eyebrow 1",
+                "eyebrow2|Eyebrow 2",
+                "eyebrow3|Eyebrow 3"
+              ],
+              "required": true
+            }
+          }
+        },
+        "weight": {
+          "title": "Font Weight",
+          "description": "Choose the weight of the font and countdown clock",
+          "type": "string",
+          "default": "default",
+          "ui:extension": {
+            "name": "dropdown",
+            "params": {
+              "items": [
+                "inherit|Default",
+                "thin|Thin",
+                "extraLight|Extra Light",
+                "light|Light",
+                "normal|Normal",
+                "medium|Medium",
+                "semiBold|Semi Bold",
+                "bold|Bold",
+                "extraBold|Extra Bold",
+                "black|Black"
+              ],
+              "required": true
+            }
+          }
+        },
+        "color": {
+          "title": "Font Color",
+          "description": "Value must be valid hex code. (#ABC123 or #ABC)",
+          "type": "string",
+          "minLength": 4,
+          "maxLength": 7
+        },
+        "clockCapitalized": {
+          "title": "Capitalize Clock Units",
+          "description": "Check here to capitalize all clock units",
+          "type": "boolean"
+        }
+      }
+    },
+    "icon": {
+      "title": "Icon",
+      "type": "object",
+      "properties": {
+        "icon": {
+          "title": "Default Icon",
+          "type": "array",
+          "allOf": [
+            {
+              "$ref": "#/definitions/advanceImageExtension"
+            }
+          ],
+          "ui:extension": {
+            "name": "",
+            "params": {
+              "max": 1
+            }
+          }
+        },
+        "iconSize": {
+          "title": "Icon Size",
+          "description": "Choose a size for the icon",
+          "type": "string",
+          "ui:extension": {
+            "name": "dropdown",
+            "params": {
+              "items": [
+                "24px|1X",
+                "32px|2X",
+                "48px|3X",
+                "64px|4X",
+                "105px|5X"
+              ],
+              "required": true
+            }
+          }
+        }
+      }
+    },
+    "imageAlt": {
+      "title": "Image",
+      "type": "object",
+      "properties": {
+          "image": {
+            "title": "Image",
+            "allOf": [
+              { "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/image-link" }
+            ],
+            "ui:component": {
+                "params": {
+                    "withAltText": false
+                }
+            }
+          },
+          "alt": {
+            "title": "Alt Text",
+            "type": "string",
+            "minLength": 0,
+            "maxLength": 200,
+            "ui:extension": {
+              "name": "automatic-alt-text",
+              "params": {
+                "image": "/image"
+              }
+            }
+          }
+        
+      },
+      "propertyOrder": []
+    },
+
+    "imageDesktop": {
+      "title": "Desktop",
+      "type": "object",
+      "properties": {
+        "image": {
+          "allOf": [
+            {
+              "$ref": "https://cms.gap.com/schema/partials/v1/global-partials.json#/definitions/advanceImageExtension"
+            }
+          ]
+        }
+      }
+    },
+    "imageMobile": {
+      "title": "Mobile",
+      "type": "object",
+      "properties": {
+        "image": {
+          "allOf": [
+            {
+              "$ref": "https://cms.gap.com/schema/partials/v1/global-partials.json#/definitions/advanceImageExtension"
+            }
+          ]
+        }
+      }
+    },
+    "imageGroup": {
+      "title": "Images",
+      "type": "object",
+      "properties": {
+        "desktop": {
+          "title": "Desktop",
+          "type": "object",
+          "properties": {
+            "image": {
+              "title": "Desktop",
+              "allOf": [
+                { "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/image-link" }
+              ],
+              "ui:component": {
+                  "params": {
+                      "withAltText": false
+                  }
+              }
+            },
+            "alt": {
+              "title": "Alt Text",
+              "type": "string",
+              "minLength": 0,
+              "maxLength": 200,
+              "ui:extension": {
+                "name": "automatic-alt-text",
+                "params": {
+                  "image": "/image"
+                }
+              }
+            }
+          },
+          "propertyOrder": []
+        },
+        "mobile": {
+          "title": "Mobile",
+          "type": "object",
+          "properties": {
+            "image": {
+              "title": "Mobile",
+              "allOf": [
+                { "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/image-link" }
+              ],
+              "ui:component": {
+                  "params": {
+                      "withAltText": false
+                  }
+              }
+            },
+            "alt": {
+              "title": "Alt Text",
+              "type": "string",
+              "minLength": 0,
+              "maxLength": 200,
+              "ui:extension": {
+                "name": "automatic-alt-text",
+                "params": {
+                  "image": "/image"
+                }
+              }
+            }
+          },
+          "propertyOrder": []
+        }
+      },
+      "ui:component": {
+        "name": "grid",
+        "params": {
+          "numColumns": 12,
+          "columns": [
+            {
+              "span": 6,
+              "pointers": [
+                "/desktop"
+              ]
+            },
+            {
+              "span": 6,
+              "pointers": [
+                "/mobile"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "mobileIcon": {
+      "title": "Mobile Icon Override",
+      "type": "object",
+      "properties": {
+        "icon": {
+          "title": "Mobile Icon",
+          "description": "If not set, default icon will be used",
+          "type": "array",
+          "allOf": [
+            {
+              "$ref": "#/definitions/advanceImageExtension"
+            }
+          ],
+          "ui:extension": {
+            "name": "",
+            "params": {
+              "max": 1
+            }
+          }
+        },
+        "iconSize": {
+          "title": "Mobile Icon Size Override",
+          "description": "Choose a size for the icon on mobile",
+          "type": "string",
+          "ui:extension": {
+            "name": "dropdown",
+            "params": {
+              "items": [
+                "14px|1X",
+                "24px|2X",
+                "32px|3X",
+                "48px|4X",
+                "80px|5X"
+              ],
+              "required": true
+            }
+          }
+        }
+      }
+    },
+    "showHideBasedOnScreenSize": {
+      "title": "Show/Hide Based on Screen Size",
+      "description": "Choose whether you want to hide the content type for a specific screen size",
+      "type": "object",
+      "properties": {
+        "showHideBasedOnScreenSize": {
+          "title": "Show/Hide Based on Screen Size",
+          "description": "Choose whether you want to hide the content type for a specific screen size",
+          "type": "string",
+          "default": "alwaysShow",
+          "ui:extension": {
+            "name": "dropdown",
+            "params": {
+              "items": [
+                "alwaysShow|Always Show",
+                "hideOnMobile|Hide on Mobile",
+                "hideOnDesktop|Hide on Desktop"
+              ],
+              "required": true
+            }
+          }
+        }
+      }
+    },
+    "pattern": {
+      "title": "Pattern",
+      "type": "object",
+      "properties": {
+        "image": {
+          "title": "Image",
+          "description": "Upload the pattern image (svg or png)",
+          "type": "array",
+          "allOf": [
+            {
+              "$ref": "#/definitions/advanceImageExtension"
+            }
+          ],
+          "ui:extension": {
+            "name": "",
+            "params": {
+              "max": 1
+            }
+          }
+        },
+        "imageSize": {
+          "title": "Image Size",
+          "description": "Select the size of the pattern",
+          "type": "string",
+          "ui:extension": {
+            "params": {
+              "items": [
+                "small|Small",
+                "medium|Medium",
+                "large|Large"
+              ],
+              "required": true
+            },
+            "name": "dropdown"
+          }
+        },
+        "offsetX": {
+          "title": "Offset X",
+          "description": "Choose the distance (in percentage) from the left edge of the container",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "offsetY": {
+          "title": "Offset Y",
+          "description": "Choose the distance (in percentage) from the bottom edge of the container",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        }
+      }
+    },
+    "timer": {
+      "title": "Timer Options",
+      "default": {},
+      "properties": {
+        "endDate": {
+          "title": "End Date",
+          "description": "Choose a date and time for when countdown clock should expire",
+          "type": "string",
+          "default": "full",
+          "ui:extension": {
+            "name": "date-picker",
+            "params": {
+              "required": true,
+              "disablePast": true
+            }
+          }
+        },
+        "typography": {
+          "title": "Countdown Clock Styles",
+          "default": {},
+          "properties": {
+            "defaultTypography": {
+              "title": "Default Countdown Clock Styles",
+              "type": "object",
+              "allOf": [
+                {
+                  "$ref": "#/definitions/countdownClockTypography"
+                },
+                {
+                  "title": "Default Styles"
+                }
+              ]
+            },
+            "mobileOverrideTypography": {
+              "title": "Mobile Countdown Clock Styles",
+              "type": "object",
+              "allOf": [
+                {
+                  "$ref": "#/definitions/countdownClockTypography"
+                },
+                {
+                  "title": "Mobile Override Styles"
+                }
+              ]
+            }
+          }
+        },
+        "format": {
+          "title": "Show Full or Abbreviated time format",
+          "description": "Choose whether you want to show a full or abbreviated time format",
+          "type": "string",
+          "default": "fullTimeFormat",
+          "ui:extension": {
+            "params": {
+              "items": [
+                "fullTimeFormat|Full: days/hours/mins/secs",
+                "abbreviatedTimeFormat|Abbreviated: D/H/M/S"
+              ],
+              "required": true
+            },
+            "name": "dropdown"
+          }
+        },
+        "location": {
+          "title": "Clock Location",
+          "description": "Choose whether the countdown clock appears before or after the main RTE",
+          "type": "string",
+          "default": "before",
+          "ui:extension": {
+            "params": {
+              "items": [
+                "before|Before",
+                "after|After"
+              ],
+              "required": true
+            },
+            "name": "dropdown"
+          }
+        },
+        "hideDays": {
+          "title": "Hide Days in timer",
+          "description": "Check here to hide days on timer",
+          "type": "boolean"
+        }
+      }
+    },
+    "recommendedContent": {
+      "title": "Recommended Content",
+      "type": "object",
+      "properties": {
+        "headlineOverride": {
+          "title": "Set Overrides for Certona API (Desktop, Mobile web, and App)",
+          "type": "object",
+          "properties": {
+            "headlineOverrideDesktop": {
+              "title": "Headline Override Text - Desktop (Default)",
+              "description": "Text will be inherited from Certona API if left blank.",
+              "type": "string"
+            },
+            "headlineOverrideMobile": {
+              "title": "Headline Override Text - Mobile (Web)",
+              "description": "Text will be inherited from Certona API if left blank.",
+              "type": "string"
+            },
+            "headlineOverrideNativeApp": {
+              "title": "Headline Override Text - (Native) App",
+              "description": "Text will be inherited from Certona API if left blank.",
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "imageHotzones": {
+      "type": "object",
+      "properties": {
+        "url": {
+          "type": "string",
+          "minLength": 1
+        },
+        "dimensions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "usage": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string"
+              },
+              "Width": {
+                "type": "number"
+              },
+              "height": {
+                "type": "number"
+              }
+            }
+          }
+        },
+        "hotspots": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string"
+              },
+              "coordinates": {
+                "type": "object",
+                "properties": {
+                  "x1": {
+                    "type": "number"
+                  },
+                  "x2": {
+                    "type": "number"
+                  },
+                  "y1": {
+                    "type": "number"
+                  },
+                  "y2": {
+                    "type": "number"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "required": [
+        "url",
+        "dimensions"
+      ],
+      "ui:extension": {
+        "name": "image-hotzones",
+        "params": {
+          "dropzone": false
+        }
+      }
+    },
+    "tags": {
+      "title": "Tags",
+      "description": "Add tag(s) to associate with this content",
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "ui:extension": {
+        "name": "personalization"
+      }
+    },
+    "platforms": {
+      "title": "Platforms",
+      "type": "object",
+      "properties": {
+        "ios": {
+          "type": "boolean",
+          "title": "IOS"
+        },
+        "android": {
+          "type": "boolean",
+          "title": "Android"
+        }
+      }
+    },
+    "ctaBlock": {
+      "title": "CTA Block",
+      "type": "object",
+      "properties": {
+        "ctas": {
+          "title": "CTA",
+          "type": "object",
+          "properties": {
+            "buttonStyle": {
+              "title": "Button Style",
+              "type": "object",
+              "allOf": [
+                {
+                  "$ref": "#/definitions/ctaButtonStyling"
+                }
+              ]
+            },
+            "ctas": {
+              "title": "CTAs",
+              "type": "array",
+              "minItems": 0,
+              "maxItems": 4,
+              "items": {
+                "type": "object",
+                "properties": {
+                  "cta": {
+                    "type": "object",
+                    "$comment": "move this into global partials",
+                    "allOf": [
+                      {
+                        "$ref": "#/definitions/cta"
+                      },
+                      {
+                        "title": "CTA Button",
+                        "properties": {
+                          "label": {
+                            "title": "Label",
+                            "description": "Add a label for the Call to Action"
+                          },
+                          "value": {
+                            "description": "Enter an absolute or relative URL"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "propertyOrder": []
+    }
+    
+    
+  }
+}

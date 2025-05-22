@@ -1,4 +1,7 @@
 import '../styles/main.scss';
+// local css imports not allowed in next so styles.css moved here
+// should move these styles to main.scss
+import '../components/cms-modern/BannerPOC/styles.css';
 import 'pure-react-carousel/dist/react-carousel.es.css';
 
 import React, { PropsWithChildren } from 'react';
@@ -20,6 +23,8 @@ import 'nprogress/nprogress.css';
 
 import ErrorPage from 'next/error';
 import { ConfigContext } from '../components/core/Config';
+
+
 
 Router.events.on('routeChangeStart', () => NProgress.start());
 Router.events.on('routeChangeComplete', () => NProgress.done());

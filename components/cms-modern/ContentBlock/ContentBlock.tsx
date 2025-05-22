@@ -3,11 +3,21 @@ import { CmsContent } from '@lib/cms/CmsContent';
 import { useContent } from '@components/core/WithVisualization/WithVisualization';
 
 import AdvancedBanner from '@components/cms-modern/AdvancedBanner';
+// POCs
+import BannerPOC from '@components/cms-modern/BannerPOC';
+import CarouselPOC from '@components/cms-modern/CarouselPOC';
+import GlobalBannerPOC from '@components/cms-modern/GlobalBannerPOC';
+import MediaCardPOC from '@components/cms-modern/MediaCardPOC';
+import PagePOC from '@components/cms-modern/PagePOC';
+import ProductCardPOC from '@components/cms-modern/ProductCardPOC';
+import WayfindingCardsPOC from '@components/cms-modern//WayfindingCardsPOC';
+// 
 import BannerSlot from '@components/cms-modern/BannerSlot';
 import Blog from '@components/cms-modern/Blog';
 import BlogList from '@components/cms/BlogList';
 import BlogSnippet from '@components/cms/BlogSnippet';
 import Card from '@components/cms-modern/Card';
+import Carousel from '@components/cms-modern/Carousel'
 import CardList from '@components/cms-modern/CardList';
 import CmsContentItem from '@components/cms-modern/CmsContentItem';
 import CmsEdition from '@components/cms-modern/CmsEdition';
@@ -39,6 +49,8 @@ import Video from '@components/cms-modern/Video';
 import { useRouter } from 'next/router';
 import Generic from '@components/stylitics/Generic/Generic';
 
+
+
 export type ContentBlockType = 'SLOT' | 'CONTENT';
 
 interface ContentBlockProps {
@@ -48,13 +60,24 @@ interface ContentBlockProps {
     components?: { [key: string]: any };
 }
 
-const ComponentMapping: any = {
+export const ComponentMapping: any = {
     'https://demostore.amplience.com/content/advanced-banner': AdvancedBanner,
+    // POCs
+    'https://cms.gap.com/schema/v1/poc-banner': BannerPOC,
+    'https://cms.gap.com/schema/v1/poc-carousel.json': CarouselPOC,
+    'https://cms.gap.com/schema/v1/sitewide-banner.json': GlobalBannerPOC,
+    "https://cms.gap.com/schema/v1/poc-media-card.json": MediaCardPOC,
+    'https://cms.gap.com/schema/v1/poc-image-card.json': ProductCardPOC,
+    "https://cms.gap.com/schema/v1/poc-page": PagePOC,
+    'https://cms.gap.com/schema/v1/poc-grid-of-image-cards.json': WayfindingCardsPOC,
+    //
     'https://demostore.amplience.com/content/blog-list': BlogList,
     'https://demostore.amplience.com/content/blog-snippet': BlogSnippet,
     'https://demostore.amplience.com/content/blog': Blog,
     'https://demostore.amplience.com/content/card-list': CardList,
+    'https://schema-examples-accelerators.com/card.json': Card,
     'https://demostore.amplience.com/content/card': Card,
+
     'https://demostore.amplience.com/content/container': Container,
     'https://demostore.amplience.com/content/curated-product-grid': CuratedProductGrid,
     'https://demostore.amplience.com/content/dynamic-blog-list': DynamicBlogList,
@@ -100,7 +123,7 @@ const ContentBlock = ({
     const vse = (query?.vse as string) || '';
 
     // Get real-time content from original content
-    console.log('*** ContnetBlock > originalConent, vse ***', originalContent, vse);
+    // console.log('*** ContentBlock > originalContent, vse ***', originalContent, vse);
     const [liveContent] = useContent(originalContent, vse);
     if (!liveContent) {
         return null;

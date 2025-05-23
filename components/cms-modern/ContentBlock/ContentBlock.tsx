@@ -10,14 +10,15 @@ import GlobalBannerPOC from '@components/cms-modern/GlobalBannerPOC';
 import MediaCardPOC from '@components/cms-modern/MediaCardPOC';
 import PagePOC from '@components/cms-modern/PagePOC';
 import ProductCardPOC from '@components/cms-modern/ProductCardPOC';
-import WayfindingCardsPOC from '@components/cms-modern//WayfindingCardsPOC';
-// 
+import WayfindingCardsPOC from '@components/cms-modern/WayfindingCardsPOC';
+import DynamicBanner from '@components/cms-modern/DynamicBanner';
+//
 import BannerSlot from '@components/cms-modern/BannerSlot';
 import Blog from '@components/cms-modern/Blog';
 import BlogList from '@components/cms/BlogList';
 import BlogSnippet from '@components/cms/BlogSnippet';
 import Card from '@components/cms-modern/Card';
-import Carousel from '@components/cms-modern/Carousel'
+import Carousel from '@components/cms-modern/Carousel';
 import CardList from '@components/cms-modern/CardList';
 import CmsContentItem from '@components/cms-modern/CmsContentItem';
 import CmsEdition from '@components/cms-modern/CmsEdition';
@@ -49,8 +50,6 @@ import Video from '@components/cms-modern/Video';
 import { useRouter } from 'next/router';
 import Generic from '@components/stylitics/Generic/Generic';
 
-
-
 export type ContentBlockType = 'SLOT' | 'CONTENT';
 
 interface ContentBlockProps {
@@ -66,10 +65,11 @@ export const ComponentMapping: any = {
     'https://cms.gap.com/schema/v1/poc-banner': BannerPOC,
     'https://cms.gap.com/schema/v1/poc-carousel.json': CarouselPOC,
     'https://cms.gap.com/schema/v1/sitewide-banner.json': GlobalBannerPOC,
-    "https://cms.gap.com/schema/v1/poc-media-card.json": MediaCardPOC,
+    'https://cms.gap.com/schema/v1/poc-media-card.json': MediaCardPOC,
     'https://cms.gap.com/schema/v1/poc-image-card.json': ProductCardPOC,
-    "https://cms.gap.com/schema/v1/poc-page": PagePOC,
+    'https://cms.gap.com/schema/v1/poc-page': PagePOC,
     'https://cms.gap.com/schema/v1/poc-grid-of-image-cards.json': WayfindingCardsPOC,
+    'https://shoe-carnival.com/schema/v1/banner': DynamicBanner,
     //
     'https://demostore.amplience.com/content/blog-list': BlogList,
     'https://demostore.amplience.com/content/blog-snippet': BlogSnippet,

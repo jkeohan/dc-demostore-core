@@ -7,7 +7,7 @@ import remarkGfm from 'remark-gfm';
 const typographyVariants = {
     header: {
         fontFamily: 'serif',
-        fontSize: '80px',
+        fontSize: '4.5rem',
         fontWeight: 400,
         lineHeight: 1.3,
         '@media (max-width: 768px)': {
@@ -86,14 +86,24 @@ interface MarkdownTypographyProps {
     markdown: string;
     color?: string;
     category?: keyof typeof typographyVariants;
+    fontSize?: number;
+    fontFamily?: string;
 }
 
-const MarkdownTypography = ({ markdown, color, category = 'paragraph' }: MarkdownTypographyProps) => {
+const MarkdownTypography = ({
+    markdown,
+    color,
+    category = 'paragraph',
+    fontSize,
+    fontFamily,
+}: MarkdownTypographyProps) => {
     // console.log('markdown - category', category);
 
     const baseStyle = {
         color,
         ...typographyVariants[category],
+        ...(fontSize !== undefined ? { fontSize: `${fontSize}px` } : {}),
+        ...(fontFamily ? { fontFamily } : {}),
     };
     // console.log('Markdown - color', color, baseStyle, category);
 

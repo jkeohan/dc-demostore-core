@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { BannerPOCProps, TextBlocks, ContentBlocks, ImageData, Block } from './types';
-import MarkdownTypography from '@components/cms-modern/MarkdownTypography';
+import { MarkdownTypography } from './components/MarkdownTypography';
 import CTAGroup from '../CTAGroupPOC';
 import Typography from '@mui/material/Typography';
 import { Link, Box } from '@mui/material';
+import { ResponsiveImage } from './components/ResponsiveImage';
 
 const DynamicBanner = ({ background = [], textBlocks, layout, images = [] }: BannerPOCProps & { images?: any[] }) => {
-    console.log('textBlocks', textBlocks);
+    // console.log('textBlocks', textBlocks);
     const [isMobile, setIsMobile] = useState(false);
     const { desktopBannerSize } = layout || 'large';
 
@@ -52,11 +53,13 @@ const DynamicBanner = ({ background = [], textBlocks, layout, images = [] }: Ban
         color: mobileContent.color ?? desktopContent.color,
     };
 
-    const activeContent = isMobile
-        ? [mergedBlocks] // optionally: handle multiple mobile blocks in future
-        : textBlocks?.contentBlocksDesktop || [defaultContentBlock];
+    // const activeContent = isMobile
+    //     ? [mergedBlocks] // optionally: handle multiple mobile blocks in future
+    //     : textBlocks?.contentBlocksDesktop || [defaultContentBlock];
 
-    console.log('activeContent', activeContent);
+          const activeContent = textBlocks?.contentBlocksDesktop || [defaultContentBlock];
+
+    // console.log('activeContent', activeContent);
 
     const { ctaAlignVerticalClass, ctaAlignHorizontalClass } = alignment(textBlocks);
 
@@ -89,12 +92,16 @@ const DynamicBanner = ({ background = [], textBlocks, layout, images = [] }: Ban
                     ? backgroundItem.image.mobile.image
                     : backgroundItem.image?.desktop?.image;
 
-            console.log('background', backgroundItem, backgroundImage);
+            // console.log('background', backgroundItem, backgroundImage);
             return (
                 <>
                     {backgroundImage ? (
                         <picture>
-                            <img className="banner-image" src={getMediaUrl(backgroundImage)} alt="" />
+                            <img
+                                src={getMediaUrl(backgroundImage)}
+                                alt=""
+                                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                            />
                         </picture>
                     ) : null}
                 </>
@@ -105,7 +112,7 @@ const DynamicBanner = ({ background = [], textBlocks, layout, images = [] }: Ban
                 isMobile && backgroundItem.video?.mobileVideo
                     ? backgroundItem.video.mobileVideo
                     : backgroundItem.video?.desktopVideo;
-            console.log('isMobile', isMobile, backgroundVideo);
+            // console.log('isMobile', isMobile, backgroundVideo);
 
             return backgroundVideo ? (
                 <video
@@ -133,17 +140,21 @@ const DynamicBanner = ({ background = [], textBlocks, layout, images = [] }: Ban
     };
 
     const renderBlock = (block: Block, index: number, content: ContentBlocks) => {
-        console.log('color', block.text?.color);
+        // console.log('color', block.text?.color);
         if (!block) return null;
         const activeColor = content.color === 'primary' ? 'black' : 'white';
+        const bgcolor = content.color;
         const position = block.text?.position;
         const left = position?.left;
         const right = position?.right;
-        const top = position?.top;
+        const top = position?.top !== undefined ? `${position.top}vw` : undefined;
         const bottom = position?.bottom;
-        const fontSize = block.text?.fontSize;
+        const baseFontSize = block.text?.fontSize ?? 1.2;
+        const responsiveFontSize = `clamp(${baseFontSize}rem, ${baseFontSize * 4}vw, 6rem)`;
+        // console.log('responsiveFontSize', responsiveFontSize);
         const fontFamily = block.text?.fontFamily;
         const color = block.text?.color;
+        console.log('Rendering block:', block, 'isMobile:', isMobile);
         switch (block.type) {
             case 'eyebrow':
             case 'header':
@@ -154,20 +165,23 @@ const DynamicBanner = ({ background = [], textBlocks, layout, images = [] }: Ban
                         key={index}
                         sx={{
                             position: 'absolute',
-                            ...(left !== undefined ? { left: `${left}px` } : {}),
-                            ...(right !== undefined ? { right: `${right}px` } : {}),
-                            ...(top !== undefined ? { top: `${top}px` } : {}),
-                            ...(bottom !== undefined ? { bottom: `${bottom}px` } : {}),
-                            ...(fontSize !== undefined ? { fontSize: `${fontSize}px` } : {}),
+                            ...(left !== undefined ? { left: `${left}%` } : {}),
+                            ...(right !== undefined ? { right: `${right}%` } : {}),
+                            ...(top !== undefined ? { top: top } : {}),
+                            ...(bottom !== undefined ? { bottom: `${bottom}%` } : {}),
                             ...(color !== undefined ? { color: color } : {}),
+                            backgroundColor: bgcolor,
+                            zIndex: 100,
+                            padding: '10px',
                         }}
                     >
                         <MarkdownTypography
                             markdown={block.text?.text}
                             color={color}
                             category={block.type}
-                            fontSize={fontSize}
                             fontFamily={fontFamily}
+                            sx={{ fontSize: responsiveFontSize }}
+                            //fontSize={responsiveFontSize}
                         />
                     </Box>
                 );
@@ -175,7 +189,7 @@ const DynamicBanner = ({ background = [], textBlocks, layout, images = [] }: Ban
                 const ctas = Array.isArray(block.text.ctas) ? block.text.ctas : [];
                 const buttonStyles = block.text.buttonStyle || {};
                 const buttonLayout = buttonStyles?.layoutType || '';
-                console.log('content', content);
+                // console.log('content', content);
                 return (
                     <div
                         key={index}
@@ -230,45 +244,59 @@ const DynamicBanner = ({ background = [], textBlocks, layout, images = [] }: Ban
     };
 
     return (
-        <section
-            className={`banner banner--${desktopBannerSize}`}
-            style={{
+        <Box
+            // className={`banner banner--${desktopBannerSize}`}
+            sx={{
                 position: 'relative',
-                fontFamily: 'serif !important',
+                fontFamily: ['Roboto', 'Arial', 'Helvetica', 'serif'],
                 width: '100%',
+                // height: desktopBannerSize === 'large' ? '100vh' : '100%',
                 height: '100%',
-                display: 'block',
+                display: 'flex',
+                overflow: 'hidden',
+                padding: 0,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
             }}
         >
             {background.length > 0 && renderBackgroundMedia()}
             {Array.isArray(images) &&
                 images.map((imgObj, idx) => {
                     const { image, position, width } = imgObj;
-                    console.log('width', width);
                     if (!image) return null;
-                    const left = position?.left !== undefined ? `${position.left}px` : undefined;
-                    const right = position?.right !== undefined ? `${position.right}px` : undefined;
-                    const top = position?.top !== undefined ? `${position.top}px` : undefined;
-                    const bottom = position?.bottom !== undefined ? `${position.bottom}px` : undefined;
+                    const left = position?.left !== undefined ? `${position.left}%` : undefined;
+                    const right = position?.right !== undefined ? `${position.right}%` : undefined;
+                    const top = position?.top !== undefined ? `${position.top}vw` : undefined;
+                    const bottom = position?.bottom !== undefined ? `${position.bottom}%` : undefined;
                     return (
                         <Box
                             key={image.id || idx}
-                            component="img"
-                            src={getMediaUrl(image)}
-                            alt={image.name || ''}
                             sx={{
                                 position: 'absolute',
                                 left,
                                 right,
                                 top,
                                 bottom,
-                                height: 'auto !important',
-                                width: width ? `${width}px !important` : 'auto !important',
+                                width: width ? `${width}%` : 'auto',
+                                height: 'auto',
                                 zIndex: 1,
                                 pointerEvents: 'none',
-                                objectFit: 'contain',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
                             }}
-                        />
+                        >
+                            <ResponsiveImage
+                                src={getMediaUrl(image)}
+                                alt={image.name || ''}
+                                sx={{
+                                    width: '100%',
+                                    height: 'auto',
+                                    objectFit: 'contain',
+                                    position: 'static',
+                                }}
+                            />
+                        </Box>
                     );
                 })}
             {activeContent.map((content, index) => {
@@ -283,7 +311,7 @@ const DynamicBanner = ({ background = [], textBlocks, layout, images = [] }: Ban
                     </Box>
                 );
             })}
-        </section>
+        </Box>
     );
 };
 

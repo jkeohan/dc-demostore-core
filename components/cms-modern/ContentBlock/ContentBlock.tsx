@@ -67,9 +67,7 @@ export const ComponentMapping: any = {
     'https://cms.gap.com/schema/v1/poc-carousel.json': CarouselPOC,
     'https://cms.gap.com/schema/v1/sitewide-banner.json': GlobalBannerPOC,
     'https://cms.gap.com/schema/v1/poc-media-card.json': MediaCardPOC,
-    'https://cms.gap.com/schema/v1/poc-media-card.json': MediaCardPOC,
     'https://cms.gap.com/schema/v1/poc-image-card.json': ProductCardPOC,
-    'https://cms.gap.com/schema/v1/poc-page': PagePOC,
     'https://cms.gap.com/schema/v1/poc-page': PagePOC,
     'https://cms.gap.com/schema/v1/poc-grid-of-image-cards.json': WayfindingCardsPOC,
     'https://cms.gap.com/schema/v1/poc-card-grids-navigation': WayfindingCardsNavPOC,
@@ -81,7 +79,6 @@ export const ComponentMapping: any = {
     'https://demostore.amplience.com/content/card-list': CardList,
     'https://schema-examples-accelerators.com/card.json': Card,
     'https://demostore.amplience.com/content/card': Card,
-
     'https://demostore.amplience.com/content/container': Container,
     'https://demostore.amplience.com/content/curated-product-grid': CuratedProductGrid,
     'https://demostore.amplience.com/content/dynamic-blog-list': DynamicBlogList,

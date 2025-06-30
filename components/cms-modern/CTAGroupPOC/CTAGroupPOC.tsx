@@ -20,7 +20,7 @@ const CTAGroup = ({ ctas = [], buttonStyle = {}, halign, color }: CTAGroupProps)
     const content = ctas.map((cta, i) => {
         
         const button = cta.cta;
-        console.log('cta', cta, cta.cta.buttonLabel);
+        // console.log('cta', cta, cta.cta.buttonLabel);
         switch (buttonStyle.buttonStyle) {
             case 'solid':
                 return (

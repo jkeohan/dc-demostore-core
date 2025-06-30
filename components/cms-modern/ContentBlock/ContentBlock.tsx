@@ -11,6 +11,7 @@ import MediaCardPOC from '@components/cms-modern/MediaCardPOC';
 import PagePOC from '@components/cms-modern/PagePOC';
 import ProductCardPOC from '@components/cms-modern/ProductCardPOC';
 import WayfindingCardsPOC from '@components/cms-modern/WayfindingCardsPOC';
+import WayfindingCardsNavPOC from '@components/cms-modern/WayfindingCardsNavPOC';
 import DynamicBanner from '@components/cms-modern/DynamicBanner';
 //
 import BannerSlot from '@components/cms-modern/BannerSlot';
@@ -66,9 +67,12 @@ export const ComponentMapping: any = {
     'https://cms.gap.com/schema/v1/poc-carousel.json': CarouselPOC,
     'https://cms.gap.com/schema/v1/sitewide-banner.json': GlobalBannerPOC,
     'https://cms.gap.com/schema/v1/poc-media-card.json': MediaCardPOC,
+    'https://cms.gap.com/schema/v1/poc-media-card.json': MediaCardPOC,
     'https://cms.gap.com/schema/v1/poc-image-card.json': ProductCardPOC,
     'https://cms.gap.com/schema/v1/poc-page': PagePOC,
+    'https://cms.gap.com/schema/v1/poc-page': PagePOC,
     'https://cms.gap.com/schema/v1/poc-grid-of-image-cards.json': WayfindingCardsPOC,
+    'https://cms.gap.com/schema/v1/poc-card-grids-navigation': WayfindingCardsNavPOC,
     'https://shoe-carnival.com/schema/v1/banner': DynamicBanner,
     //
     'https://demostore.amplience.com/content/blog-list': BlogList,

@@ -13,6 +13,7 @@ import ProductCardPOC from '@components/cms-modern/ProductCardPOC';
 import WayfindingCardsPOC from '@components/cms-modern/WayfindingCardsPOC';
 import WayfindingCardsNavPOC from '@components/cms-modern/WayfindingCardsNavPOC';
 import DynamicBanner from '@components/cms-modern/DynamicBanner';
+import TutorialBanner from '@components/cms-modern/TutorialBanner';
 //
 import BannerSlot from '@components/cms-modern/BannerSlot';
 import Blog from '@components/cms-modern/Blog';
@@ -72,6 +73,7 @@ export const ComponentMapping: any = {
     'https://cms.gap.com/schema/v1/poc-grid-of-image-cards.json': WayfindingCardsPOC,
     'https://cms.gap.com/schema/v1/poc-card-grids-navigation': WayfindingCardsNavPOC,
     'https://shoe-carnival.com/schema/v1/banner': DynamicBanner,
+    'https://schema-examples.com/tutorial-banner_': TutorialBanner,
     //
     'https://demostore.amplience.com/content/blog-list': BlogList,
     'https://demostore.amplience.com/content/blog-snippet': BlogSnippet,

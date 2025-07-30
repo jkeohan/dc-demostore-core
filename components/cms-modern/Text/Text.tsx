@@ -6,6 +6,9 @@ import { Link, Typography, Box } from '@mui/material';
 type StoreCardProps = {} & CmsContent;
 
 const Text = ({ text, align }: StoreCardProps) => {
+    // Pre-process text to handle soft line breaks (backslash + newline)
+    const processedText = text?.replace(/\\\n/g, '  \n'); // Convert \ + newline to two spaces + newline (markdown line break)
+
     const options = {
         overrides: {
             h1: { component: Typography, props: { variant: 'h1' } },
@@ -26,7 +29,11 @@ const Text = ({ text, align }: StoreCardProps) => {
         },
     };
 
-    return <Box style={{ textAlign: align }}>{text && <ReactMarkdown options={options}>{text}</ReactMarkdown>}</Box>;
+    return (
+        <Box style={{ textAlign: align }}>
+            {processedText && <ReactMarkdown options={options}>{processedText}</ReactMarkdown>}
+        </Box>
+    );
 };
 
 export default Text;

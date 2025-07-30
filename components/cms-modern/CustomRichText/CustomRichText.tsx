@@ -35,9 +35,11 @@ const Text = ({ text = [], align = 'left' }: TextProps) => {
 
                 switch (type) {
                     case 'markdown':
+                        // Pre-process text to handle soft line breaks (convert \\\n to <br>)
+                        const processedData = data?.replace(/\\\n/g, '<br>');
                         return (
                             <Box key={index} className="amp-dc-text" style={{ textAlign: align, padding: '10px 0' }}>
-                                {data && <ReactMarkdown options={options}>{data}</ReactMarkdown>}
+                                {processedData && <ReactMarkdown options={options}>{processedData}</ReactMarkdown>}
                             </Box>
                         );
                     case 'dc-content-link':

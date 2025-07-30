@@ -74,7 +74,7 @@ const Store = (props: StoreProps) => {
                                     {locationName}
                                 </Typography>
                                 <ReactMarkdown style={{ width: '70%' }} options={options}>
-                                    {locationAddress}
+                                    {locationAddress?.replace(/\\\n/g, '<br>')}
                                 </ReactMarkdown>
                             </Paper>
                         )}

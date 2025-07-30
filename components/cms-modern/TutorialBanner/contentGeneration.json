@@ -1,0 +1,12 @@
+{
+    "name": "Joe K Product Description Test",
+    "features": "Lightweight, breathable fabric; UV protection; Machine-washable; Available in multiple colors",
+    "amp:brandVoice": "John Lewis",
+    "amp:audience": "Fitness Enthusiasts",
+    "amp:tone": "Casual, Friendly and Gentle",
+    "locale": "en-US",
+    "format": "paragraphs_and_bullets",
+    "maximumWordCount": 120,
+    "seoKeywords": "outdoor shirt, UV protection clothing, hiking wear",
+    "additionalInstructions": "Focus on the benefits for outdoor activities and highlight versatility for both casual and performance wear."
+}

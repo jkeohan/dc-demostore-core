@@ -20,5 +20,6 @@ export { default as Text } from './Text';
 export { default as ThemePaletteSpec } from './ThemePaletteSpec';
 export { default as ThemeTypographySpec } from './ThemeTypographySpec';
 export { default as ThemeWrapper } from './ThemeWrapper';
+export { default as TutorialBanner } from './TutorialBanner';
 export { default as Video } from './Video';
 export { default as WayfindingCardsNavPOC } from './WayfindingCardsNavPOC';

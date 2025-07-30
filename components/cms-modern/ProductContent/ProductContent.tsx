@@ -41,9 +41,11 @@ const Text = ({ header, text = [], textOverride = [], align = 'left' }: TextProp
                 const { type, data } = item;
                 switch (type) {
                     case 'markdown':
+                        // Pre-process text to handle soft line breaks (backslash + newline)
+                        const processedData = data?.replace(/\\\n/g, '  \n');
                         return (
                             <Box key={index} className="amp-dc-text" style={{ textAlign: align }}>
-                                {data && <ReactMarkdown options={options}>{data}</ReactMarkdown>}
+                                {processedData && <ReactMarkdown options={options}>{processedData}</ReactMarkdown>}
                             </Box>
                         );
                     case 'dc-content-link':

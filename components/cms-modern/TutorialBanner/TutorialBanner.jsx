@@ -123,7 +123,9 @@ const Banner = ({ headline, strapline, markdown, customRichText, background = {}
                     <Box>
                         <ReactMarkdownNew components={components}>{markdown}</ReactMarkdownNew>
                         <ReactMarkdownNew components={components}>{customRichText}</ReactMarkdownNew>
-                        <h4>rehypeRaw</h4>
+                        <p></p>
+                        <h4>react-markdown with rehypeRaw</h4>
+
                         <ReactMarkdownNew components={components} rehypePlugins={[rehypeRaw]}>
                             {markdown}
                         </ReactMarkdownNew>
@@ -143,3 +145,5 @@ export default Banner;
 
 // import { client } from './dc-sdk-testing';
 // console.log('banner - client', client);
+
+

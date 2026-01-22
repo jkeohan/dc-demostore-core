@@ -56,8 +56,6 @@ const WithVisualization = (props: WithVisualizationProps) => {
                 setStatus('failed');
             });
 
-        console.log('*** WithVisualization > formModal ***', formModel);
-        
         return () => {
             if (removeChangedSubscription) {
                 removeChangedSubscription();

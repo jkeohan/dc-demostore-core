@@ -44,7 +44,7 @@ export const ResponsiveImage = forwardRef<HTMLImageElement, ResponsiveImageProps
         if (naturalWidth && naturalHeight) {
             setAspectRatio(naturalWidth / naturalHeight);
         }
-    }, []);
+    }, [aspectRatio, sx]);
 
     // Allow parent to pass a ref
     React.useImperativeHandle(ref, () => imgRef.current as HTMLImageElement, []);

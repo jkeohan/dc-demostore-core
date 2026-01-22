@@ -23,13 +23,16 @@ type ContextState = {
 export const AdaptiveImageContext = createContext<ContextState | null>(null);
 
 const AdaptiveImage = (props: AdaptiveImageProps) => {
-    const { image, imageAltText = '', transformations, diParams = '', children, imageRef, ...other } = props;
+    const { image, imageAltText = '', transformations, diParams = '', children, imageRef, fetchPriority, ...other } = props;
 
     if (!image) {
         return null;
     }
 
     const defaultImageUrl = getImageURL(image, transformations, false, diParams);
+
+    // Filter out fetchPriority as React doesn't recognize it on DOM elements
+    // If needed, use fetchpriority (lowercase) directly in the img tag
 
     return (
         <AdaptiveImageContext.Provider

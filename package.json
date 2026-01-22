@@ -78,5 +78,5 @@
         "url": "https://github.com/amplience/dc-demostore-core/issues"
     },
     "homepage": "https://github.com/amplience/dc-demostore-core#readme",
-    "packageManager": "pnpm@8.15.3+sha1.64838798f519c18029c1e8a1310e16101fc2eda0"
+    "packageManager": "npm@11.7.0+sha512.c22099a6fff8d5b2286c2a09df5352b4858a7c0c716320f58989d60ad8b29ecf2ce6fdfe97ccb41c23ffb1272e1fa079f868487dd6b81d02a2a9e199c095a117"
 }
